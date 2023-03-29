@@ -1,5 +1,7 @@
 # React homework template
 
+[maket](https://www.figma.com/file/mSdCAZrnRyIOQZxiaPHR00/book-shop?t=4C4KjBpukwnJgH3p-0)
+
 Этот проект был создан при помощи
 [Create React App](https://github.com/facebook/create-react-app). Для знакомства
 и настройки дополнительных возможностей
