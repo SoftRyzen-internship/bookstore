@@ -1,0 +1,42 @@
+:root {
+  --accent-cl: #13c296;
+
+  /*BACKGROUND COLORS*/
+  --primary-bg-cl: #ffffff;
+  --secondary-bg-cl: #f2f3f9;
+  --components-cl: #ffffff;
+
+  /* TEXT COLORS */
+  --primary-txt-cl: #101010;
+  --secondary-txt-cl: #3d3d3d;
+
+  /*BUTTONS*/
+  --copy-btn-cl: #5599ff;
+
+  /*OTHER COLORS*/
+  --white: #ffffff;
+  --black: #000000;
+  --gray: #747474;
+  --red: #e21e4d;
+  --blue: #3056d3;
+
+  /* TRANSITION */
+  --transition: 250ms linear;
+
+  /*FONTS*/
+  --font-family: 'Inter', sans-serif;
+  --line-height: 1.5;
+
+  /*FONT SIZE*/
+  --title: 28px;
+  --text-2xl: 24px;
+  --text-xl: 20px;
+  --text-lg: 18px;
+  --text-md: 16px;
+  --text-sm: 14px;
+
+  /*FONT WEIGHT*/
+  --semibold: 600;
+  --medium: 500;
+  --regular: 400;
+}

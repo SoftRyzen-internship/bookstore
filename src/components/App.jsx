@@ -1,16 +1,25 @@
+import { Header } from './Header';
+
+import 'styles/variables.scss';
+import 'styles/global.scss';
+import { MainWrapper } from './Containers/MainWrapper';
+import { Sidebar } from './Sidebar';
+import { MainContainer } from './Containers/MainContainer';
+import { Footer } from './Footer';
+import { BooksList } from './BooksList';
+import { PageWrapper } from './Containers/PageWrapper/PageWrapper';
+
 export const App = () => {
   return (
-    <div
-      style={{
-        height: '100vh',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        fontSize: 40,
-        color: '#010101',
-      }}
-    >
-      Bookstore working
-    </div>
+    <PageWrapper>
+      <Header />
+      <MainWrapper>
+        <Sidebar />
+        <MainContainer>
+          <BooksList />
+        </MainContainer>
+      </MainWrapper>
+      <Footer />
+    </PageWrapper>
   );
 };
