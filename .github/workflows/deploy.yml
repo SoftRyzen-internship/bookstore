@@ -5,6 +5,7 @@ on:
     branches: [main]
 
 jobs:
+permissions: read-all|write-all
   build-and-deploy:
     runs-on: ubuntu-latest
     steps:
