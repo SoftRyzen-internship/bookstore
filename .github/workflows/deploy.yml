@@ -5,8 +5,8 @@ on:
     branches: [main]
 
 jobs:
-permissions: read-all|write-all
   build-and-deploy:
+    permissions: read-all|write-all
     runs-on: ubuntu-latest
     steps:
       - name: Checkout 🛎️
