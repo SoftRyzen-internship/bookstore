@@ -1,5 +1,7 @@
 .header {
   position: fixed;
+  display: flex;
+  justify-content: space-between;
   height: 100px;
   padding: 26px 32px;
   background-color: var(--primary-bg-cl);

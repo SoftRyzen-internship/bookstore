@@ -1,0 +1,28 @@
+.inputContainer {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 420px;
+}
+
+.input {
+  width: 100%;
+  padding: 12px 16px;
+  font-size: var(--text-md);
+  font-weight: var(--medium);
+  line-height: 1.5;
+  border-radius: 5px;
+  border: 2px solid var(--accent-cl);
+  outline: none;
+}
+
+.iconButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 52px;
+  height: 48px;
+  position: absolute;
+  right: 0px;
+  background-color: var(--accent-cl);
+}
