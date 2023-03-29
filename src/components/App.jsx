@@ -10,7 +10,7 @@ export const App = () => {
         color: '#010101',
       }}
     >
-      bookstore
+      Bookstore working
     </div>
   );
 };
