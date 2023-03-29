@@ -1,0 +1,31 @@
+.container {
+  position: relative;
+  padding: 5px 8px;
+}
+
+.button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 28px;
+  height: 28px;
+}
+
+.indicator {
+  font-family: var(--font-family);
+  font-size: 10px;
+  line-height: 1.2;
+  font-weight: var(--medium);
+  position: absolute;
+  display: block;
+  top: 0px;
+  right: 0px;
+  width: 16px;
+  height: 16px;
+  padding: 2px 5px;
+  text-align: center;
+  border-radius: 50%;
+  background-color: var(--red);
+  color: var(--white);
+}
