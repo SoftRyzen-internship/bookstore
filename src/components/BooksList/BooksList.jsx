@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import ReactPaginate from 'react-paginate';
 import { useFetch } from 'hooks/useFetch';
 import { getBooks } from 'services/books-api';
@@ -8,16 +8,14 @@ import { BookCard } from './BookCard';
 import s from './BooksList.module.scss';
 
 export const BooksList = () => {
-  const [currentPage, setCurrentPage] = useState(0);
+  let [searchParams, setSearchParams] = useSearchParams();
+  let page = Number(searchParams.get('page') ? searchParams.get('page') : 1);
 
   const handlePageChange = ({ selected }) => {
-    setCurrentPage(selected);
+    setSearchParams({ page: selected + 1 });
   };
 
-  const { data, loading } = useFetch(
-    () => getBooks(currentPage),
-    [currentPage]
-  );
+  const { data, loading } = useFetch(() => getBooks(page), [page]);
   return (
     <div className={s.container}>
       {loading && <Spinner />}
@@ -34,12 +32,12 @@ export const BooksList = () => {
       )}
       {!loading && data && (
         <ReactPaginate
-          initialPage={currentPage}
+          initialPage={page - 1}
           pageCount={data.count}
           nextLabel=">"
           previousLabel="<"
           marginPagesDisplayed={1}
-          pageRangeDisplayed={5}
+          pageRangeDisplayed={3}
           onPageChange={handlePageChange}
           containerClassName={s.pagination}
           activeClassName={s.active}
