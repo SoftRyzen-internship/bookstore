@@ -1,6 +1,6 @@
 import { http } from './api';
 
-const baseURL = process.env.REACT_APP_BASE_API_URL;
+const baseURL = 'https://books-be.herokuapp.com/api';
 
 export const getBooks = (page = 1) => {
   return http.get(`${baseURL}/books?page=${page}`);

@@ -1,8 +1,35 @@
 .container {
   position: relative;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 32px;
 }
-.spinner {
-  position: absolute;
-  top: 50%;
-  left: 50%;
+
+.pagination {
+  font-size: var(--text-md);
+  font-weight: var(--semibold);
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+
+  & li {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 30px;
+    border: 2px solid var(--accent-cl);
+  }
+  & a {
+    padding: 4px 8px;
+    cursor: pointer;
+  }
+}
+
+.active {
+  background-color: var(--accent-cl);
+  color: var(--white);
 }

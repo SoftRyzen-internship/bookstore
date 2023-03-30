@@ -1,6 +1,8 @@
 .loader {
-  position: relative;
+  position: absolute;
   display: inline-block;
+  top: 50%;
+  left: 50%;
 
   width: 80px;
   height: 80px;
