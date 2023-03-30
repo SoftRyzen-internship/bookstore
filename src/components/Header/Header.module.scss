@@ -1,5 +1,7 @@
 .header {
   position: fixed;
+  display: flex;
+  justify-content: space-between;
   height: 100px;
   padding: 26px 32px;
   background-color: var(--primary-bg-cl);
@@ -7,4 +9,16 @@
   right: 0;
   left: 0;
   bottom: 0;
+}
+
+.rightWrapper {
+  display: flex;
+}
+
+.buttonWrapper {
+  width: 350px;
+  margin-left: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
