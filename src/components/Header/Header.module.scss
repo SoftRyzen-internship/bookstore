@@ -1,17 +1,20 @@
 .header {
   position: fixed;
-  display: flex;
-  justify-content: space-between;
   height: 100px;
-  padding: 26px 32px;
-  background-color: var(--primary-bg-cl);
+
   top: 0;
   right: 0;
   left: 0;
   bottom: 0;
   z-index: 10;
+  background-color: var(--primary-bg-cl);
 }
-
+.headerWrapper {
+  padding-top: 26px;
+  padding-bottom: 26px;
+  display: flex;
+  justify-content: space-between;
+}
 .rightWrapper {
   display: flex;
 }

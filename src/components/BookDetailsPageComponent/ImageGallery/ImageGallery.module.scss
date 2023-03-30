@@ -1,0 +1,43 @@
+.gallery {
+  margin-top: 24px;
+  height: 587px;
+  display: flex;
+  gap: 32px;
+}
+.imgBigContainer {
+  padding: 26px 58px 18px 59px;
+  border: 1px solid #efefef;
+  border-radius: 5px;
+}
+
+.imgBig {
+  width: 371px;
+  height: 543px;
+}
+
+.imageList {
+  width: 73px;
+  height: 587px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  overflow-y: scroll;
+  &::-webkit-scrollbar {
+    width: 0px;
+  }
+}
+.item {
+  width: 72px;
+  height: 106px;
+  padding: 14px 9px;
+  border: 1px solid #efefef;
+  border-radius: 5px;
+}
+.itemSelected {
+  border: 1px solid var(--accent-cl);
+}
+
+.imgSmall {
+  width: 53px;
+  height: 78px;
+}

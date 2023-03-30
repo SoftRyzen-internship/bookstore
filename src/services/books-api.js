@@ -7,5 +7,5 @@ export const getBooks = (page = 1) => {
 };
 
 export const getBookDetails = id => {
-  return http.get(`${baseURL}/books${id}`);
+  return http.get(`${baseURL}/books/${id}`);
 };

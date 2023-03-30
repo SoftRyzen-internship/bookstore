@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import ReactPaginate from 'react-paginate';
 import { useFetch } from 'hooks/useFetch';
 import { getBooks } from 'services/books-api';
@@ -8,9 +8,6 @@ import { BookCard } from './BookCard';
 import s from './BooksList.module.scss';
 
 export const BooksList = () => {
-  const handleClickFavorite = e => {
-    e.preventDefault();
-  };
   const [currentPage, setCurrentPage] = useState(0);
 
   const handlePageChange = ({ selected }) => {
@@ -21,27 +18,21 @@ export const BooksList = () => {
     () => getBooks(currentPage),
     [currentPage]
   );
-  // console.log(data);
-  return loading ? (
-    <Spinner />
-  ) : (
-    data && (
-      <>
-        <ul className={s.container}>
+  return (
+    <div className={s.container}>
+      {loading && <Spinner />}
+      {!loading && data && (
+        <ul className={s.list}>
           {data.books.map(book => {
             return (
               <li key={book._id}>
-                <BookCard
-                  onClickFavorite={handleClickFavorite}
-                  onClickAdd={handleClickFavorite}
-                  onClickEdit={handleClickFavorite}
-                  onClickDelete={handleClickFavorite}
-                  book={book}
-                />
+                <BookCard book={book} />
               </li>
             );
           })}
         </ul>
+      )}
+      {!loading && data && (
         <ReactPaginate
           initialPage={currentPage}
           pageCount={data.count}
@@ -53,7 +44,7 @@ export const BooksList = () => {
           containerClassName={s.pagination}
           activeClassName={s.active}
         />
-      </>
-    )
+      )}
+    </div>
   );
 };

@@ -1,4 +1,9 @@
 .container {
+  padding-left: 32px;
+  padding-right: 32px;
+  width: 100%;
+}
+.list {
   position: relative;
   width: 100%;
   display: flex;

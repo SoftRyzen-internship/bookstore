@@ -1,5 +1,5 @@
 import { ICONS } from 'assets/icons';
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 import s from './Input.module.scss';
 

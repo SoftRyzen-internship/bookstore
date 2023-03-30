@@ -1,4 +1,4 @@
-import React, { lazy, Suspense } from 'react';
+import { lazy, Suspense } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { Header } from './Header';
 import { Footer } from './Footer';
@@ -9,6 +9,9 @@ import { MainWrapper } from './Containers/MainWrapper';
 
 const HomePage = lazy(() =>
   import('../pages/HomePage' /* webpackChunkName: "home-page" */)
+);
+const BookDetailsPage = lazy(() =>
+  import('../pages/BookDetailsPage' /* webpackChunkName: "book-page" */)
 );
 
 export const App = () => {
@@ -30,7 +33,7 @@ export const App = () => {
             path={routesPath.BOOK_DETAIL}
             element={
               <Suspense fallback={<Spinner />}>
-                <div>Book detail</div>
+                <BookDetailsPage />
               </Suspense>
             }
           />

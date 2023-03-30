@@ -11,6 +11,7 @@ import { ReactComponent as Check } from 'assets/icons/svg/check.svg';
 import { ReactComponent as Plus } from 'assets/icons/svg/plus.svg';
 import { ReactComponent as Edit } from 'assets/icons/svg/edit.svg';
 import { ReactComponent as Trash } from 'assets/icons/svg/trash.svg';
+import { ReactComponent as CartFull } from 'assets/icons/svg/cart-full.svg';
 
 export const ICONS = {
   LOGO: Logo,
@@ -26,4 +27,5 @@ export const ICONS = {
   PLUS: Plus,
   EDIT: Edit,
   TRASH: Trash,
+  CART_FULL: CartFull,
 };

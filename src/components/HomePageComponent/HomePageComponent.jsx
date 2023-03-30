@@ -1,15 +1,15 @@
 import { BooksList } from 'components/BooksList';
-import { MainContainer } from 'components/Containers/MainContainer';
+import { Container } from 'components/Containers/Container';
+import { FlexWrapper } from 'components/Containers/FlexWrapper';
 import { Sidebar } from 'components/Sidebar';
-import React from 'react';
 
 export const HomePageComponent = () => {
   return (
-    <>
-      <Sidebar />
-      <MainContainer>
+    <Container>
+      <FlexWrapper>
+        <Sidebar />
         <BooksList />
-      </MainContainer>
-    </>
+      </FlexWrapper>
+    </Container>
   );
 };
