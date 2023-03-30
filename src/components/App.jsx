@@ -1,24 +1,29 @@
+import React, { lazy, Suspense } from 'react';
+import { Routes, Route } from 'react-router-dom';
 import { Header } from './Header';
-
-import 'styles/variables.scss';
-import 'styles/global.scss';
-import { MainWrapper } from './Containers/MainWrapper';
-import { Sidebar } from './Sidebar';
-import { MainContainer } from './Containers/MainContainer';
 import { Footer } from './Footer';
-import { BooksList } from './BooksList';
 import { PageWrapper } from './Containers/PageWrapper/PageWrapper';
+import { Spinner } from './Spinner';
+import { routesPath } from 'router/routesPath';
+
+const HomePage = lazy(() =>
+  import('../pages/HomePage' /* webpackChunkName: "home-page" */)
+);
 
 export const App = () => {
   return (
     <PageWrapper>
       <Header />
-      <MainWrapper>
-        <Sidebar />
-        <MainContainer>
-          <BooksList />
-        </MainContainer>
-      </MainWrapper>
+      {/* <Routes>
+        <Route
+          path={''}
+          element={
+            <Suspense fallback={<Spinner />}>
+              <HomePage />
+            </Suspense>
+          }
+        />
+      </Routes> */}
       <Footer />
     </PageWrapper>
   );
