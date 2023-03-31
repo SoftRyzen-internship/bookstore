@@ -1,11 +1,13 @@
 {
   "files": {
     "main.css": "/bookstore/static/css/main.7356bdf3.css",
-    "main.js": "/bookstore/static/js/main.69d1a57b.js",
+    "main.js": "/bookstore/static/js/main.aaad4450.js",
     "home-page.css": "/bookstore/static/css/home-page.851a054e.chunk.css",
-    "home-page.js": "/bookstore/static/js/home-page.7443e80c.chunk.js",
+    "home-page.js": "/bookstore/static/js/home-page.58d78e03.chunk.js",
     "book-page.css": "/bookstore/static/css/book-page.98bcc0fc.chunk.css",
     "book-page.js": "/bookstore/static/js/book-page.2b7a25fa.chunk.js",
+    "user-page.css": "/bookstore/static/css/user-page.49342453.chunk.css",
+    "user-page.js": "/bookstore/static/js/user-page.33575b4d.chunk.js",
     "static/js/279.36b05045.chunk.js": "/bookstore/static/js/279.36b05045.chunk.js",
     "static/media/Inter-SemiBold.ttf": "/bookstore/static/media/Inter-SemiBold.4d56bb21f2399db8ad48.ttf",
     "static/media/Inter-Medium.ttf": "/bookstore/static/media/Inter-Medium.6dcbc9bed1ec438907ee.ttf",
@@ -30,15 +32,17 @@
     "static/media/edit.svg": "/bookstore/static/media/edit.5840ae79803090a13d790bc2ef686664.svg",
     "static/media/plus.svg": "/bookstore/static/media/plus.4b380bf3774f8b64e993edca211618ee.svg",
     "main.7356bdf3.css.map": "/bookstore/static/css/main.7356bdf3.css.map",
-    "main.69d1a57b.js.map": "/bookstore/static/js/main.69d1a57b.js.map",
+    "main.aaad4450.js.map": "/bookstore/static/js/main.aaad4450.js.map",
     "home-page.851a054e.chunk.css.map": "/bookstore/static/css/home-page.851a054e.chunk.css.map",
-    "home-page.7443e80c.chunk.js.map": "/bookstore/static/js/home-page.7443e80c.chunk.js.map",
+    "home-page.58d78e03.chunk.js.map": "/bookstore/static/js/home-page.58d78e03.chunk.js.map",
     "book-page.98bcc0fc.chunk.css.map": "/bookstore/static/css/book-page.98bcc0fc.chunk.css.map",
     "book-page.2b7a25fa.chunk.js.map": "/bookstore/static/js/book-page.2b7a25fa.chunk.js.map",
+    "user-page.49342453.chunk.css.map": "/bookstore/static/css/user-page.49342453.chunk.css.map",
+    "user-page.33575b4d.chunk.js.map": "/bookstore/static/js/user-page.33575b4d.chunk.js.map",
     "279.36b05045.chunk.js.map": "/bookstore/static/js/279.36b05045.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.7356bdf3.css",
-    "static/js/main.69d1a57b.js"
+    "static/js/main.aaad4450.js"
   ]
 }
