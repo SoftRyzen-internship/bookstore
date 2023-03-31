@@ -13,6 +13,9 @@ const HomePage = lazy(() =>
 const BookDetailsPage = lazy(() =>
   import('../pages/BookDetailsPage' /* webpackChunkName: "book-page" */)
 );
+const BookEditPage = lazy(() =>
+  import('../pages/BookEditPage' /* webpackChunkName: "book-edit-page" */)
+);
 
 export const App = () => {
   return (
@@ -30,7 +33,7 @@ export const App = () => {
           />
 
           <Route
-            path={routesPath.BOOK_DETAIL}
+            path={routesPath.HOME + routesPath.BOOK_DETAIL}
             element={
               <Suspense fallback={<Spinner />}>
                 <BookDetailsPage />
@@ -38,7 +41,18 @@ export const App = () => {
             }
           />
 
-          <Route path="*" element={<Navigate to="books" />} />
+          <Route
+            path={
+              routesPath.HOME + routesPath.BOOK_DETAIL + routesPath.BOOK_EDIT
+            }
+            element={
+              <Suspense fallback={<Spinner />}>
+                <BookEditPage />
+              </Suspense>
+            }
+          />
+
+          <Route path="*" element={<Navigate to={routesPath.HOME} />} />
         </Routes>
       </MainWrapper>
 

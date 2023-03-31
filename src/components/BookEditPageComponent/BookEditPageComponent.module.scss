@@ -1,0 +1,12 @@
+.container {
+  padding-left: 32px;
+  width: 100%;
+}
+
+.title {
+  font-weight: var(--semibold);
+  font-size: 28px;
+  line-height: calc(35 / 28);
+  margin-bottom: 16px;
+  color: var(--primary-txt-cl);
+}

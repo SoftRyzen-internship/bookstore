@@ -1,0 +1,1 @@
+export { BookEditPageComponent } from './BookEditPageComponent';

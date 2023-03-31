@@ -2,9 +2,12 @@ import { useState } from 'react';
 import PropTypes from 'prop-types';
 import { ICONS } from 'assets/icons';
 import s from './BlockInfo.module.scss';
+import { useNavigate } from 'react-router-dom';
+import { routesPath } from 'router/routesPath';
 
 export const BlockInfo = ({ data }) => {
   const [favorite, setFavorite] = useState(false);
+  const navigate = useNavigate();
   return (
     <div className={s.container}>
       <p className={s.title}>{data.title}</p>
@@ -48,6 +51,31 @@ export const BlockInfo = ({ data }) => {
           </li>
         </ul>
       </div>
+      <ul className={s.editButtonContainer}>
+        <li>
+          <button
+            className={s.editButton}
+            onClick={e => {
+              e.preventDefault();
+              navigate(routesPath.BOOK_EDIT);
+            }}
+          >
+            <ICONS.EDIT />
+            Редагувати
+          </button>
+        </li>
+        <li>
+          <button
+            className={s.deleteButton}
+            onClick={e => {
+              e.preventDefault();
+            }}
+          >
+            <ICONS.TRASH />
+            Видалити
+          </button>
+        </li>
+      </ul>
     </div>
   );
 };

@@ -1,4 +1,5 @@
 export const routesPath = {
-  HOME: '/books',
-  BOOK_DETAIL: '/books/:id',
+  HOME: 'books/',
+  BOOK_DETAIL: ':id/',
+  BOOK_EDIT: 'edit/',
 };

@@ -1,11 +1,13 @@
-import { useState } from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { ICONS } from 'assets/icons';
 import s from './BookCard.module.scss';
+import { routesPath } from 'router/routesPath';
 
 export const BookCard = ({ book }) => {
   const [favorite, setFavorite] = useState(false);
+  const navigate = useNavigate();
   return (
     <Link to={book._id}>
       <div className={s.container}>
@@ -49,6 +51,7 @@ export const BookCard = ({ book }) => {
               className={s.editButton}
               onClick={e => {
                 e.preventDefault();
+                navigate(book._id + '/' + routesPath.BOOK_EDIT);
               }}
             >
               <ICONS.EDIT />

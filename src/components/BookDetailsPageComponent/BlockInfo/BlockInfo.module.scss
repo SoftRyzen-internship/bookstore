@@ -50,7 +50,6 @@
 }
 .detailsWrapper {
   width: 592px;
-  height: 440px;
   padding: 24px 24px 36px 24px;
   border-radius: 5px;
   border: 1px solid #efefef;
@@ -106,4 +105,35 @@
 .value {
   font-weight: var(--medium);
   color: var(--secondary-txt-cl);
+}
+
+.editButtonContainer {
+  margin-top: 24px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 24px;
+}
+
+.editButton {
+  font-weight: var(--semibold);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 30px;
+  border-radius: 5px;
+  color: var(--white);
+  background-color: var(--accent-cl);
+}
+
+.deleteButton {
+  font-weight: var(--semibold);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 30px;
+  border-radius: 5px;
+  background-color: var(--red);
+  color: var(--white);
 }
