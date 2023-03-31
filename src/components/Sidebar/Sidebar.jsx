@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
-import s from './Sidebar.module.scss';
 import { getCategories } from 'services/categories';
 import { CategoryItem } from './CategoryItem';
+import s from './Sidebar.module.scss';
 
 export const Sidebar = () => {
   const [categories, setCategories] = useState([]);

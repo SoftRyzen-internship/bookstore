@@ -1,6 +1,6 @@
-import s from './CategoryItem.module.scss';
 import { Link } from 'react-router-dom';
 import { getSubcategories } from 'services/categories';
+import s from './CategoryItem.module.scss';
 
 export const CategoryItem = ({
   category,
