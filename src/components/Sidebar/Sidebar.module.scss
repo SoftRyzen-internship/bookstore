@@ -4,3 +4,23 @@
   background-color: var(--primary-bg-cl);
   flex-shrink: 0;
 }
+
+.titleWrapper {
+  padding: 9px 32px;
+  margin-bottom: 24px;
+  background-color: var(--accent-cl);
+  border-radius: 0px 5px 0px 0px;
+}
+
+.title {
+  font-size: var(--text-lg);
+  line-height: calc(24 / 18);
+  font-weight: var(--medium);
+}
+
+.listWrapper {
+  position: relative;
+}
+.categoriesWrapper {
+  position: relative;
+}
