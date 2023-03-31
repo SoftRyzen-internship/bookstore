@@ -34,7 +34,7 @@ export const BooksList = () => {
       {!loading && data && (
         <ReactPaginate
           initialPage={page - 1}
-          pageCount={Math.floor(data.total / booksPerPage)}
+          pageCount={Math.ceil(data.total / booksPerPage)}
           nextLabel=">"
           previousLabel="<"
           marginPagesDisplayed={1}
