@@ -13,6 +13,9 @@ const HomePage = lazy(() =>
 const BookDetailsPage = lazy(() =>
   import('../pages/BookDetailsPage' /* webpackChunkName: "book-page" */)
 );
+const UserPage = lazy(() =>
+  import('../pages/UserPage' /* webpackChunkName: "user-page" */)
+);
 
 export const App = () => {
   return (
@@ -34,6 +37,14 @@ export const App = () => {
             element={
               <Suspense fallback={<Spinner />}>
                 <BookDetailsPage />
+              </Suspense>
+            }
+          />
+          <Route
+            path={routesPath.USER}
+            element={
+              <Suspense fallback={<Spinner />}>
+                <UserPage />
               </Suspense>
             }
           />

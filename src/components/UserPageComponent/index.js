@@ -1,0 +1,1 @@
+export { UserPageComponent } from './UserPageComponent';
