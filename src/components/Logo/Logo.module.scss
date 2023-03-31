@@ -5,6 +5,7 @@
   margin-left: 12px;
 }
 .text {
-  font-size: var(--text-md);
+  font-size: var(--text-lg);
   font-weight: var(--medium);
+  line-height: calc(24 / 18);
 }

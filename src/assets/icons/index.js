@@ -11,6 +11,10 @@ import { ReactComponent as Check } from 'assets/icons/svg/check.svg';
 import { ReactComponent as Plus } from 'assets/icons/svg/plus.svg';
 import { ReactComponent as Edit } from 'assets/icons/svg/edit.svg';
 import { ReactComponent as Trash } from 'assets/icons/svg/trash.svg';
+import { ReactComponent as Facebook } from 'assets/icons/svg/facebook.svg';
+import { ReactComponent as Twitter } from 'assets/icons/svg/twitter.svg';
+import { ReactComponent as Youtube } from 'assets/icons/svg/youtube.svg';
+import { ReactComponent as Linkedin } from 'assets/icons/svg/linkedin.svg';
 import { ReactComponent as CartFull } from 'assets/icons/svg/cart-full.svg';
 
 export const ICONS = {
@@ -27,5 +31,9 @@ export const ICONS = {
   PLUS: Plus,
   EDIT: Edit,
   TRASH: Trash,
+  FACEBOOK: Facebook,
+  TWITTER: Twitter,
+  YOUTUBE: Youtube,
+  LINKEDIN: Linkedin,
   CART_FULL: CartFull,
 };
