@@ -1,0 +1,63 @@
+.listItem {
+  font-size: var(--text-md);
+  line-height: calc(24 / 16);
+  font-weight: var(--medium);
+  padding-left: 32px;
+  padding-right: 32px;
+  &:not(:last-child) {
+    margin-bottom: 18px;
+  }
+  border-right: 2px solid transparent;
+  transition: all var(--transition);
+  &:hover,
+  &:focus {
+    color: var(--accent-cl);
+    border-right: 2px solid var(--accent-cl);
+  }
+}
+
+.categoryLink {
+  position: relative;
+  width: 100%;
+  display: inline-block;
+}
+
+.subcategories {
+  width: 100%;
+  padding-top: 24px;
+  padding-bottom: 24px;
+  background-color: var(--components-cl);
+  border-radius: 0px 5px 5px 0px;
+  position: absolute;
+  top: 0;
+  left: calc(100% + 2px);
+  z-index: 2;
+}
+
+.listItemSubcatigories {
+  padding-left: 24px;
+  &:not(:last-child) {
+    margin-bottom: 18px;
+  }
+}
+
+.subcategoryLink {
+  display: block;
+  color: var(--primary-txt-cl);
+  border-right: 2px solid transparent;
+  transition: all var(--transition);
+  &:hover,
+  &:focus {
+    color: var(--accent-cl);
+    border-right: 2px solid var(--accent-cl);
+  }
+}
+
+/* Зміни для активного елемента */
+.listItem.active {
+  position: relative;
+}
+
+.listItem.active .subcategories {
+  top: 0;
+}
