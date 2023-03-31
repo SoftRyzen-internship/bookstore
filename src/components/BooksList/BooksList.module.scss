@@ -1,6 +1,5 @@
 .container {
   padding-left: 32px;
-  padding-right: 32px;
   width: 100%;
 }
 .list {
@@ -28,6 +27,10 @@
     height: 40px;
     border-radius: 30px;
     border: 2px solid var(--accent-cl);
+    &.disabled {
+      border: 2px solid var(--border-social-normal);
+      color: var(--border-social-normal);
+    }
   }
   & a {
     padding: 4px 8px;
@@ -36,6 +39,15 @@
 }
 
 .active {
+  & a {
+    cursor: default;
+  }
   background-color: var(--accent-cl);
   color: var(--white);
+}
+
+.disabled {
+  & a {
+    cursor: default;
+  }
 }
