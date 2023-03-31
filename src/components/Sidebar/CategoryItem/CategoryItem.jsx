@@ -1,4 +1,3 @@
-import React from 'react';
 import s from './CategoryItem.module.scss';
 import { Link } from 'react-router-dom';
 import { getSubcategories } from 'services/categories';
