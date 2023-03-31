@@ -1,0 +1,1 @@
+export { BookDetailsPageComponent } from './BookDetailsPageComponent';

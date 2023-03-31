@@ -3,12 +3,14 @@ import { ContactInfo } from 'components/ContactInfo';
 import { Logo } from 'components/Logo';
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { Container } from 'components/Containers/Container';
 import s from './Footer.module.scss';
 
 export const Footer = () => {
   return (
     <footer className={s.footer}>
-      <div className={s.container}>
+      <Container>
+        {/* <div className={s.container}> */}
         <div className={s.blockBox}>
           <div className={s.blockBoxItem}>
             <div className={s.footerLogo}>
@@ -119,7 +121,8 @@ export const Footer = () => {
         <div className={s.footerCopy}>
           <span id="copyright">&copy; 2004-2023. Усі права захищено</span>
         </div>
-      </div>
+        {/* </div> */}
+      </Container>
     </footer>
   );
 };

@@ -1,5 +1,4 @@
 import { ICONS } from 'assets/icons';
-import React from 'react';
 import { formatPhoneNumber } from 'utils';
 import s from './ContactInfo.module.scss';
 

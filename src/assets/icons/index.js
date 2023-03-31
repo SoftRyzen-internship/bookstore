@@ -15,6 +15,7 @@ import { ReactComponent as Facebook } from 'assets/icons/svg/facebook.svg';
 import { ReactComponent as Twitter } from 'assets/icons/svg/twitter.svg';
 import { ReactComponent as Youtube } from 'assets/icons/svg/youtube.svg';
 import { ReactComponent as Linkedin } from 'assets/icons/svg/linkedin.svg';
+import { ReactComponent as CartFull } from 'assets/icons/svg/cart-full.svg';
 
 export const ICONS = {
   LOGO: Logo,
@@ -34,4 +35,5 @@ export const ICONS = {
   TWITTER: Twitter,
   YOUTUBE: Youtube,
   LINKEDIN: Linkedin,
+  CART_FULL: CartFull,
 };

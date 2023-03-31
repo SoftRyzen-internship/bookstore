@@ -1,10 +1,10 @@
 import PropTypes from 'prop-types';
-import s from './PageWrapper.module.scss';
+import s from './Container.module.scss';
 
-export const PageWrapper = ({ children }) => {
+export const Container = ({ children }) => {
   return <div className={s.container}>{children}</div>;
 };
 
-PageWrapper.propTypes = {
+Container.propTypes = {
   children: PropTypes.node,
 };

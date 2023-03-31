@@ -1,0 +1,13 @@
+.container {
+  margin-top: -24px;
+  padding-top: 32px;
+  padding-bottom: 32px;
+  width: 100%;
+  background-color: var(--components-cl);
+}
+
+.wrapper {
+  position: relative;
+  display: flex;
+  gap: 32px;
+}

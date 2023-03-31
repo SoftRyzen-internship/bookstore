@@ -1,5 +1,4 @@
 import { ICONS } from 'assets/icons';
-import React from 'react';
 import s from './Logo.module.scss';
 
 export const Logo = () => {
