@@ -10,6 +10,7 @@ import s from './BooksList.module.scss';
 export const BooksList = () => {
   let [searchParams, setSearchParams] = useSearchParams();
   let page = Number(searchParams.get('page') ? searchParams.get('page') : 1);
+  const booksPerPage = 6;
 
   const handlePageChange = ({ selected }) => {
     setSearchParams({ page: selected + 1 });
@@ -33,7 +34,7 @@ export const BooksList = () => {
       {!loading && data && (
         <ReactPaginate
           initialPage={page - 1}
-          pageCount={data.count}
+          pageCount={Math.floor(data.total / booksPerPage)}
           nextLabel=">"
           previousLabel="<"
           marginPagesDisplayed={1}
@@ -41,6 +42,7 @@ export const BooksList = () => {
           onPageChange={handlePageChange}
           containerClassName={s.pagination}
           activeClassName={s.active}
+          disabledClassName={s.disabled}
         />
       )}
     </div>

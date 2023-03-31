@@ -2,12 +2,10 @@ import PropTypes from 'prop-types';
 
 export const FlexWrapper = ({
   children,
-  justifyContent = 'normal',
-  alignItems = 'normal',
-  flexDirection = 'row',
-  flexWrap = 'nowrap',
-  flexGrow = 0,
-  flexShrink = 1,
+  justifyContent,
+  alignItems,
+  flexDirection,
+  flexWrap,
 }) => {
   const wrapperStyles = {
     display: 'flex',
@@ -15,8 +13,6 @@ export const FlexWrapper = ({
     alignItems: alignItems,
     flexDirection: flexDirection,
     flexWrap: flexWrap,
-    flexGrow: flexGrow,
-    flexShrink: flexShrink,
   };
 
   return <div style={wrapperStyles}>{children}</div>;

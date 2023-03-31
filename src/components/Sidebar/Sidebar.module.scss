@@ -1,4 +1,6 @@
 .sidebar {
+  margin-left: -32px;
   width: 312px;
   background-color: var(--primary-bg-cl);
+  flex-shrink: 0;
 }
