@@ -1,0 +1,109 @@
+.container {
+  margin-top: 24px;
+  width: 592px;
+}
+.title {
+  font-weight: var(--semibold);
+  font-size: 36px;
+  line-height: 1.25;
+  margin-bottom: 16px;
+  color: var(--primary-txt-cl);
+}
+.wrapper {
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #efefef;
+}
+.author {
+  font-weight: var(--medium);
+  margin-bottom: 6px;
+  justify-content: space-between;
+  color: var(--gray);
+}
+.reviews {
+  font-weight: var(--medium);
+  margin-bottom: 6px;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--gray);
+  color: var(--gray);
+}
+.tabs {
+  display: flex;
+  border-radius: 5px;
+  border: 1px solid #efefef;
+  border-bottom: none;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+.activeTab {
+  padding-top: 9px;
+  padding-bottom: 9px;
+  width: 50%;
+  color: var(--accent-cl);
+}
+.disableTab {
+  padding-top: 9px;
+  padding-bottom: 9px;
+  width: 50%;
+  background-color: #efefef;
+}
+.detailsWrapper {
+  width: 592px;
+  height: 440px;
+  padding: 24px 24px 36px 24px;
+  border-radius: 5px;
+  border: 1px solid #efefef;
+  border-top: none;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.buyWrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+.price {
+  font-weight: var(--semibold);
+  font-size: 24px;
+  line-height: 1.875;
+  color: var(--accent-cl);
+}
+.buyButton {
+  font-weight: var(--semibold);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 30px;
+  border-radius: 5px;
+  color: var(--white);
+  background-color: var(--accent-cl);
+}
+.favoriteWrapper {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+.favoriteText {
+  font-weight: var(--medium);
+  color: var(--secondary-txt-cl);
+}
+
+.detailsItem {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  border-bottom: 1px solid #efefef;
+}
+.text {
+  font-weight: var(--regular);
+  color: var(--gray);
+}
+.value {
+  font-weight: var(--medium);
+  color: var(--secondary-txt-cl);
+}

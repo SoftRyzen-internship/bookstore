@@ -1,5 +1,4 @@
 import { ICONS } from 'assets/icons';
-import React from 'react';
 import { HeaderButton } from './HeaderButton';
 import s from './HeaderButtonList.module.scss';
 

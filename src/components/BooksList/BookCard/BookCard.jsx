@@ -1,25 +1,25 @@
-import { ICONS } from 'assets/icons';
-import React from 'react';
+import { useState } from 'react';
 import PropTypes from 'prop-types';
-import s from './BookCard.module.scss';
 import { Link } from 'react-router-dom';
+import { ICONS } from 'assets/icons';
+import s from './BookCard.module.scss';
 
-export const BookCard = ({
-  favorite,
-  onClickFavorite,
-  onClickAdd,
-  onClickEdit,
-  onClickDelete,
-  book,
-}) => {
+export const BookCard = ({ book }) => {
+  const [favorite, setFavorite] = useState(false);
   return (
     <Link to={book._id}>
       <div className={s.container}>
-        <button className={s.favorite} onClick={onClickFavorite}>
+        <button
+          className={s.favorite}
+          onClick={e => {
+            e.preventDefault();
+            setFavorite(!favorite);
+          }}
+        >
           {favorite ? (
             <ICONS.FAVORITE_ACTIVE />
           ) : (
-            <ICONS.FAVORITE fill="var(--red)" />
+            <ICONS.FAVORITE width={24} height={24} fill="var(--red)" />
           )}
         </button>
         <img className={s.poster} src={book.small_image} alt="book poster" />
@@ -38,19 +38,29 @@ export const BookCard = ({
           </p>
         </div>
         {/* <div className={s.addButtonContainer}>
-          <button className={s.addButton} onClick={onClickAdd}>
+          <button className={s.addButton} onClick={(e)=>{e.preventDefault();}}>
             <ICONS.PLUS className={s.addIcon} />
             Додати до кошика
           </button>
         </div> */}
         <ul className={s.editButtonContainer}>
           <li>
-            <button className={s.editButton} onClick={onClickEdit}>
+            <button
+              className={s.editButton}
+              onClick={e => {
+                e.preventDefault();
+              }}
+            >
               <ICONS.EDIT />
             </button>
           </li>
           <li>
-            <button className={s.deleteButton} onClick={onClickDelete}>
+            <button
+              className={s.deleteButton}
+              onClick={e => {
+                e.preventDefault();
+              }}
+            >
               <ICONS.TRASH />
             </button>
           </li>
@@ -61,11 +71,6 @@ export const BookCard = ({
 };
 
 BookCard.propTypes = {
-  favorite: PropTypes.bool,
-  onClickFavorite: PropTypes.func,
-  onClickAdd: PropTypes.func,
-  onClickEdit: PropTypes.func,
-  onClickDelete: PropTypes.func,
   book: PropTypes.shape({
     _id: PropTypes.string,
     author: PropTypes.string,
