@@ -16,6 +16,9 @@ const BookDetailsPage = lazy(() =>
 const BookEditPage = lazy(() =>
   import('../pages/BookEditPage' /* webpackChunkName: "book-edit-page" */)
 );
+const UserPage = lazy(() =>
+  import('../pages/UserPage' /* webpackChunkName: "user-page" */)
+);
 
 export const App = () => {
   return (
@@ -45,7 +48,7 @@ export const App = () => {
             path={routesPath.PROFILE}
             element={
               <Suspense fallback={<Spinner />}>
-                <div>PROFILE PAGE</div>
+                <UserPage />
               </Suspense>
             }
           />
