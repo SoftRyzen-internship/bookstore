@@ -22,6 +22,12 @@
   color: var(--primary-txt-cl);
   background-color: var(--components-cl);
 }
+.inputError {
+  outline: 1px solid var(--red);
+}
+.inputValid {
+  outline: 1px solid var(--accent-cl);
+}
 .smallInputList {
   display: flex;
   justify-content: space-between;
@@ -57,6 +63,12 @@
   outline: 1px solid var(--gray-secondary);
   background-color: var(--components-cl);
   color: var(--primary-txt-cl);
+  &.inputError {
+    outline: 1px solid var(--red);
+  }
+  &.inputValid {
+    outline: 1px solid var(--accent-cl);
+  }
 }
 .errorMsg {
   position: absolute;

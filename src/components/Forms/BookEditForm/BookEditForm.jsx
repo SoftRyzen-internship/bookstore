@@ -24,7 +24,7 @@ export const BookEditForm = () => {
     title: '',
     author: '',
     type: '',
-    book_year: currentYear,
+    book_year: '',
     book_page_count: '',
     description: '',
     small_image: '',
@@ -43,6 +43,7 @@ export const BookEditForm = () => {
           author: values.author,
           book_year: Number(values.book_year),
           book_page_count: Number(values.book_page_count),
+          description: values.description,
           small_image: values.small_image,
           big_image: values.big_image,
           price: Number(values.price - values.discount),
@@ -64,6 +65,7 @@ export const BookEditForm = () => {
     dirty,
     handleChange,
     handleSubmit,
+    handleBlur,
     setFieldValue,
     setValues,
   } = formik;
@@ -72,7 +74,7 @@ export const BookEditForm = () => {
     const years = [];
     for (let year = currentYear; year > currentYear - 200; year--) {
       years.push({
-        value: year,
+        value: year.toString(),
         label: year.toString(),
       });
     }
@@ -81,23 +83,23 @@ export const BookEditForm = () => {
 
   useEffect(() => {
     if (data) {
-      setValues({
+      const fields = {
         title: data.title,
         author: data.author,
         type: '',
-        book_year: currentYear,
+        book_year: data.book_year,
         book_page_count: data.book_page_count,
         description: data.description,
         small_image: data.small_image,
         big_image: data.big_image,
         price: data.price,
         discount: 0,
-      });
+      };
+      setValues(fields);
+      Object.keys(fields).forEach(field => (touched[field] = true));
     }
-
     // eslint-disable-next-line
   }, [data]);
-
   return loading ? (
     <Spinner />
   ) : (
@@ -109,13 +111,17 @@ export const BookEditForm = () => {
               Вкажіть назву книги<span style={{ color: 'var(--red)' }}>*</span>
             </p>
             <input
-              className={s.input}
+              className={`${s.input} ${
+                touched.title && (errors.title ? s.inputError : s.inputValid)
+              }`}
+              id="title"
               name="title"
               placeholder=""
               value={values.title}
               onChange={handleChange}
+              onBlur={handleBlur}
             />
-            {touched && errors.title && (
+            {touched.title && errors.title && (
               <p className={s.errorMsg}>{errors.title}</p>
             )}
           </label>
@@ -127,13 +133,16 @@ export const BookEditForm = () => {
               Вкажіть автора<span style={{ color: 'var(--red)' }}>*</span>
             </p>
             <input
-              className={s.input}
+              className={`${s.input} ${
+                touched.author && (errors.author ? s.inputError : s.inputValid)
+              }`}
               name="author"
               placeholder=""
               value={values.author}
               onChange={handleChange}
+              onBlur={handleBlur}
             />
-            {touched && errors.author && (
+            {touched.author && errors.author && (
               <p className={s.errorMsg}>{errors.author}</p>
             )}
           </label>
@@ -145,18 +154,26 @@ export const BookEditForm = () => {
               <label className={s.smallInputLabel}>
                 <p>Виберіть тип видання</p>
                 <Dropdown
+                  className={
+                    touched.type && (errors.type ? s.inputError : s.inputValid)
+                  }
                   options={[
                     {
                       label: 'Паперова',
                       value: 'paper',
                     },
                   ]}
+                  initialValue={{
+                    label: 'Паперова',
+                    value: 'paper',
+                  }}
                   placeHolder=""
                   onChange={({ value }) => {
                     setFieldValue('type', value);
+                    touched.type = true;
                   }}
                 />
-                {touched && errors.type && (
+                {touched.type && errors.type && (
                   <p className={s.errorMsg}>{errors.type}</p>
                 )}
               </label>
@@ -168,14 +185,22 @@ export const BookEditForm = () => {
                   <span style={{ color: 'var(--red)' }}>*</span>
                 </p>
                 <Dropdown
+                  className={
+                    touched.book_year &&
+                    (errors.book_year ? s.inputError : s.inputValid)
+                  }
                   options={yearList}
+                  initialValue={{
+                    label: values.book_year.toString(),
+                    value: values.book_year.toString(),
+                  }}
                   isSearchable
-                  placeHolder={currentYear.toString()}
                   onChange={({ value }) => {
                     setFieldValue('book_year', value);
+                    touched.book_year = true;
                   }}
                 />
-                {touched && errors.book_year && (
+                {touched.book_year && errors.book_year && (
                   <p className={s.errorMsg}>{errors.book_year}</p>
                 )}
               </label>
@@ -187,13 +212,17 @@ export const BookEditForm = () => {
                   <span style={{ color: 'var(--red)' }}>*</span>
                 </p>
                 <input
-                  className={s.input}
+                  className={`${s.input} ${
+                    touched.book_page_count &&
+                    (errors.book_page_count ? s.inputError : s.inputValid)
+                  }`}
                   name="book_page_count"
                   placeholder=""
                   value={values.book_page_count}
                   onChange={handleChange}
+                  onBlur={handleBlur}
                 />
-                {touched && errors.book_page_count && (
+                {touched.book_page_count && errors.book_page_count && (
                   <p className={s.errorMsg}>{errors.book_page_count}</p>
                 )}
               </label>
@@ -208,13 +237,17 @@ export const BookEditForm = () => {
               <span style={{ color: 'var(--red)' }}>*</span>
             </p>
             <textarea
-              className={s.textarea}
+              className={`${s.textarea} ${
+                touched.description &&
+                (errors.description ? s.inputError : s.inputValid)
+              }`}
               name="description"
               placeholder=""
               value={values.description}
               onChange={handleChange}
+              onBlur={handleBlur}
             />
-            {touched && errors.description && (
+            {touched.description && errors.description && (
               <p className={s.errorMsg}>{errors.description}</p>
             )}
           </label>
@@ -227,13 +260,17 @@ export const BookEditForm = () => {
               <span style={{ color: 'var(--red)' }}>*</span>
             </p>
             <input
-              className={s.input}
+              className={`${s.input} ${
+                touched.small_image &&
+                (errors.small_image ? s.inputError : s.inputValid)
+              }`}
               name="small_image"
               placeholder=""
               value={values.small_image}
               onChange={handleChange}
+              onBlur={handleBlur}
             />
-            {touched && errors.small_image && (
+            {touched.small_image && errors.small_image && (
               <p className={s.errorMsg}>{errors.small_image}</p>
             )}
           </label>
@@ -247,13 +284,17 @@ export const BookEditForm = () => {
               <span style={{ color: 'var(--red)' }}>*</span>
             </p>
             <input
-              className={s.input}
+              className={`${s.input} ${
+                touched.big_image &&
+                (errors.big_image ? s.inputError : s.inputValid)
+              }`}
               name="big_image"
               placeholder=""
               value={values.big_image}
               onChange={handleChange}
+              onBlur={handleBlur}
             />
-            {touched && errors.big_image && (
+            {touched.big_image && errors.big_image && (
               <p className={s.errorMsg}>{errors.big_image}</p>
             )}
           </label>
@@ -273,13 +314,17 @@ export const BookEditForm = () => {
                   <span style={{ color: 'var(--red)' }}>*</span>
                 </p>
                 <input
-                  className={s.input}
+                  className={`${s.input} ${
+                    touched.price &&
+                    (errors.price ? s.inputError : s.inputValid)
+                  }`}
                   name="price"
                   placeholder=""
                   value={values.price}
                   onChange={handleChange}
+                  onBlur={handleBlur}
                 />
-                {touched && errors.price && (
+                {touched.price && errors.price && (
                   <p className={s.errorMsg}>{errors.price}</p>
                 )}
               </label>
@@ -291,13 +336,17 @@ export const BookEditForm = () => {
                   <span style={{ color: 'var(--red)' }}>*</span>
                 </p>
                 <input
-                  className={s.input}
+                  className={`${s.input} ${
+                    touched.discount &&
+                    (errors.discount ? s.inputError : s.inputValid)
+                  }`}
                   name="discount"
                   placeholder=""
                   value={values.discount}
                   onChange={handleChange}
+                  onBlur={handleBlur}
                 />
-                {!isValid && touched && errors.discount && (
+                {touched.discount && errors.discount && (
                   <p className={s.errorMsg}>{errors.discount}</p>
                 )}
               </label>

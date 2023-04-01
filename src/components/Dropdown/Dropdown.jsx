@@ -3,9 +3,11 @@ import { ICONS } from 'assets/icons';
 import s from './Dropdown.module.scss';
 
 export const Dropdown = ({
+  className,
   placeHolder = '',
   options,
   isSearchable,
+  initialValue,
   onChange,
 }) => {
   const [showMenu, setShowMenu] = useState(false);
@@ -13,6 +15,9 @@ export const Dropdown = ({
   const [searchValue, setSearchValue] = useState('');
   const searchRef = useRef();
   const inputRef = useRef();
+  useEffect(() => {
+    setSelectedValue(initialValue);
+  }, [initialValue]);
 
   useEffect(() => {
     setSearchValue('');
@@ -38,6 +43,7 @@ export const Dropdown = ({
       window.removeEventListener('click', handler);
     };
   });
+
   const handleInputClick = () => {
     setShowMenu(!showMenu);
   };
@@ -71,7 +77,11 @@ export const Dropdown = ({
 
   return (
     <div className={s.container}>
-      <div ref={inputRef} onClick={handleInputClick} className={s.input}>
+      <div
+        ref={inputRef}
+        onClick={handleInputClick}
+        className={`${s.input} ${className ? className : ''}`}
+      >
         <p className={s.selectedValue}>
           {!selectedValue ? placeHolder : selectedValue.label}
         </p>
@@ -93,7 +103,7 @@ export const Dropdown = ({
             <div
               onClick={() => onItemClick(option)}
               key={option.value}
-              className={`${s.item} ${isSelected(option) && s.selected}`}
+              className={`${s.item} ${isSelected(option) ? s.selected : ''}`}
             >
               {option.label}
             </div>

@@ -1,16 +1,16 @@
 .container {
   text-align: left;
-  border: 1px solid var(--gray-secondary);
   position: relative;
-  border-radius: 5px;
 }
 
 .input {
+  position: relative;
   padding: 12px 16px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  // user-select: none;
+  border-radius: 5px;
+  outline: 1px solid var(--gray-secondary);
 }
 .selectedValue {
   font-weight: var(--regular);
@@ -20,7 +20,7 @@
   position: absolute;
   transform: translateY(4px);
   width: 100%;
-  border: 1px solid var(--gray-secondary);
+  outline: 1px solid var(--gray-secondary);
   border-radius: 5px;
   overflow: auto;
   max-height: 244px;
@@ -34,10 +34,15 @@
 .item {
   padding: 8px 16px;
   cursor: pointer;
+  // transition: var(--transition);
 }
 
 .item:hover {
-  background-color: var(--gray-secondary);
+  outline: 1px solid var(--accent-cl);
+  color: var(--accent-cl);
+  &.selected {
+    color: var(--white);
+  }
 }
 
 .selected {
