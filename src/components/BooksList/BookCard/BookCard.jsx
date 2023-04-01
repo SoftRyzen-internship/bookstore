@@ -1,17 +1,22 @@
 import PropTypes from 'prop-types';
 import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { ICONS } from 'assets/icons';
-import s from './BookCard.module.scss';
 import { routesPath } from 'router/routesPath';
+import { deleteBook } from 'services/books-api';
+import { SpinnerButton } from 'components/SpinnerButton';
+import s from './BookCard.module.scss';
 
-export const BookCard = ({ book }) => {
+export const BookCard = ({ book, onDelete, count }) => {
   const [favorite, setFavorite] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
   return (
-    <Link to={book._id}>
+    <Link to={book._id} state={{ from: location, count: count }}>
       <div className={s.container}>
         <button
+          type="button"
           className={s.favorite}
           onClick={e => {
             e.preventDefault();
@@ -40,7 +45,7 @@ export const BookCard = ({ book }) => {
           </p>
         </div>
         {/* <div className={s.addButtonContainer}>
-          <button className={s.addButton} onClick={(e)=>{e.preventDefault();}}>
+          <button type='button' className={s.addButton} onClick={(e)=>{e.preventDefault();}}>
             <ICONS.PLUS className={s.addIcon} />
             Додати до кошика
           </button>
@@ -48,10 +53,15 @@ export const BookCard = ({ book }) => {
         <ul className={s.editButtonContainer}>
           <li>
             <button
+              type="button"
               className={s.editButton}
               onClick={e => {
                 e.preventDefault();
-                navigate(book._id + '/' + routesPath.BOOK_EDIT);
+                navigate(book._id + '/' + routesPath.BOOK_EDIT, {
+                  state: {
+                    from: location,
+                  },
+                });
               }}
             >
               <ICONS.EDIT />
@@ -59,12 +69,22 @@ export const BookCard = ({ book }) => {
           </li>
           <li>
             <button
+              type="button"
               className={s.deleteButton}
-              onClick={e => {
+              onClick={async e => {
                 e.preventDefault();
+                try {
+                  setIsDeleting(true);
+                  await deleteBook(book._id);
+                  setIsDeleting(false);
+                  onDelete();
+                } catch (error) {
+                  setIsDeleting(false);
+                  console.log(error.message);
+                }
               }}
             >
-              <ICONS.TRASH />
+              {isDeleting ? <SpinnerButton /> : <ICONS.TRASH />}
             </button>
           </li>
         </ul>
@@ -74,6 +94,8 @@ export const BookCard = ({ book }) => {
 };
 
 BookCard.propTypes = {
+  count: PropTypes.number,
+  onDelete: PropTypes.func,
   book: PropTypes.shape({
     _id: PropTypes.string,
     author: PropTypes.string,

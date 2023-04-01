@@ -4,18 +4,18 @@
   padding: 16px 20px 20px 16px;
   border-radius: 5px;
   background-color: var(--components-cl);
-
+  transition: var(--transition);
   &:hover {
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
-    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12);
+    box-shadow: var(--shadow-primary);
     & .addButtonContainer {
       display: block;
-      box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12);
+      box-shadow: var(--shadow-primary);
     }
     & .editButtonContainer {
       display: flex;
-      box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12);
+      box-shadow: var(--shadow-primary);
     }
     & .title {
       white-space: normal;
@@ -147,6 +147,11 @@
   width: 118px;
   background-color: var(--accent-cl);
   color: var(--white);
+  transition: var(--transition);
+  &:hover {
+    background-color: var(--accent-hover-cl);
+    box-shadow: var(--shadow-primary);
+  }
 }
 
 .deleteButton {
@@ -159,4 +164,9 @@
   width: 118px;
   background-color: var(--red);
   color: var(--white);
+  transition: var(--transition);
+  &:hover {
+    background-color: var(--red-hover);
+    box-shadow: var(--shadow-primary);
+  }
 }

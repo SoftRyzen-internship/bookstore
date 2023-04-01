@@ -33,6 +33,33 @@ export const App = () => {
           />
 
           <Route
+            path={routesPath.ORDER}
+            element={
+              <Suspense fallback={<Spinner />}>
+                <div>ORDER PAGE</div>
+              </Suspense>
+            }
+          />
+
+          <Route
+            path={routesPath.PROFILE}
+            element={
+              <Suspense fallback={<Spinner />}>
+                <div>PROFILE PAGE</div>
+              </Suspense>
+            }
+          />
+
+          <Route
+            path={routesPath.HOME + routesPath.BOOK_ADD}
+            element={
+              <Suspense fallback={<Spinner />}>
+                <div>ADD BOOK PAGE</div>
+              </Suspense>
+            }
+          />
+
+          <Route
             path={routesPath.HOME + routesPath.BOOK_DETAIL}
             element={
               <Suspense fallback={<Spinner />}>

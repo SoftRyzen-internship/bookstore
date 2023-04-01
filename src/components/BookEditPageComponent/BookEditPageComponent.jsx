@@ -3,6 +3,7 @@ import { FlexWrapper } from 'components/Containers/FlexWrapper';
 import { Sidebar } from 'components/Sidebar';
 import s from './BookEditPageComponent.module.scss';
 import { Breadcrumbs } from 'components/Breadcrumbs';
+import { BookEditForm } from 'components/Forms';
 
 export const BookEditPageComponent = () => {
   return (
@@ -12,7 +13,7 @@ export const BookEditPageComponent = () => {
         <div className={s.container}>
           <Breadcrumbs />
           <p className={s.title}>Редагування книги</p>
-          {/* <BookEditForm /> */}
+          <BookEditForm />
         </div>
       </FlexWrapper>
     </Container>

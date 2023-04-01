@@ -5,10 +5,18 @@ export const BlockDescription = ({ data }) => {
   return (
     <div className={s.container}>
       <div className={s.tabs}>
-        <button className={s.activeTab}>Опис товару</button>
-        <button className={s.disableTab}>Зміст книги</button>
-        <button className={s.disableTab}>Фрагмент з книги</button>
-        <button className={s.disableTab}>Відгуки покупців</button>
+        <button type="button" className={s.activeTab}>
+          Опис товару
+        </button>
+        <button type="button" className={s.disableTab}>
+          Зміст книги
+        </button>
+        <button type="button" className={s.disableTab}>
+          Фрагмент з книги
+        </button>
+        <button type="button" className={s.disableTab}>
+          Відгуки покупців
+        </button>
       </div>
       <div className={s.descriptionWrapper}>
         <p className={s.title}>Анотація</p>

@@ -1,5 +1,6 @@
 :root {
   --accent-cl: #13c296;
+  --accent-hover-cl: #12daa7;
 
   /*BACKGROUND COLORS*/
   --primary-bg-cl: #ffffff;
@@ -19,7 +20,9 @@
   --gray: #747474;
   --red: #e21e4d;
   --blue: #3056d3;
-  --border-social-normal: #b7b7b7;
+
+  --gray-secondary: #b7b7b7;
+  --red-hover: #ff265a;
 
   /* TRANSITION */
   --transition: 250ms linear;
@@ -40,4 +43,6 @@
   --semibold: 600;
   --medium: 500;
   --regular: 400;
+
+  --shadow-primary: 0px 1px 3px rgba(0, 0, 0, 0.12);
 }

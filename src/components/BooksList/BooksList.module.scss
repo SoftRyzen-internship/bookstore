@@ -17,8 +17,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 20px;
-
+  gap: 8px;
   & li {
     display: flex;
     justify-content: center;
@@ -26,10 +25,15 @@
     width: 40px;
     height: 40px;
     border-radius: 30px;
-    border: 2px solid var(--accent-cl);
+    transition: var(--transition);
+    &:hover {
+      color: var(--accent-cl);
+      &.active {
+        color: var(--white);
+      }
+    }
     &.disabled {
-      border: 2px solid var(--border-social-normal);
-      color: var(--border-social-normal);
+      color: var(--gray-secondary);
     }
   }
   & a {
