@@ -1,13 +1,14 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useFormik } from 'formik';
 import { validationSchema } from './validationSchema';
 import { useFetch } from 'hooks/useFetch';
+import { routesPath } from 'router/routesPath';
 import { getBookDetails, updateBook } from 'services/books-api';
 import { Dropdown } from 'components/Dropdown';
 import { Spinner } from 'components/Spinner';
+import { ImgBookFormList } from 'components/ImgBookFormList';
 import s from './BookEditForm.module.scss';
-import { routesPath } from 'router/routesPath';
 
 export const BookEditForm = () => {
   const currentYear = new Date().getFullYear();
@@ -29,8 +30,10 @@ export const BookEditForm = () => {
     description: '',
     small_image: '',
     big_image: '',
+    media_gallery_image: [],
     price: '',
     discount: '',
+    gallery_image: '',
   };
 
   const formik = useFormik({
@@ -46,6 +49,7 @@ export const BookEditForm = () => {
           description: values.description,
           small_image: values.small_image,
           big_image: values.big_image,
+          media_gallery_image: values.media_gallery_image,
           price: Number(values.price - values.discount),
         };
         await updateBook(id, book);
@@ -69,7 +73,6 @@ export const BookEditForm = () => {
     setFieldValue,
     setFieldTouched,
     setValues,
-    setTouched,
   } = formik;
 
   const yearList = useMemo(() => {
@@ -94,14 +97,40 @@ export const BookEditForm = () => {
         description: data.description,
         small_image: data.small_image,
         big_image: data.big_image,
+        media_gallery_image: data.media_gallery_image,
         price: data.price,
         discount: 0,
+        gallery_image: '',
       };
       setValues(fields);
-      setTouched(fields);
+      Object.keys(fields).forEach(field => (touched[field] = true));
     }
     // eslint-disable-next-line
   }, [data]);
+
+  const handleDeleteGalleryItem = useCallback(
+    item => {
+      const { media_gallery_image } = values;
+
+      const updatedGallery = [...media_gallery_image].filter(
+        img => img !== item
+      );
+
+      setFieldValue('media_gallery_image', updatedGallery);
+    },
+    // eslint-disable-next-line
+    [values.media_gallery_image]
+  );
+
+  const handleAddGalleryItem = item => {
+    const { media_gallery_image } = values;
+
+    const updatedGallery = [...media_gallery_image, item];
+
+    setFieldValue('media_gallery_image', updatedGallery);
+    setFieldValue('gallery_image', '');
+  };
+
   return loading ? (
     <Spinner />
   ) : (
@@ -181,6 +210,7 @@ export const BookEditForm = () => {
                 )}
               </label>
             </li>
+
             <li>
               <label className={s.smallInputLabel}>
                 <p>
@@ -209,6 +239,7 @@ export const BookEditForm = () => {
                 )}
               </label>
             </li>
+
             <li>
               <label className={s.smallInputLabel}>
                 <p>
@@ -307,6 +338,49 @@ export const BookEditForm = () => {
             src={values.big_image}
             alt="book big poster"
           />
+        </li>
+
+        <li>
+          <div className={s.galleryContainer}>
+            <p>Додайте URL зображення для галереї</p>
+            <div className={s.galleryInputContainer}>
+              <label className={s.inputLabel}>
+                <input
+                  className={`${s.input} ${
+                    touched.gallery_image &&
+                    (errors.gallery_image ? s.inputError : s.inputValid)
+                  }`}
+                  name="gallery_image"
+                  placeholder=""
+                  value={values.gallery_image}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                />
+                {touched.gallery_image && errors.gallery_image && (
+                  <p className={s.errorMsg}>{errors.gallery_image}</p>
+                )}
+              </label>
+              <button
+                type="button"
+                className={s.addButton}
+                disabled={errors.gallery_image}
+                onClick={() => {
+                  handleAddGalleryItem(values.gallery_image);
+                }}
+              >
+                Додати
+              </button>
+            </div>
+            {touched.media_gallery_image && errors.media_gallery_image && (
+              <p className={s.errorMsg}>{errors.media_gallery_image}</p>
+            )}
+            {values.media_gallery_image && (
+              <ImgBookFormList
+                list={values.media_gallery_image}
+                onDelete={handleDeleteGalleryItem}
+              />
+            )}
+          </div>
         </li>
 
         <li>

@@ -71,4 +71,15 @@ export const validationSchema = Yup.object({
     'Число від 0 до 5000',
     val => !isNaN(Number(val)) && Number(val) >= 0 && Number(val) <= 5000
   ),
+  gallery_image: Yup.string()
+    .matches(
+      /^[\S]+[\S\s]*[\S]+$/,
+      'Поле не може починатися або закінчуватися пробілом'
+    )
+    .url('Будь-ласка введіть валідний URL')
+    .matches(/^.{10,}$/, 'URL має містити не менше 10 символів')
+    .matches(
+      /^(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|jpeg|png|JPG|JPEG|PNG)$/,
+      'Зображення має бути jpg, jpeg, png формату '
+    ),
 });
