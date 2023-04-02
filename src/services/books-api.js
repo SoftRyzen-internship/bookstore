@@ -9,3 +9,15 @@ export const getBooks = (page = 1) => {
 export const getBookDetails = id => {
   return http.get(`${baseURL}/books/${id}`);
 };
+
+export const addBook = book => {
+  return http.post(`${baseURL}/books/`, book);
+};
+
+export const updateBook = (id, book) => {
+  return http.put(`${baseURL}/books/${id}`, book);
+};
+
+export const deleteBook = id => {
+  return http.delete(`${baseURL}/books/${id}`);
+};

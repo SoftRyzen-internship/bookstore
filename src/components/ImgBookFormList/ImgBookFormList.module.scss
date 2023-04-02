@@ -1,0 +1,36 @@
+.imgGalleryItem {
+  position: relative;
+  border-radius: 5px;
+  outline: 1px solid var(--gray-secondary);
+  overflow: hidden;
+}
+
+.imgGalleryContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 32px;
+}
+
+.image {
+  height: 200px;
+  width: 160px;
+}
+
+.deleteButton {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  bottom: 0;
+  right: 0;
+  padding: 4px;
+  border-radius: 5px;
+  background-color: var(--white);
+}
+.deleteIcon {
+  stroke: var(--red);
+  transition: var(--transition);
+  &:hover {
+    stroke: var(--red-hover);
+  }
+}

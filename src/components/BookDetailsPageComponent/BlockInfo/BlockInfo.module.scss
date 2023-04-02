@@ -41,16 +41,17 @@
   padding-bottom: 9px;
   width: 50%;
   color: var(--accent-cl);
+  cursor: default;
 }
 .disableTab {
   padding-top: 9px;
   padding-bottom: 9px;
   width: 50%;
   background-color: #efefef;
+  cursor: default;
 }
 .detailsWrapper {
   width: 592px;
-  height: 440px;
   padding: 24px 24px 36px 24px;
   border-radius: 5px;
   border: 1px solid #efefef;
@@ -81,6 +82,11 @@
   border-radius: 5px;
   color: var(--white);
   background-color: var(--accent-cl);
+  transition: var(--transition);
+  &:hover {
+    background-color: var(--accent-hover-cl);
+    box-shadow: var(--shadow-primary);
+  }
 }
 .favoriteWrapper {
   display: flex;
@@ -106,4 +112,46 @@
 .value {
   font-weight: var(--medium);
   color: var(--secondary-txt-cl);
+}
+
+.editButtonContainer {
+  margin-top: 24px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 24px;
+}
+
+.editButton {
+  font-weight: var(--semibold);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 30px;
+  border-radius: 5px;
+  color: var(--white);
+  background-color: var(--accent-cl);
+  transition: var(--transition);
+  &:hover {
+    background-color: var(--accent-hover-cl);
+    box-shadow: var(--shadow-primary);
+  }
+}
+
+.deleteButton {
+  font-weight: var(--semibold);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 30px;
+  width: 172px;
+  border-radius: 5px;
+  background-color: var(--red);
+  color: var(--white);
+  transition: var(--transition);
+  &:hover {
+    background-color: var(--red-hover);
+    box-shadow: var(--shadow-primary);
+  }
 }

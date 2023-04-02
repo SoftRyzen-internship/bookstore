@@ -13,6 +13,12 @@ const HomePage = lazy(() =>
 const BookDetailsPage = lazy(() =>
   import('../pages/BookDetailsPage' /* webpackChunkName: "book-page" */)
 );
+const BookEditPage = lazy(() =>
+  import('../pages/BookEditPage' /* webpackChunkName: "book-edit-page" */)
+);
+const BookAddPage = lazy(() =>
+  import('../pages/BookAddPage' /* webpackChunkName: "book-add-page" */)
+);
 const UserPage = lazy(() =>
   import('../pages/UserPage' /* webpackChunkName: "user-page" */)
 );
@@ -33,15 +39,16 @@ export const App = () => {
           />
 
           <Route
-            path={routesPath.BOOK_DETAIL}
+            path={routesPath.ORDER}
             element={
               <Suspense fallback={<Spinner />}>
-                <BookDetailsPage />
+                <div>ORDER PAGE</div>
               </Suspense>
             }
           />
+
           <Route
-            path={routesPath.USER}
+            path={routesPath.PROFILE}
             element={
               <Suspense fallback={<Spinner />}>
                 <UserPage />
@@ -49,7 +56,36 @@ export const App = () => {
             }
           />
 
-          <Route path="*" element={<Navigate to="books" />} />
+          <Route
+            path={routesPath.HOME + routesPath.BOOK_ADD}
+            element={
+              <Suspense fallback={<Spinner />}>
+                <BookAddPage />
+              </Suspense>
+            }
+          />
+
+          <Route
+            path={routesPath.HOME + routesPath.BOOK_DETAIL}
+            element={
+              <Suspense fallback={<Spinner />}>
+                <BookDetailsPage />
+              </Suspense>
+            }
+          />
+
+          <Route
+            path={
+              routesPath.HOME + routesPath.BOOK_DETAIL + routesPath.BOOK_EDIT
+            }
+            element={
+              <Suspense fallback={<Spinner />}>
+                <BookEditPage />
+              </Suspense>
+            }
+          />
+
+          <Route path="*" element={<Navigate to={routesPath.HOME} />} />
         </Routes>
       </MainWrapper>
 
