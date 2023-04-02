@@ -16,6 +16,9 @@ const BookDetailsPage = lazy(() =>
 const BookEditPage = lazy(() =>
   import('../pages/BookEditPage' /* webpackChunkName: "book-edit-page" */)
 );
+const BookAddPage = lazy(() =>
+  import('../pages/BookAddPage' /* webpackChunkName: "book-add-page" */)
+);
 const UserPage = lazy(() =>
   import('../pages/UserPage' /* webpackChunkName: "user-page" */)
 );
@@ -57,7 +60,7 @@ export const App = () => {
             path={routesPath.HOME + routesPath.BOOK_ADD}
             element={
               <Suspense fallback={<Spinner />}>
-                <div>ADD BOOK PAGE</div>
+                <BookAddPage />
               </Suspense>
             }
           />

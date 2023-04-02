@@ -1,24 +1,15 @@
-import { useEffect, useMemo, useState } from 'react';
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { useMemo, useState } from 'react';
 import { useFormik } from 'formik';
 import { validationSchema } from './validationSchema';
-import { useFetch } from 'hooks/useFetch';
-import { getBookDetails, updateBook } from 'services/books-api';
+import { addBook } from 'services/books-api';
 import { Dropdown } from 'components/Dropdown';
 import { Spinner } from 'components/Spinner';
-import s from './BookEditForm.module.scss';
-import { routesPath } from 'router/routesPath';
+import s from './BookAddForm.module.scss';
 
-export const BookEditForm = () => {
+export const BookAddForm = () => {
   const currentYear = new Date().getFullYear();
   const [error, setError] = useState('');
-  const navigate = useNavigate();
-  const { id } = useParams();
-  const location = useLocation();
-  const backLocation = location?.state?.from;
-  const backPage = backLocation?.pathname + backLocation?.search;
-
-  const { data, loading } = useFetch(() => getBookDetails(id), []);
+  const [isLoading, setIsLoading] = useState(false);
 
   const initialValues = {
     title: '',
@@ -36,7 +27,7 @@ export const BookEditForm = () => {
   const formik = useFormik({
     initialValues,
     validationSchema,
-    onSubmit: async values => {
+    onSubmit: async (values, actions) => {
       try {
         const book = {
           title: values.title,
@@ -48,9 +39,15 @@ export const BookEditForm = () => {
           big_image: values.big_image,
           price: Number(values.price - values.discount),
         };
-        await updateBook(id, book);
-        backPage ? navigate(backPage) : navigate(routesPath.HOME);
+        setIsLoading(true);
+        await addBook(book);
+        setIsLoading(false);
+        actions.setSubmitting(false);
+        actions.resetForm({
+          values: initialValues,
+        });
       } catch (error) {
+        setIsLoading(false);
         setError(error.message);
       }
     },
@@ -68,8 +65,6 @@ export const BookEditForm = () => {
     handleBlur,
     setFieldValue,
     setFieldTouched,
-    setValues,
-    setTouched,
   } = formik;
 
   const yearList = useMemo(() => {
@@ -83,26 +78,7 @@ export const BookEditForm = () => {
     return years;
   }, [currentYear]);
 
-  useEffect(() => {
-    if (data) {
-      const fields = {
-        title: data.title,
-        author: data.author,
-        type: 'paper',
-        book_year: data.book_year,
-        book_page_count: data.book_page_count,
-        description: data.description,
-        small_image: data.small_image,
-        big_image: data.big_image,
-        price: data.price,
-        discount: 0,
-      };
-      setValues(fields);
-      setTouched(fields);
-    }
-    // eslint-disable-next-line
-  }, [data]);
-  return loading ? (
+  return isLoading ? (
     <Spinner />
   ) : (
     <form onSubmit={handleSubmit} className={s.form}>
@@ -165,10 +141,6 @@ export const BookEditForm = () => {
                       value: 'paper',
                     },
                   ]}
-                  initialValue={{
-                    label: 'Паперова',
-                    value: 'paper',
-                  }}
                   placeHolder=""
                   onClick={() => setFieldTouched('type', true)}
                   onChange={({ value }) => {
@@ -193,12 +165,8 @@ export const BookEditForm = () => {
                     (errors.book_year ? s.inputError : s.inputValid)
                   }
                   options={yearList}
-                  initialValue={{
-                    label: values.book_year.toString(),
-                    value: values.book_year.toString(),
-                  }}
                   isSearchable
-                  onClick={() => setFieldTouched('type', true)}
+                  onClick={() => setFieldTouched('book_year', true)}
                   onChange={({ value }) => {
                     setFieldValue('book_year', value);
                     touched.book_year = true;
@@ -278,7 +246,13 @@ export const BookEditForm = () => {
               <p className={s.errorMsg}>{errors.small_image}</p>
             )}
           </label>
-          <img className={s.image} src={values.small_image} alt="book poster" />
+          {touched.small_image && !errors.small_image && (
+            <img
+              className={s.image}
+              src={values.small_image}
+              alt="book poster"
+            />
+          )}
         </li>
 
         <li>
@@ -302,11 +276,13 @@ export const BookEditForm = () => {
               <p className={s.errorMsg}>{errors.big_image}</p>
             )}
           </label>
-          <img
-            className={s.image}
-            src={values.big_image}
-            alt="book big poster"
-          />
+          {touched.big_image && !errors.big_image && (
+            <img
+              className={s.image}
+              src={values.big_image}
+              alt="book big poster"
+            />
+          )}
         </li>
 
         <li>

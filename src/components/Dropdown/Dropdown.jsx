@@ -8,6 +8,7 @@ export const Dropdown = ({
   options,
   isSearchable,
   initialValue,
+  onClick,
   onChange,
 }) => {
   const [showMenu, setShowMenu] = useState(false);
@@ -46,6 +47,7 @@ export const Dropdown = ({
 
   const handleInputClick = () => {
     setShowMenu(!showMenu);
+    onClick();
   };
 
   const onItemClick = option => {
