@@ -45,11 +45,7 @@ export function FormPassword() {
 
   const handleCancel = () => {
     resetForm();
-    if (location.state?.from) {
-      navigate(-1);
-    } else {
-      navigate('/books');
-    }
+    navigate(location.state?.from ? -1 : '/books');
   };
   return (
     <>

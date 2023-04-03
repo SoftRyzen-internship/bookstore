@@ -1,11 +1,11 @@
 import { useFormik } from 'formik';
 import { userValidationSchema } from './userValidationSchema';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { sendFormData } from 'services/sendFormData';
+import { currentUser, sendFormData } from 'services/sendFormData';
 import PhoneInput, { isValidPhoneNumber } from 'react-phone-number-input';
-
 import s from './FormUser.module.scss';
 import 'react-phone-number-input/style.css';
+import { useEffect } from 'react';
 
 export function FormUser() {
   const formik = useFormik({
@@ -14,6 +14,7 @@ export function FormUser() {
       lastName: '',
       fathersName: '',
       email: '',
+      phone: '',
     },
     validationSchema: userValidationSchema,
 
@@ -43,7 +44,40 @@ export function FormUser() {
     handleSubmit,
     resetForm,
     setErrors,
+    setValues,
   } = formik;
+  useEffect(() => {
+    async function getUser() {
+      try {
+        const currentUserData = await currentUser();
+        const { data } = currentUserData;
+
+        const getValueFromNestedObject = (obj, key) => {
+          if (!obj) return undefined;
+          if (obj.hasOwnProperty(key)) return obj[key];
+          for (let k in obj) {
+            if (typeof obj[k] === 'object') {
+              const result = getValueFromNestedObject(obj[k], key);
+              if (result !== undefined) return result;
+            }
+          }
+          return undefined;
+        };
+
+        const email = getValueFromNestedObject(data, 'email') || '';
+        const firstName = getValueFromNestedObject(data, 'firstName') || '';
+        const lastName = getValueFromNestedObject(data, 'lastName') || '';
+        const fathersName = getValueFromNestedObject(data, 'fathersName') || '';
+        const phone = getValueFromNestedObject(data, 'phone') || '';
+
+        setValues({ email, firstName, lastName, fathersName, phone });
+      } catch (error) {
+        console.error(error);
+      }
+    }
+    getUser();
+  }, [setValues]);
+
   const navigate = useNavigate();
   const location = useLocation();
   const handleChangePhone = value => {
