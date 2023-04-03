@@ -43,7 +43,7 @@ export const Dropdown = ({
     return () => {
       window.removeEventListener('click', handler);
     };
-  });
+  }, []);
 
   const handleInputClick = () => {
     setShowMenu(!showMenu);
