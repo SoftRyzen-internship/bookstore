@@ -17,6 +17,7 @@ import { ReactComponent as Youtube } from 'assets/icons/svg/youtube.svg';
 import { ReactComponent as Linkedin } from 'assets/icons/svg/linkedin.svg';
 import { ReactComponent as CartFull } from 'assets/icons/svg/cart-full.svg';
 import { ReactComponent as Arrow } from 'assets/icons/svg/arrow.svg';
+import { ReactComponent as Eye } from 'assets/icons/svg/eye.svg';
 import { ReactComponent as ShowPass } from 'assets/icons/svg/show-password.svg';
 import { ReactComponent as ClosePass } from 'assets/icons/svg/close-password.svg';
 
@@ -40,6 +41,7 @@ export const ICONS = {
   LINKEDIN: Linkedin,
   CART_FULL: CartFull,
   ARROW: Arrow,
+  EYE: Eye,
   SHOWPASS: ShowPass,
   CLOSEPASS: ClosePass,
 };
