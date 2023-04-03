@@ -17,11 +17,10 @@ export const BlockInfo = ({ data }) => {
   const count = state?.count;
 
   const decreasePathPage = path => {
-    const currentPage = parseInt(path.match(/page=(\d+)/)[1]);
-    return path.replace(
-      /page=\d+/,
-      `page=${currentPage === 1 ? currentPage : currentPage - 1}`
-    );
+    const searchParams = new URLSearchParams(path.slice(path.indexOf('?')));
+    const currentPage = parseInt(searchParams.get('page'));
+    searchParams.set('page', currentPage === 1 ? currentPage : currentPage - 1);
+    return path.slice(0, path.indexOf('?')) + '?' + searchParams.toString();
   };
 
   return (

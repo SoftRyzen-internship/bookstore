@@ -12,13 +12,13 @@ export const Dropdown = ({
   onChange,
 }) => {
   const [showMenu, setShowMenu] = useState(false);
-  const [selectedValue, setSelectedValue] = useState(null);
+  const [selectedValue, setSelectedValue] = useState(
+    initialValue || options[0] || null
+  );
+
   const [searchValue, setSearchValue] = useState('');
-  const searchRef = useRef();
+  const searchRef = useRef(null);
   const inputRef = useRef();
-  useEffect(() => {
-    setSelectedValue(initialValue);
-  }, [initialValue]);
 
   useEffect(() => {
     setSearchValue('');

@@ -11,7 +11,7 @@ import { useEffect, useState } from 'react';
 export const BooksList = () => {
   const [count, setCount] = useState(null);
   let [searchParams, setSearchParams] = useSearchParams();
-  let page = Number(searchParams.get('page') ? searchParams.get('page') : 1);
+  let page = searchParams.get('page') || 1;
   const booksPerPage = 6;
 
   const handlePageChange = ({ selected }) => {
