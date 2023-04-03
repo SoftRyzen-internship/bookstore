@@ -23,30 +23,23 @@ export const CategoryItem = ({
     }
   };
 
-  const handleMouseLeave = () => {
-    setActiveCategoryId(null);
-  };
-
   const isActive = activeCategoryId === category.id;
 
   return (
     <li
       className={`${s.listItem} ${isActive ? s.active : ''}`}
       key={category.id}
+      onClick={() => setActiveCategoryId(null)}
     >
       <Link
         className={s.categoryLink}
         to={`#`}
-        onMouseEnter={() => handleMouseEnter(category.id)}
+        onClick={() => handleMouseEnter(category.id)}
       >
         {category.name}
       </Link>
       {isActive && (
-        <ul
-          ref={subcategoriesRef}
-          className={`${s.subcategories} ${s.active}`}
-          onMouseLeave={handleMouseLeave} // додаємо подію на виїзд курсора миші зі списку підкатегорій
-        >
+        <ul ref={subcategoriesRef} className={`${s.subcategories} ${s.active}`}>
           {subcategories.map(subcategory => (
             <li key={subcategory.id} className={s.listItemSubcatigories}>
               <Link className={s.subcategoryLink} to={`#`}>

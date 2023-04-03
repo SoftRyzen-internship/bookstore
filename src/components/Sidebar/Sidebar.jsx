@@ -40,12 +40,8 @@ export const Sidebar = () => {
     };
   }, []);
 
-  const handleClickAside = () => {
-    setActiveCategoryId(null);
-  };
-
   return (
-    <aside ref={asideRef} className={s.sidebar} onClick={handleClickAside}>
+    <aside ref={asideRef} className={s.sidebar}>
       <div className={s.titleWrapper}>
         <h2 className={s.title}>Категорії</h2>
       </div>
