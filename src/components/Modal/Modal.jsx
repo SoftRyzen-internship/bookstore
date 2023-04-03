@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import s from './Modal.module.scss';
 
 export const Modal = ({ isOpen, onClose, children }) => {
@@ -14,4 +15,10 @@ export const Modal = ({ isOpen, onClose, children }) => {
       </div>
     )
   );
+};
+
+Modal.propTypes = {
+  isOpen: PropTypes.bool,
+  onClose: PropTypes.func,
+  children: PropTypes.node,
 };
