@@ -92,8 +92,8 @@ export const BookAddForm = () => {
 
       setFieldValue('media_gallery_image', updatedGallery);
     },
-    // eslint-disable-next-line
-    [values.media_gallery_image]
+
+    [setFieldValue, values]
   );
 
   const handleAddGalleryItem = item => {
