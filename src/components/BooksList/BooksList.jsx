@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import ReactPaginate from 'react-paginate';
 import { useFetch } from 'hooks/useFetch';
@@ -6,7 +7,6 @@ import { Spinner } from 'components/Spinner';
 import { BookCard } from './BookCard';
 
 import s from './BooksList.module.scss';
-import { useEffect, useState } from 'react';
 
 export const BooksList = () => {
   const [count, setCount] = useState(null);

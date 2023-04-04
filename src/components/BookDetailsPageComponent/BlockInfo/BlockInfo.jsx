@@ -1,6 +1,10 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { setItem } from 'redux/slice/slice-cart';
+import * as selectors from 'redux/selectors';
+import { userRoles } from 'constants/userRoles';
 import { routesPath } from 'router/routesPath';
 import { deleteBook } from 'services/books-api';
 import { ICONS } from 'assets/icons';
@@ -9,6 +13,9 @@ import { SpinnerButton } from 'components/SpinnerButton';
 import s from './BlockInfo.module.scss';
 
 export const BlockInfo = ({ data }) => {
+  const userRole = useSelector(selectors.getUserRole);
+  const dispatch = useDispatch();
+
   const [favorite, setFavorite] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
   const navigate = useNavigate();
@@ -45,10 +52,18 @@ export const BlockInfo = ({ data }) => {
       <div className={s.detailsWrapper}>
         <div className={s.buyWrapper}>
           <p className={s.price}>{`${data.price}.00 грн`}</p>
-          <button type="button" className={s.buyButton}>
-            <ICONS.CART_FULL />
-            Купити
-          </button>
+          {userRole === userRoles.BUYER && (
+            <button
+              type="button"
+              className={s.buyButton}
+              onClick={() => {
+                dispatch(setItem(data));
+              }}
+            >
+              <ICONS.CART_FULL />
+              Купити
+            </button>
+          )}
         </div>
         <div className={s.favoriteWrapper}>
           <button
@@ -75,56 +90,58 @@ export const BlockInfo = ({ data }) => {
           </li>
         </ul>
       </div>
-      <ul className={s.editButtonContainer}>
-        <li>
-          <button
-            type="button"
-            className={s.editButton}
-            onClick={e => {
-              e.preventDefault();
-              navigate(routesPath.BOOK_EDIT, {
-                state: { from: location },
-              });
-            }}
-          >
-            <ICONS.EDIT />
-            Редагувати
-          </button>
-        </li>
-        <li>
-          <button
-            type="button"
-            className={s.deleteButton}
-            onClick={async e => {
-              e.preventDefault();
-              try {
-                setIsDeleting(true);
-                await deleteBook(data._id);
-                setIsDeleting(false);
-                if (backPage) {
-                  count === 1
-                    ? navigate(decreasePathPage(backPage))
-                    : navigate(backPage);
-                } else {
-                  navigate(routesPath.HOME);
+      {userRole === userRoles.ADMIN && (
+        <ul className={s.editButtonContainer}>
+          <li>
+            <button
+              type="button"
+              className={s.editButton}
+              onClick={e => {
+                e.preventDefault();
+                navigate(routesPath.BOOK_EDIT, {
+                  state: { from: location },
+                });
+              }}
+            >
+              <ICONS.EDIT />
+              Редагувати
+            </button>
+          </li>
+          <li>
+            <button
+              type="button"
+              className={s.deleteButton}
+              onClick={async e => {
+                e.preventDefault();
+                try {
+                  setIsDeleting(true);
+                  await deleteBook(data._id);
+                  setIsDeleting(false);
+                  if (backPage) {
+                    count === 1
+                      ? navigate(decreasePathPage(backPage))
+                      : navigate(backPage);
+                  } else {
+                    navigate(routesPath.HOME);
+                  }
+                } catch (error) {
+                  setIsDeleting(false);
+                  console.log(error.message);
                 }
-              } catch (error) {
-                setIsDeleting(false);
-                console.log(error.message);
-              }
-            }}
-          >
-            {isDeleting ? (
-              <SpinnerButton />
-            ) : (
-              <>
-                <ICONS.TRASH />
-                Видалити
-              </>
-            )}
-          </button>
-        </li>
-      </ul>
+              }}
+            >
+              {isDeleting ? (
+                <SpinnerButton />
+              ) : (
+                <>
+                  <ICONS.TRASH />
+                  Видалити
+                </>
+              )}
+            </button>
+          </li>
+        </ul>
+      )}
     </div>
   );
 };
