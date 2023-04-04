@@ -24,6 +24,9 @@ const BookAddPage = lazy(() =>
 const UserPage = lazy(() =>
   import('../pages/UserPage' /* webpackChunkName: "user-page" */)
 );
+const AuthPage = lazy(() =>
+  import('../pages/AuthPage' /* webpackChunkName: "auth-page" */)
+);
 
 const OrderPage = lazy(() =>
   import('../pages/OrderPage' /* webpackChunkName: "order-page" */)
@@ -82,6 +85,22 @@ export const App = () => {
             element={
               <Suspense fallback={<Spinner />}>
                 <BookDetailsPage />
+              </Suspense>
+            }
+          />
+          <Route
+            path={routesPath.REGISTER}
+            element={
+              <Suspense fallback={<Spinner />}>
+                <AuthPage isRegister />
+              </Suspense>
+            }
+          />
+          <Route
+            path={routesPath.LOGIN}
+            element={
+              <Suspense fallback={<Spinner />}>
+                <AuthPage isRegister={false} />
               </Suspense>
             }
           />

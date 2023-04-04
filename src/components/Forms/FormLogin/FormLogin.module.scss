@@ -1,16 +1,10 @@
 .formWrapper {
   background-color: var(--primary-bg-cl);
-  padding: 24px;
-  width: 904px;
+  padding: 16px 24px 24px 24px;
+  min-width: 800px;
   height: auto;
 }
-.titleForm {
-  font-size: var(--text-2xl);
-  font-weight: var(--semibold);
-  line-height: calc(45 / 24);
-  color: var(--primary-txt-cl);
-  margin-bottom: 24px;
-}
+
 .buttonSubmit {
   padding: 12px 30px;
   border-radius: 5px;
@@ -46,9 +40,10 @@
   }
 }
 .blockButton {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 24px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(1, 1fr);
+  gap: 32px;
 }
 .inputGroup {
   position: relative;
@@ -67,21 +62,22 @@
 .input {
   width: 100%;
   max-width: 412px;
-  padding: 12px 50px 12px 15px;
+  padding: 12px 15px;
   border: 1px solid var(--gray-secondary);
   border-radius: 5px;
 }
 
 .inputGroupBlock {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   grid-template-rows: repeat(1, 1fr);
   gap: 32px;
+  margin-bottom: 16px;
 }
 
 .errorInput {
   position: absolute;
-  bottom: -25px;
+  bottom: -20px;
   left: 15px;
   color: var(--red);
 }
@@ -100,4 +96,28 @@
 }
 .iconShow {
   fill: var(--primary-txt-cl);
+}
+.wrapperLock {
+  display: inline-flex;
+  justify-content: left;
+  align-items: flex-start;
+  margin-bottom: 16px;
+  position: relative;
+}
+.lockLink {
+  font-size: var(--text-sm);
+  line-height: calc(24 / 14);
+  font-weight: var(--regular);
+  color: var(--accent-cl);
+  margin-left: 12px;
+  &:before {
+    content: '';
+    width: 110px;
+    height: 1px;
+    border-radius: 1px;
+    background-color: var(--accent-cl);
+    position: absolute;
+    left: 30px;
+    bottom: 2px;
+  }
 }
