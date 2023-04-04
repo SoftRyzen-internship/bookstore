@@ -19,4 +19,7 @@ export const userValidationSchema = Yup.object().shape({
   phone: Yup.string()
     .required('Телефон є обов`язковим')
     .max(20, 'Номер повинен бути не більше 20 символів'),
+  password: Yup.string()
+    .required("Пароль є обов'язковим")
+    .min(6, 'Пароль повинен бути не менше 6 символів'),
 });

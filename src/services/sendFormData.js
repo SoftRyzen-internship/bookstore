@@ -31,6 +31,22 @@ export async function loginUser(body) {
     throw error;
   }
 }
+export async function logOut() {
+  try {
+    const response = await api.post('/users/logout', {});
+    return response;
+  } catch (error) {
+    throw error;
+  }
+}
+export async function registerUser(body) {
+  try {
+    const response = await api.post('/users/register', body);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+}
 
 export async function updatePassword(body) {
   try {

@@ -5,4 +5,6 @@ export const routesPath = {
   BOOK_ADD: 'add/',
   PROFILE: 'profile/',
   ORDER: 'order/',
+  LOGIN: 'login/',
+  REGISTER: 'register/',
 };
