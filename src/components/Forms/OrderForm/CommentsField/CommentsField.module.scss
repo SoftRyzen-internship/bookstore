@@ -1,0 +1,15 @@
+.addCommentBtn {
+  font-weight: var(--medium);
+  font-size: var(--text-md);
+
+  color: var(--accent-cl);
+
+  text-decoration-line: underline;
+}
+
+.commentWrapper {
+  padding: 24px 0 24px 24px;
+
+  border-top: var(--border);
+  border-bottom: var(--border);
+}
