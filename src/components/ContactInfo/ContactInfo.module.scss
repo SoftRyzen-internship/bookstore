@@ -5,8 +5,18 @@
   margin-bottom: 4px;
   display: flex;
   justify-content: space-between;
+  transition: var(--transition);
+  &:hover {
+    .number {
+      color: var(--accent-cl);
+    }
+    .icon {
+      fill: var(--accent-cl);
+    }
+  }
 }
 .icon {
+  fill: var(--primary-txt-cl);
   width: 24px;
   height: 24px;
 }

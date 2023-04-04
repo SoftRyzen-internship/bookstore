@@ -1,5 +1,8 @@
 import { lazy, Suspense, useEffect } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
+import * as selectors from 'redux/selectors';
+import { useSelector } from 'react-redux';
+import { userRoles } from 'constants/userRoles';
 import { Header } from './Header';
 import { Footer } from './Footer';
 import { PageWrapper } from './Containers/PageWrapper/PageWrapper';
@@ -34,9 +37,9 @@ const OrderPage = lazy(() =>
 
 export const App = () => {
   const dispatch = useDispatch();
-
+  const userRole = useSelector(selectors.getUserRole);
   useEffect(() => {
-    dispatch(setUserRole('buyer'));
+    dispatch(setUserRole(userRoles.BUYER));
   }, [dispatch]);
 
   return (
@@ -63,32 +66,6 @@ export const App = () => {
           />
 
           <Route
-            path={routesPath.PROFILE}
-            element={
-              <Suspense fallback={<Spinner />}>
-                <UserPage />
-              </Suspense>
-            }
-          />
-
-          <Route
-            path={routesPath.HOME + routesPath.BOOK_ADD}
-            element={
-              <Suspense fallback={<Spinner />}>
-                <BookAddPage />
-              </Suspense>
-            }
-          />
-
-          <Route
-            path={routesPath.HOME + routesPath.BOOK_DETAIL}
-            element={
-              <Suspense fallback={<Spinner />}>
-                <BookDetailsPage />
-              </Suspense>
-            }
-          />
-          <Route
             path={routesPath.REGISTER}
             element={
               <Suspense fallback={<Spinner />}>
@@ -104,17 +81,47 @@ export const App = () => {
               </Suspense>
             }
           />
-
           <Route
-            path={
-              routesPath.HOME + routesPath.BOOK_DETAIL + routesPath.BOOK_EDIT
-            }
+            path={routesPath.PROFILE}
             element={
               <Suspense fallback={<Spinner />}>
-                <BookEditPage />
+                <UserPage />
               </Suspense>
             }
           />
+
+          {userRole === userRoles.ADMIN && (
+            <Route
+              path={routesPath.HOME + routesPath.BOOK_ADD}
+              element={
+                <Suspense fallback={<Spinner />}>
+                  <BookAddPage />
+                </Suspense>
+              }
+            />
+          )}
+
+          <Route
+            path={routesPath.HOME + routesPath.BOOK_DETAIL}
+            element={
+              <Suspense fallback={<Spinner />}>
+                <BookDetailsPage />
+              </Suspense>
+            }
+          />
+
+          {userRole === userRoles.ADMIN && (
+            <Route
+              path={
+                routesPath.HOME + routesPath.BOOK_DETAIL + routesPath.BOOK_EDIT
+              }
+              element={
+                <Suspense fallback={<Spinner />}>
+                  <BookEditPage />
+                </Suspense>
+              }
+            />
+          )}
 
           <Route path="*" element={<Navigate to={routesPath.HOME} />} />
         </Routes>
