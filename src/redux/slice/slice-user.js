@@ -20,6 +20,9 @@ const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
+    setUserRole(state, { payload }) {
+      state.user.role = payload;
+    },
     setUserToken(state, { payload }) {
       return { ...state, ...payload };
     },
@@ -32,4 +35,4 @@ const userSlice = createSlice({
 });
 
 export default userSlice.reducer;
-export const { setUserToken, deleteUser } = userSlice.actions;
+export const { setUserRole, setUserToken, deleteUser } = userSlice.actions;

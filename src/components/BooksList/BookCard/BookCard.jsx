@@ -1,17 +1,26 @@
 import PropTypes from 'prop-types';
 import { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { setItem } from 'redux/slice/slice-cart';
+import * as selectors from 'redux/selectors';
+import { userRoles } from 'constants/userRoles';
 import { ICONS } from 'assets/icons';
 import { routesPath } from 'router/routesPath';
 import { deleteBook } from 'services/books-api';
 import { SpinnerButton } from 'components/SpinnerButton';
+
 import s from './BookCard.module.scss';
 
 export const BookCard = ({ book, onDelete, count }) => {
+  const userRole = useSelector(selectors.getUserRole);
+  const dispatch = useDispatch();
+
   const [favorite, setFavorite] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
+
   return (
     <Link to={book._id} state={{ from: location, count: count }}>
       <div className={s.container}>
@@ -44,50 +53,61 @@ export const BookCard = ({ book, onDelete, count }) => {
             {book.inStock ? 'Є в наявності' : 'Немає в наявності'}
           </p>
         </div>
-        {/* <div className={s.addButtonContainer}>
-          <button type='button' className={s.addButton} onClick={(e)=>{e.preventDefault();}}>
-            <ICONS.PLUS className={s.addIcon} />
-            Додати до кошика
-          </button>
-        </div> */}
-        <ul className={s.editButtonContainer}>
-          <li>
+        {userRole === userRoles.BUYER && (
+          <div className={s.addButtonContainer}>
             <button
               type="button"
-              className={s.editButton}
+              className={s.addButton}
               onClick={e => {
                 e.preventDefault();
-                navigate(book._id + '/' + routesPath.BOOK_EDIT, {
-                  state: {
-                    from: location,
-                  },
-                });
+                dispatch(setItem(book));
               }}
             >
-              <ICONS.EDIT />
+              <ICONS.PLUS className={s.addIcon} />
+              Додати до кошика
             </button>
-          </li>
-          <li>
-            <button
-              type="button"
-              className={s.deleteButton}
-              onClick={async e => {
-                e.preventDefault();
-                try {
-                  setIsDeleting(true);
-                  await deleteBook(book._id);
-                  setIsDeleting(false);
-                  onDelete();
-                } catch (error) {
-                  setIsDeleting(false);
-                  console.log(error.message);
-                }
-              }}
-            >
-              {isDeleting ? <SpinnerButton /> : <ICONS.TRASH />}
-            </button>
-          </li>
-        </ul>
+          </div>
+        )}
+        {userRole === userRoles.ADMIN && (
+          <ul className={s.editButtonContainer}>
+            <li>
+              <button
+                type="button"
+                className={s.editButton}
+                onClick={e => {
+                  e.preventDefault();
+                  navigate(book._id + '/' + routesPath.BOOK_EDIT, {
+                    state: {
+                      from: location,
+                    },
+                  });
+                }}
+              >
+                <ICONS.EDIT />
+              </button>
+            </li>
+            <li>
+              <button
+                type="button"
+                className={s.deleteButton}
+                onClick={async e => {
+                  e.preventDefault();
+                  try {
+                    setIsDeleting(true);
+                    await deleteBook(book._id);
+                    setIsDeleting(false);
+                    onDelete();
+                  } catch (error) {
+                    setIsDeleting(false);
+                    console.log(error.message);
+                  }
+                }}
+              >
+                {isDeleting ? <SpinnerButton /> : <ICONS.TRASH />}
+              </button>
+            </li>
+          </ul>
+        )}
       </div>
     </Link>
   );
