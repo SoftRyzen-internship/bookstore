@@ -23,6 +23,10 @@
 
   --gray-secondary: #b7b7b7;
   --red-hover: #ff265a;
+  --border-cl: #EFEFEF;
+
+  /*BORDER*/
+  --border: 1px solid var(--border-cl);
 
   /* TRANSITION */
   --transition: 250ms linear;

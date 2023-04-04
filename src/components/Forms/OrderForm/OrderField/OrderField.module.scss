@@ -1,0 +1,49 @@
+.title {
+  padding-top: 16px;
+  padding-bottom: 16px;
+  font-weight: var(--semibold);
+  font-size: var(--text-2xl);
+  line-height: 1.88;
+
+  text-align: center;
+
+  border-bottom: var(--border);
+  border-top: var(--border);
+}
+
+.bookPoster {
+  border: 1px solid #EFEFEF;
+  border-radius: 5px;
+}
+
+.orderTable {
+  padding-top: 16px;
+  padding-bottom: 16px;
+
+  width: 100%;
+
+  text-align: center;
+
+  td {
+    vertical-align: top;
+
+    &:nth-child(2) {
+      text-align: left;
+    }
+  }
+
+  p {
+    margin-bottom: 4px;
+    font-weight: var(--medium);
+    font-size: var(--text-sm);
+    line-height: 1.71;
+    color: var(--gray);
+  }
+
+  .bold {
+    font-weight: var(--semibold);
+    font-size: var(--text-md);
+
+    color: var(--primary-txt-cl);
+  }
+}

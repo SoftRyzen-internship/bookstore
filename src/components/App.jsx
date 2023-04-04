@@ -23,6 +23,10 @@ const UserPage = lazy(() =>
   import('../pages/UserPage' /* webpackChunkName: "user-page" */)
 );
 
+const OrderPage = lazy(() =>
+  import('../pages/OrderPage' /* webpackChunkName: "order-page" */)
+);
+
 export const App = () => {
   return (
     <PageWrapper>
@@ -42,7 +46,7 @@ export const App = () => {
             path={routesPath.ORDER}
             element={
               <Suspense fallback={<Spinner />}>
-                <div>ORDER PAGE</div>
+                <OrderPage />
               </Suspense>
             }
           />
