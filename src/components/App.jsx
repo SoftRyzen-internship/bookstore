@@ -34,7 +34,7 @@ export const App = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(setUserRole(userRoles.ADMIN));
+    dispatch(setUserRole(userRoles.BUYER));
   }, [dispatch]);
 
   return (
