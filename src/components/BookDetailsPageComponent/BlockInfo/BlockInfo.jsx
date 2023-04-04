@@ -1,11 +1,12 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types';
-import { ICONS } from 'assets/icons';
-import s from './BlockInfo.module.scss';
-import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { routesPath } from 'router/routesPath';
 import { deleteBook } from 'services/books-api';
+import { ICONS } from 'assets/icons';
 import { SpinnerButton } from 'components/SpinnerButton';
+
+import s from './BlockInfo.module.scss';
 
 export const BlockInfo = ({ data }) => {
   const [favorite, setFavorite] = useState(false);
@@ -15,12 +16,13 @@ export const BlockInfo = ({ data }) => {
   const state = location?.state;
   const backPage = state?.from?.pathname + state?.from?.search;
   const count = state?.count;
-  const [searchParams] = useSearchParams();
 
   const decreasePathPage = path => {
-    const currentPage = parseInt(searchParams.get('page'));
-    searchParams.set('page', Math.max(currentPage - 1, 1));
-    return path.slice(0, path.indexOf('?')) + '?' + searchParams.toString();
+    const currentPage = parseInt(path.match(/page=(\d+)/)[1]);
+    return path.replace(
+      /page=\d+/,
+      `page=${currentPage === 1 ? currentPage : currentPage - 1}`
+    );
   };
 
   return (

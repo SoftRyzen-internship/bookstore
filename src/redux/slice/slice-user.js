@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
-import * as extraReducersUser from 'redux/reducers/reducers-user';
+import * as operations from 'redux/operations/operations-user';
+
 const initialState = {
   user: {
     firstName: null,
@@ -26,12 +27,8 @@ const userSlice = createSlice({
       return { ...initialState };
     },
   },
-  extraReducers: {
-    ...extraReducersUser.registerUser,
-    ...extraReducersUser.loginUser,
-    ...extraReducersUser.currentUser,
-    ...extraReducersUser.logoutUser,
-  },
+  extraReducers: builder =>
+    builder.addCase(operations.loginUser.fulfilled, state => {}),
 });
 
 export default userSlice.reducer;
