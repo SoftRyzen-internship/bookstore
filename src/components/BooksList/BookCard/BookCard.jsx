@@ -4,6 +4,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { setItem } from 'redux/slice/slice-cart';
 import * as selectors from 'redux/selectors';
+import * as actions from 'redux/slice/slice-books';
 import { userRoles } from 'constants/userRoles';
 import { ICONS } from 'assets/icons';
 import { routesPath } from 'router/routesPath';
@@ -12,7 +13,7 @@ import { SpinnerButton } from 'components/SpinnerButton';
 
 import s from './BookCard.module.scss';
 
-export const BookCard = ({ book, onDelete, count }) => {
+export const BookCard = ({ book, count }) => {
   const userRole = useSelector(selectors.getUserRole);
   const dispatch = useDispatch();
 
@@ -22,7 +23,7 @@ export const BookCard = ({ book, onDelete, count }) => {
   const location = useLocation();
 
   return (
-    <Link to={book._id} state={{ from: location, count: count }}>
+    <Link to={book._id} state={{ from: location, count: count }} replace={true}>
       <div className={s.container}>
         <button
           type="button"
@@ -94,9 +95,11 @@ export const BookCard = ({ book, onDelete, count }) => {
                   e.preventDefault();
                   try {
                     setIsDeleting(true);
-                    await deleteBook(book._id);
+                    const response = await deleteBook(book._id);
                     setIsDeleting(false);
-                    onDelete();
+                    if (response.status === 200) {
+                      dispatch(actions.decreaseCount());
+                    }
                   } catch (error) {
                     setIsDeleting(false);
                     console.log(error.message);
@@ -115,7 +118,6 @@ export const BookCard = ({ book, onDelete, count }) => {
 
 BookCard.propTypes = {
   count: PropTypes.number,
-  onDelete: PropTypes.func,
   book: PropTypes.shape({
     _id: PropTypes.string,
     author: PropTypes.string,

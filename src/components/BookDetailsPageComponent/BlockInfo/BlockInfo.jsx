@@ -4,6 +4,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { setItem } from 'redux/slice/slice-cart';
 import * as selectors from 'redux/selectors';
+import * as actions from 'redux/slice/slice-books';
 import { userRoles } from 'constants/userRoles';
 import { routesPath } from 'router/routesPath';
 import { deleteBook } from 'services/books-api';
@@ -30,6 +31,33 @@ export const BlockInfo = ({ data }) => {
       /page=\d+/,
       `page=${currentPage === 1 ? currentPage : currentPage - 1}`
     );
+  };
+
+  const handleEdit = () => {
+    navigate(routesPath.BOOK_EDIT, {
+      state: { from: location },
+    });
+  };
+
+  const handleDelete = async e => {
+    try {
+      setIsDeleting(true);
+      const response = await deleteBook(data._id);
+      setIsDeleting(false);
+      if (response.status === 200) {
+        dispatch(actions.decreaseCount());
+        if (backPage) {
+          count === 1
+            ? navigate(decreasePathPage(backPage))
+            : navigate(backPage);
+        } else {
+          navigate(routesPath.HOME);
+        }
+      }
+    } catch (error) {
+      setIsDeleting(false);
+      console.log(error.message);
+    }
   };
 
   return (
@@ -93,16 +121,7 @@ export const BlockInfo = ({ data }) => {
       {userRole === userRoles.ADMIN && (
         <ul className={s.editButtonContainer}>
           <li>
-            <button
-              type="button"
-              className={s.editButton}
-              onClick={e => {
-                e.preventDefault();
-                navigate(routesPath.BOOK_EDIT, {
-                  state: { from: location },
-                });
-              }}
-            >
+            <button type="button" className={s.editButton} onClick={handleEdit}>
               <ICONS.EDIT />
               Редагувати
             </button>
@@ -111,24 +130,7 @@ export const BlockInfo = ({ data }) => {
             <button
               type="button"
               className={s.deleteButton}
-              onClick={async e => {
-                e.preventDefault();
-                try {
-                  setIsDeleting(true);
-                  await deleteBook(data._id);
-                  setIsDeleting(false);
-                  if (backPage) {
-                    count === 1
-                      ? navigate(decreasePathPage(backPage))
-                      : navigate(backPage);
-                  } else {
-                    navigate(routesPath.HOME);
-                  }
-                } catch (error) {
-                  setIsDeleting(false);
-                  console.log(error.message);
-                }
-              }}
+              onClick={handleDelete}
             >
               {isDeleting ? (
                 <SpinnerButton />

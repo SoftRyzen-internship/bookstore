@@ -8,6 +8,7 @@ import { routesPath } from 'router/routesPath';
 import { MainWrapper } from './Containers/MainWrapper';
 import { useDispatch } from 'react-redux';
 import { setUserRole } from 'redux/slice/slice-user';
+import { userRoles } from 'constants/userRoles';
 
 const HomePage = lazy(() =>
   import('../pages/HomePage' /* webpackChunkName: "home-page" */)
@@ -33,7 +34,7 @@ export const App = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(setUserRole('buyer'));
+    dispatch(setUserRole(userRoles.ADMIN));
   }, [dispatch]);
 
   return (

@@ -52,8 +52,10 @@ export const BookEditForm = () => {
           media_gallery_image: values.media_gallery_image,
           price: Number(values.price - values.discount),
         };
-        await updateBook(id, book);
-        backPage ? navigate(backPage) : navigate(routesPath.HOME);
+        const response = await updateBook(id, book);
+        if (response.status === 200) {
+          backPage ? navigate(backPage) : navigate(routesPath.HOME);
+        }
       } catch (error) {
         setError(error.message);
       }

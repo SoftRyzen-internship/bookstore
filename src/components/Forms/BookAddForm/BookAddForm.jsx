@@ -42,14 +42,17 @@ export const BookAddForm = () => {
           big_image: values.big_image,
           media_gallery_image: values.media_gallery_image,
           price: Number(values.price - values.discount),
+          reviews: '0',
         };
         setIsLoading(true);
-        await addBook(book);
+        const response = await addBook(book);
         setIsLoading(false);
-        actions.setSubmitting(false);
-        actions.resetForm({
-          values: initialValues,
-        });
+        if (response.status === 201) {
+          actions.setSubmitting(false);
+          actions.resetForm({
+            values: initialValues,
+          });
+        }
       } catch (error) {
         setIsLoading(false);
         setError(error.message);
@@ -168,7 +171,10 @@ export const BookAddForm = () => {
                       value: 'paper',
                     },
                   ]}
-                  placeHolder=""
+                  initialValue={{
+                    label: 'Паперова',
+                    value: 'paper',
+                  }}
                   onClick={() => setFieldTouched('type', true)}
                   onChange={({ value }) => {
                     setFieldValue('type', value);
@@ -192,6 +198,10 @@ export const BookAddForm = () => {
                     (errors.book_year ? s.inputError : s.inputValid)
                   }
                   options={yearList}
+                  initialValue={{
+                    label: values.book_year.toString(),
+                    value: values.book_year.toString(),
+                  }}
                   isSearchable
                   onClick={() => setFieldTouched('book_year', true)}
                   onChange={({ value }) => {

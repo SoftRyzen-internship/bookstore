@@ -13,7 +13,14 @@ const initialState = {
 const booksSlice = createSlice({
   name: 'books',
   initialState,
-  reducers: {},
+  reducers: {
+    decreaseCount(state) {
+      state.count -= 1;
+    },
+    increaseCount(state) {
+      state.count += 1;
+    },
+  },
   extraReducers: builder => {
     builder
       .addCase(operations.getBooks.fulfilled, (state, { payload }) => {
@@ -22,15 +29,6 @@ const booksSlice = createSlice({
         state.count = payload.count;
         state.total = payload.total;
       })
-      // .addCase(operations.addBook.fulfilled, (state, { payload }) => {
-      //   state.isLoading = false;
-      // })
-      // .addCase(operations.updateBook.fulfilled, (state, { payload }) => {
-      //   state.isLoading = false;
-      // })
-      // .addCase(operations.deleteBook.fulfilled, (state, { payload }) => {
-      //   state.isLoading = false;
-      // })
       .addMatcher(
         action =>
           !action.type.startsWith('books/getBooks') &&
@@ -57,13 +55,8 @@ const booksSlice = createSlice({
         }
       );
   },
-
-  // {
-  //   ...extraReducersBooks.getBooks,
-  //   ...extraReducersBooks.addBook,
-  //   ...extraReducersBooks.updateBook,
-  //   ...extraReducersBooks.deleteBook,
-  // },
 });
+
+export const { decreaseCount, increaseCount } = booksSlice.actions;
 
 export default booksSlice.reducer;
