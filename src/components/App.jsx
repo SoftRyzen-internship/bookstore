@@ -1,4 +1,4 @@
-import { lazy, Suspense } from 'react';
+import { lazy, Suspense, useEffect } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { Header } from './Header';
 import { Footer } from './Footer';
@@ -6,6 +6,8 @@ import { PageWrapper } from './Containers/PageWrapper/PageWrapper';
 import { Spinner } from './Spinner';
 import { routesPath } from 'router/routesPath';
 import { MainWrapper } from './Containers/MainWrapper';
+import { useDispatch } from 'react-redux';
+import { setUserRole } from 'redux/slice/slice-user';
 
 const HomePage = lazy(() =>
   import('../pages/HomePage' /* webpackChunkName: "home-page" */)
@@ -26,7 +28,17 @@ const AuthPage = lazy(() =>
   import('../pages/AuthPage' /* webpackChunkName: "auth-page" */)
 );
 
+const OrderPage = lazy(() =>
+  import('../pages/OrderPage' /* webpackChunkName: "order-page" */)
+);
+
 export const App = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(setUserRole('buyer'));
+  }, [dispatch]);
+
   return (
     <PageWrapper>
       <Header />
@@ -45,7 +57,7 @@ export const App = () => {
             path={routesPath.ORDER}
             element={
               <Suspense fallback={<Spinner />}>
-                <div>ORDER PAGE</div>
+                <OrderPage />
               </Suspense>
             }
           />
