@@ -6,7 +6,7 @@ export const getBooks = createAsyncThunk('books/getBooks', async page => {
   return response.data;
 });
 
-export const getBookDetails = createAsyncThunk('books/getBooks', async id => {
+export const getBookDetails = createAsyncThunk('books/getBook', async id => {
   const response = await booksApi.getBookDetails(id);
   return response.data;
 });
