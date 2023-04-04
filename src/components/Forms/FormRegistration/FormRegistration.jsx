@@ -1,15 +1,18 @@
 import { useFormik } from 'formik';
 import { userValidationSchema } from './userValidationSchema';
-import { registerUser } from 'services/sendFormData';
+
 import PhoneInput, { isValidPhoneNumber } from 'react-phone-number-input';
 import { ICONS } from 'assets/icons';
 import s from './FormRegistration.module.scss';
 import 'react-phone-number-input/style.css';
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { registerUser } from 'redux/operations/operations-user';
 
 export function FormRegistration() {
   const [showPassword, setShowPassword] = useState(false);
   const [isChecked, setIsChecked] = useState(false);
+  const dispatch = useDispatch();
   const formik = useFormik({
     initialValues: {
       firstName: '',
@@ -29,7 +32,7 @@ export function FormRegistration() {
           }
           return acc;
         }, {});
-        await registerUser({ ...formData });
+        dispatch(registerUser({ ...formData }));
       } catch (error) {
         setErrors({ error: error?.response?.data?.message });
       }
@@ -168,7 +171,7 @@ export function FormRegistration() {
                 type={showPassword ? 'text' : 'password'}
                 name="password"
                 id="password"
-                placeholder="Старий пароль"
+                placeholder="Пароль"
                 value={password}
                 onChange={handleChange}
                 onBlur={handleBlur}

@@ -1,11 +1,11 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: 'https://books-be.herokuapp.com/api',
+  baseURL: 'https://book-beck-user.onrender.com/api',
   withCredentials: true,
 });
 
-export async function sendFormData(body) {
+export async function changeUserData(body) {
   try {
     const response = await api.patch('/users', body);
     return response.data;

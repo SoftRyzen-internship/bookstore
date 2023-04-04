@@ -1,14 +1,17 @@
 import { useFormik } from 'formik';
 import { userValidationSchema } from './userValidationSchema';
-import { loginUser } from 'services/sendFormData';
+
 import { ICONS } from 'assets/icons';
 import s from './FormLogin.module.scss';
 import 'react-phone-number-input/style.css';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { loginUser } from 'redux/operations/operations-user';
 
 export function FormLogin() {
   const [showPassword, setShowPassword] = useState(false);
+  const dispatch = useDispatch();
   const formik = useFormik({
     initialValues: {
       email: '',
@@ -24,7 +27,7 @@ export function FormLogin() {
           }
           return acc;
         }, {});
-        await loginUser({ ...formData });
+        dispatch(loginUser({ ...formData }));
       } catch (error) {
         setErrors({ error: error?.response?.data?.message });
       }
