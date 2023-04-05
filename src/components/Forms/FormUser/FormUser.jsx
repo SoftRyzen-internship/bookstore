@@ -3,7 +3,6 @@ import { userValidationSchema } from './userValidationSchema';
 import { useLocation, useNavigate } from 'react-router-dom';
 import PhoneInput, { isValidPhoneNumber } from 'react-phone-number-input';
 import s from './FormUser.module.scss';
-import 'react-phone-number-input/style.css';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { changeUser, currentUser } from 'redux/operations/operations-user';

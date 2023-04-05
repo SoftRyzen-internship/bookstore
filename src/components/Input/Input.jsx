@@ -15,7 +15,7 @@ export const Input = () => {
         name="search"
         placeholder="Напишіть назву книги"
         value={value}
-        onChange={e => setValue(e.value)}
+        onChange={e => setValue(e.target.value)}
       />
       <button className={s.iconButton} type="button" onClick={handleClick}>
         <ICONS.SEARCH />
