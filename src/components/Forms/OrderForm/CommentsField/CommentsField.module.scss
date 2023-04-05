@@ -5,11 +5,27 @@
   color: var(--accent-cl);
 
   text-decoration-line: underline;
+  text-align: left;
 }
 
 .commentWrapper {
   padding: 24px 0 24px 24px;
 
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
   border-top: var(--border);
   border-bottom: var(--border);
+}
+
+.textarea {
+  padding: 6px;
+  width: 100%;
+  height: 100px;
+
+  font-family: var(--font-family);
+  font-size: var(--text-md);
+
+  border: var(--border);
 }
