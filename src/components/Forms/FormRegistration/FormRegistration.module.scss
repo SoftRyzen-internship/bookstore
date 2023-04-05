@@ -1,17 +1,11 @@
 .formWrapper {
   background-color: var(--primary-bg-cl);
-  padding: 24px;
-  width: 904px;
+  padding: 16px 24px 24px 24px;
+  min-width: 800px;
   height: auto;
 }
-.titleForm {
-  font-size: var(--text-2xl);
-  font-weight: var(--semibold);
-  line-height: calc(45 / 24);
-  color: var(--primary-txt-cl);
-  margin-bottom: 24px;
-}
 .buttonSubmit {
+  width: 100%;
   padding: 12px 30px;
   border-radius: 5px;
   font-size: var(--text-md);
@@ -27,28 +21,12 @@
     opacity: 1;
   }
 }
-.buttonSubmitGap {
-  margin-right: 24px;
-}
 
-.buttonCancel {
-  padding: 12px 30px;
-  border-radius: 5px;
-  font-size: var(--text-md);
-  line-height: calc(20 / 16);
-  color: var(--red);
-  border: 1px solid var(--red);
-  opacity: 0.8;
-  transition: all var(--transition);
-  &:hover,
-  &:focus {
-    opacity: 1;
-  }
-}
 .blockButton {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 24px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(1, 1fr);
+  gap: 32px;
 }
 .inputGroup {
   position: relative;
@@ -67,25 +45,25 @@
 .input {
   width: 100%;
   max-width: 412px;
-  padding: 12px 50px 12px 15px;
+  padding: 12px 15px;
   border: 1px solid var(--gray-secondary);
   border-radius: 5px;
 }
 
 .inputGroupBlock {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(1, 1fr);
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
   gap: 32px;
+  margin-bottom: 32px;
 }
 
 .errorInput {
   position: absolute;
-  bottom: -25px;
+  bottom: -20px;
   left: 15px;
   color: var(--red);
 }
-
 .showPasswordButton {
   position: absolute;
   top: 70%;
@@ -100,4 +78,30 @@
 }
 .iconShow {
   fill: var(--primary-txt-cl);
+}
+.wrapperCheckbox {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+.inputCheckbox {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  border: 0;
+  clip: rect(0 0 0 0);
+}
+.checkboxLabel {
+  font-size: var(--text-sm);
+  line-height: calc(24 / 14);
+  font-weight: var(--regular);
+  color: var(--secondary-txt-cl);
+  margin-left: 12px;
+  cursor: pointer;
+}
+.iconCheckbox {
+  cursor: pointer;
 }

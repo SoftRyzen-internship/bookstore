@@ -1,14 +1,17 @@
 import { useFormik } from 'formik';
 import { userValidationSchema } from './userValidationSchema';
-import { useLocation, useNavigate } from 'react-router-dom';
-import PhoneInput, { isValidPhoneNumber } from 'react-phone-number-input';
-import s from './FormUser.module.scss';
-import 'react-phone-number-input/style.css';
-import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { changeUser, currentUser } from 'redux/operations/operations-user';
 
-export function FormUser() {
+import PhoneInput, { isValidPhoneNumber } from 'react-phone-number-input';
+import { ICONS } from 'assets/icons';
+import s from './FormRegistration.module.scss';
+import 'react-phone-number-input/style.css';
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { registerUser } from 'redux/operations/operations-user';
+
+export function FormRegistration() {
+  const [showPassword, setShowPassword] = useState(false);
+  const [isChecked, setIsChecked] = useState(false);
   const dispatch = useDispatch();
   const formik = useFormik({
     initialValues: {
@@ -17,6 +20,7 @@ export function FormUser() {
       fathersName: '',
       email: '',
       phone: '',
+      password: '',
     },
     validationSchema: userValidationSchema,
 
@@ -28,14 +32,14 @@ export function FormUser() {
           }
           return acc;
         }, {});
-        dispatch(changeUser({ ...formData }));
+        dispatch(registerUser({ ...formData }));
       } catch (error) {
         setErrors({ error: error?.response?.data?.message });
       }
     },
   });
   const {
-    values: { firstName, lastName, fathersName, email, phone },
+    values: { firstName, lastName, fathersName, email, phone, password },
     errors,
     touched,
     isValid,
@@ -44,79 +48,17 @@ export function FormUser() {
     handleChange,
     setFieldValue,
     handleSubmit,
-    resetForm,
     setErrors,
-    setValues,
   } = formik;
-  useEffect(() => {
-    async function getUser() {
-      try {
-        const data = await dispatch(currentUser());
 
-        const getValueFromNestedObject = (obj, key) => {
-          if (!obj) return undefined;
-          if (obj.hasOwnProperty(key)) return obj[key];
-          for (let k in obj) {
-            if (typeof obj[k] === 'object') {
-              const result = getValueFromNestedObject(obj[k], key);
-              if (result !== undefined) return result;
-            }
-          }
-          return undefined;
-        };
-
-        const email = getValueFromNestedObject(data, 'email') || '';
-        const firstName = getValueFromNestedObject(data, 'firstName') || '';
-        const lastName = getValueFromNestedObject(data, 'lastName') || '';
-        const fathersName = getValueFromNestedObject(data, 'fathersName') || '';
-        const phone = getValueFromNestedObject(data, 'phone') || '';
-
-        setValues({ email, firstName, lastName, fathersName, phone });
-      } catch (error) {
-        console.error(error);
-      }
-    }
-
-    getUser();
-  }, [dispatch, setValues]);
-
-  const navigate = useNavigate();
-  const location = useLocation();
   const handleChangePhone = value => {
     setFieldValue('phone', value);
   };
 
-  const handleCancel = () => {
-    resetForm();
-    if (location.state?.from) {
-      navigate(-1);
-    } else {
-      navigate('/books');
-    }
-  };
   return (
     <>
       <div className={s.formWrapper}>
         <form onSubmit={handleSubmit}>
-          <div className={s.blockButton}>
-            <span className={s.titleForm}>Особисті дані</span>
-            <div>
-              <button
-                className={`${s.buttonSubmit} ${s.buttonSubmitGap}`}
-                type="submit"
-                disabled={!isValid && !dirty}
-              >
-                Змінити дані
-              </button>
-              <button
-                className={s.buttonCancel}
-                type="button"
-                onClick={handleCancel}
-              >
-                Вийти
-              </button>
-            </div>
-          </div>
           <div className={s.inputGroupBlock}>
             <div className={s.inputGroup}>
               <label className={s.inputLabel} htmlFor="firstName">
@@ -219,6 +161,71 @@ export function FormUser() {
               {errors.error && (
                 <small className={s.errorInput}>{errors.error}</small>
               )}
+            </div>
+            <div className={s.inputGroup}>
+              <label className={s.inputLabel} htmlFor="password">
+                Пароль
+              </label>
+              <input
+                className={s.input}
+                type={showPassword ? 'text' : 'password'}
+                name="password"
+                id="password"
+                placeholder="Пароль"
+                value={password}
+                onChange={handleChange}
+                onBlur={handleBlur}
+              />
+              <button
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+                className={s.showPasswordButton}
+              >
+                {showPassword ? (
+                  <ICONS.SHOWPASS className={s.iconShow} />
+                ) : (
+                  <ICONS.CLOSEPASS className={s.iconClose} />
+                )}
+              </button>
+              {errors.password && touched.password && (
+                <small className={s.errorInput}>
+                  {errors.password} {errors.error}
+                </small>
+              )}
+              {errors.error && (
+                <small className={s.errorInput}>{errors.error}</small>
+              )}
+            </div>
+          </div>
+          <div className={s.blockButton}>
+            <button
+              className={`${s.buttonSubmit} ${s.buttonSubmitGap}`}
+              type="submit"
+              disabled={!isValid && !dirty}
+            >
+              Зберегти
+            </button>
+
+            <div className={s.wrapperCheckbox}>
+              <input
+                className={s.inputCheckbox}
+                id="checkbox"
+                type="checkbox"
+                checked={isChecked}
+                onChange={() => {
+                  setIsChecked(prev => !prev);
+                }}
+              />
+              <button
+                type="button"
+                onClick={() => setIsChecked(prev => !prev)}
+                className={s.iconCheckbox}
+              >
+                {isChecked ? <ICONS.CHECKED /> : <ICONS.DEFAULT_CHECKED />}
+              </button>
+              <label htmlFor="checkbox" className={s.checkboxLabel}>
+                Створити обліковий запис
+              </label>
             </div>
           </div>
         </form>
