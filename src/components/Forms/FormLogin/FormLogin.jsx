@@ -3,7 +3,6 @@ import { userValidationSchema } from './userValidationSchema';
 
 import { ICONS } from 'assets/icons';
 import s from './FormLogin.module.scss';
-// import 'react-phone-number-input/style.css';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';

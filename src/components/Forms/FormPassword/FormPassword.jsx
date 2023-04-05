@@ -4,7 +4,6 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { ICONS } from 'assets/icons';
 import s from './FormPassword.module.scss';
-// import 'react-phone-number-input/style.css';
 import { updatePassword } from 'services/sendFormData';
 
 export function FormPassword() {
