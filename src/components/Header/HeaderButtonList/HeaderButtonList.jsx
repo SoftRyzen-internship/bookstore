@@ -1,11 +1,18 @@
 import { ICONS } from 'assets/icons';
 import { HeaderButton } from './HeaderButton';
+import { toggleCart } from 'redux/slice/slice-cart';
+import { useDispatch, useSelector } from 'react-redux';
 import s from './HeaderButtonList.module.scss';
 
 export const HeaderButtonList = () => {
+  const dispatch = useDispatch();
+  const orderItems = useSelector(state => state.cart.items);
+
   const handleClickUser = () => {};
   const handleClickFavorite = () => {};
-  const handleClickCart = () => {};
+  const handleClickCart = () => {
+    dispatch(toggleCart());
+  };
 
   const buttonList = [
     {
@@ -22,7 +29,7 @@ export const HeaderButtonList = () => {
     {
       id: 'cart',
       icon: <ICONS.CART />,
-      // indicatorNumber: 1,
+      indicatorNumber: orderItems.reduce((acc, item) => acc + item.quality, 0),
       onClick: handleClickCart,
     },
   ];

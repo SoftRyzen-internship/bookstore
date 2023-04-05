@@ -8,6 +8,7 @@ import { routesPath } from 'router/routesPath';
 import { MainWrapper } from './Containers/MainWrapper';
 import { useDispatch } from 'react-redux';
 import { setUserRole } from 'redux/slice/slice-user';
+import { OrderBasket } from './OrderBasket/OrderBasket';
 
 const HomePage = lazy(() =>
   import('../pages/HomePage' /* webpackChunkName: "home-page" */)
@@ -102,6 +103,7 @@ export const App = () => {
       </MainWrapper>
 
       <Footer />
+      <OrderBasket />
     </PageWrapper>
   );
 };
