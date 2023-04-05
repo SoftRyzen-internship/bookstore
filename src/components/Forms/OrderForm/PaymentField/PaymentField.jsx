@@ -14,7 +14,11 @@ export const PaymentField = () => {
       <h2 className={s.title}>Спосіб оплати</h2>
       <ul className={s.radioList}>
         <li className={s.paymentItem}>
-          <label className={s.label}>
+          <label
+            className={`${s.label} ${
+              selectedPaymentType === 'card' && s.active
+            }`}
+          >
             <input
               type="radio"
               id="cardPayment"
@@ -27,7 +31,11 @@ export const PaymentField = () => {
           </label>
         </li>
         <li className={s.paymentItem}>
-          <label className={s.label}>
+          <label
+            className={`${s.label} ${
+              selectedPaymentType === 'cash' && s.active
+            }`}
+          >
             <input
               type="radio"
               id="cashPayment"

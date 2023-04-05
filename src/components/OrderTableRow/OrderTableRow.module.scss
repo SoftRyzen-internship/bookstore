@@ -1,0 +1,35 @@
+.orderItem {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+
+  td {
+    vertical-align: top;
+
+    &:nth-child(2) {
+      text-align: left;
+    }
+  }
+
+  p {
+    margin-bottom: 4px;
+    font-weight: var(--medium);
+    font-size: var(--text-sm);
+    line-height: 1.71;
+    color: var(--gray);
+  }
+
+  .bold {
+    font-weight: var(--semibold);
+    font-size: var(--text-md);
+
+    color: var(--primary-txt-cl);
+  }
+}
+
+.posterWrapper {
+  padding: 13px 9px;
+
+  border: 1px solid #EFEFEF;
+  border-radius: 5px;
+}
