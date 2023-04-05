@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import ReactPaginate from 'react-paginate';
 
@@ -19,20 +19,22 @@ export const BooksList = () => {
 
   const dispatch = useDispatch();
 
+  const [count, setCount] = useState(countOnPage);
   let [searchParams, setSearchParams] = useSearchParams();
   let page = searchParams.get('page') || '1';
   const booksPerPage = 6;
   const changed = useRef(false);
 
   useEffect(() => {
-    if (!changed.current && countOnPage === 0 && page > 1) {
+    if (!changed.current && count === 0 && page > 1) {
       setSearchParams({ page: page - 1 });
       changed.current = true;
     } else {
       dispatch(operations.getBooks(page));
+      setCount(countOnPage);
       changed.current = false;
     }
-  }, [dispatch, page, countOnPage, setSearchParams]);
+  }, [dispatch, count, page, setSearchParams, totalBooks, countOnPage]);
 
   const handlePageChange = ({ selected }) => {
     setSearchParams({ page: selected + 1 });
@@ -46,7 +48,7 @@ export const BooksList = () => {
           {books.map(book => {
             return (
               <li key={book._id}>
-                <BookCard count={countOnPage} book={book} />
+                <BookCard count={countOnPage} book={book} setCount={setCount} />
               </li>
             );
           })}

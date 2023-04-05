@@ -4,7 +4,6 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { setItem } from 'redux/slice/slice-cart';
 import * as selectors from 'redux/selectors';
-import * as actions from 'redux/slice/slice-books';
 import { userRoles } from 'constants/userRoles';
 import { routesPath } from 'router/routesPath';
 import { deleteBook } from 'services/books-api';
@@ -15,6 +14,7 @@ import s from './BlockInfo.module.scss';
 
 export const BlockInfo = ({ data }) => {
   const userRole = useSelector(selectors.getUserRole);
+  const cartItems = useSelector(selectors.getCartItems);
   const dispatch = useDispatch();
 
   const [favorite, setFavorite] = useState(false);
@@ -45,7 +45,6 @@ export const BlockInfo = ({ data }) => {
       const response = await deleteBook(data._id);
       setIsDeleting(false);
       if (response.status === 200) {
-        dispatch(actions.decreaseCount());
         if (backPage) {
           count === 1
             ? navigate(decreasePathPage(backPage))
@@ -89,7 +88,9 @@ export const BlockInfo = ({ data }) => {
               }}
             >
               <ICONS.CART_FULL />
-              Купити
+              {cartItems.find(item => item._id === data._id)
+                ? 'В кошику'
+                : 'Купити'}
             </button>
           )}
         </div>

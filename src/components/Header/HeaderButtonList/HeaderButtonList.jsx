@@ -1,10 +1,13 @@
 import { useMemo, useRef, useState } from 'react';
-import { ICONS } from 'assets/icons';
-import { HeaderButton } from './HeaderButton';
-import { toggleCart } from 'redux/slice/slice-cart';
 import { useDispatch, useSelector } from 'react-redux';
-import s from './HeaderButtonList.module.scss';
+import { toggleCart } from 'redux/slice/slice-cart';
+import * as selectors from 'redux/selectors';
+import { ICONS } from 'assets/icons';
+import { userRoles } from 'constants/userRoles';
 import { useOutsideClick } from 'hooks/useOutsideClick';
+import { HeaderButton } from './HeaderButton';
+
+import s from './HeaderButtonList.module.scss';
 
 export const HeaderButtonList = () => {
   const ref = useRef();
@@ -12,39 +15,55 @@ export const HeaderButtonList = () => {
   useOutsideClick(ref, setPopup);
 
   const dispatch = useDispatch();
-  const orderItems = useSelector(state => state.cart.items);
+  const orderItems = useSelector(selectors.getCartItems);
+  const userRole = useSelector(selectors.getUserRole);
 
-  const buttonList = useMemo(
-    () => [
-      {
-        id: 'user',
-        icon: <ICONS.USER />,
-        ref: ref,
-        popup: popup,
-        onClick: () => {
-          setPopup(!popup);
+  const buttonList = useMemo(() => {
+    if (userRole === userRoles.BUYER) {
+      return [
+        {
+          id: 'user',
+          icon: <ICONS.USER />,
+          ref: ref,
+          popup: popup,
+          onClick: () => {
+            setPopup(!popup);
+          },
         },
-      },
-      {
-        id: 'favorite',
-        icon: <ICONS.FAVORITE />,
-        // indicatorNumber: 3,
-        onClick: () => {},
-      },
-      {
-        id: 'cart',
-        icon: <ICONS.CART />,
-        indicatorNumber: orderItems.reduce(
-          (acc, item) => acc + item.quality,
-          0
-        ),
-        onClick: () => {
-          dispatch(toggleCart());
+        {
+          id: 'favorite',
+          icon: <ICONS.FAVORITE />,
+          // indicatorNumber: 3,
+          onClick: () => {},
         },
-      },
-    ],
-    [dispatch, orderItems, popup]
-  );
+        {
+          id: 'cart',
+          icon: <ICONS.CART />,
+          indicatorNumber: orderItems.reduce(
+            (acc, item) => acc + item.quality,
+            0
+          ),
+          onClick: () => {
+            dispatch(toggleCart());
+          },
+        },
+      ];
+    }
+    if (userRole === userRoles.ADMIN) {
+      return [
+        {
+          id: 'user',
+          icon: <ICONS.USER />,
+          ref: ref,
+          popup: popup,
+          onClick: () => {
+            setPopup(!popup);
+          },
+        },
+      ];
+    }
+    return [];
+  }, [dispatch, orderItems, popup, userRole]);
 
   return (
     <ul className={s.container}>

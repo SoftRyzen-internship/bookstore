@@ -1,5 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit';
-// import * as extraReducersBooks from 'redux/reducers/reducers-books';
 import * as operations from 'redux/operations/operations-books';
 
 const initialState = {
@@ -13,14 +12,7 @@ const initialState = {
 const booksSlice = createSlice({
   name: 'books',
   initialState,
-  reducers: {
-    decreaseCount(state) {
-      state.count -= 1;
-    },
-    increaseCount(state) {
-      state.count += 1;
-    },
-  },
+  reducers: {},
   extraReducers: builder => {
     builder
       .addCase(operations.getBooks.fulfilled, (state, { payload }) => {
@@ -56,7 +48,5 @@ const booksSlice = createSlice({
       );
   },
 });
-
-export const { decreaseCount, increaseCount } = booksSlice.actions;
 
 export default booksSlice.reducer;
