@@ -12,7 +12,7 @@ import { SpinnerButton } from 'components/SpinnerButton';
 
 import s from './BookCard.module.scss';
 
-export const BookCard = ({ book, count, setCount }) => {
+export const BookCard = ({ book, count, onDelete }) => {
   const userRole = useSelector(selectors.getUserRole);
   const cartItems = useSelector(selectors.getCartItems);
   const dispatch = useDispatch();
@@ -136,7 +136,7 @@ export const BookCard = ({ book, count, setCount }) => {
                       const response = await deleteBook(book._id);
                       setIsDeleting(false);
                       if (response.status === 200) {
-                        setCount(prev => prev - 1);
+                        onDelete();
                       }
                     } catch (error) {
                       setIsDeleting(false);
@@ -157,7 +157,7 @@ export const BookCard = ({ book, count, setCount }) => {
 
 BookCard.propTypes = {
   count: PropTypes.number,
-  setUpdate: PropTypes.func,
+  onDelete: PropTypes.func,
   book: PropTypes.shape({
     _id: PropTypes.string,
     author: PropTypes.string,

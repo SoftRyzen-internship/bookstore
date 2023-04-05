@@ -48,7 +48,11 @@ export const BooksList = () => {
           {books.map(book => {
             return (
               <li key={book._id}>
-                <BookCard count={countOnPage} book={book} setCount={setCount} />
+                <BookCard
+                  count={countOnPage}
+                  book={book}
+                  onDelete={() => setCount(prev => prev - 1)}
+                />
               </li>
             );
           })}
