@@ -4,7 +4,7 @@ import { userValidationSchema } from './userValidationSchema';
 import PhoneInput, { isValidPhoneNumber } from 'react-phone-number-input';
 import { ICONS } from 'assets/icons';
 import s from './FormRegistration.module.scss';
-import 'react-phone-number-input/style.css';
+// import 'react-phone-number-input/style.css';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
