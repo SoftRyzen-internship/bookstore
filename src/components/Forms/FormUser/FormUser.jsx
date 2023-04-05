@@ -5,10 +5,14 @@ import PhoneInput, { isValidPhoneNumber } from 'react-phone-number-input';
 import s from './FormUser.module.scss';
 import 'react-phone-number-input/style.css';
 import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { changeUser, currentUser } from 'redux/operations/operations-user';
+import { Spinner } from 'components/Spinner';
+import * as selectors from 'redux/selectors';
+import { handleErrorChange } from 'utils/handleErrorLogin';
 
 export function FormUser() {
+  const isLoading = useSelector(selectors.isLoading);
   const dispatch = useDispatch();
   const formik = useFormik({
     initialValues: {
@@ -28,7 +32,15 @@ export function FormUser() {
           }
           return acc;
         }, {});
-        dispatch(changeUser({ ...formData }));
+        const resp = await dispatch(changeUser({ ...formData }));
+        if (resp.meta.requestStatus === 'fulfilled') {
+          await dispatch(currentUser()).then(
+            ({ meta }) => meta.requestStatus === 'fulfilled'
+          );
+        }
+        if (resp.meta.requestStatus === 'rejected') {
+          setErrors(handleErrorChange({ ...formData }));
+        }
       } catch (error) {
         setErrors({ error: error?.response?.data?.message });
       }
@@ -222,6 +234,11 @@ export function FormUser() {
             </div>
           </div>
         </form>
+        {isLoading && (
+          <div className={s.spinner}>
+            <Spinner />
+          </div>
+        )}
       </div>
     </>
   );

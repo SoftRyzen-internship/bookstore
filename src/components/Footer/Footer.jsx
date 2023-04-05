@@ -5,12 +5,19 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Container } from 'components/Containers/Container';
 import s from './Footer.module.scss';
+import { useDispatch } from 'react-redux';
+import { logoutUser } from 'redux/operations/operations-user';
 
 export const Footer = () => {
+  const dispatch = useDispatch();
+  const logout = () => {
+    dispatch(logoutUser());
+  };
   return (
     <footer className={s.footer}>
       <Container>
         {/* <div className={s.container}> */}
+        <button onClick={logout}>Logout</button>
         <div className={s.blockBox}>
           <div className={s.blockBoxItem}>
             <div className={s.footerLogo}>
