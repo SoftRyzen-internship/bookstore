@@ -14,9 +14,9 @@ export const userValidationSchema = Yup.object().shape({
     .max(20, 'По батькові повинно бути не більше 20 символів')
     .required('Введіть ваше по батькові'),
   email: Yup.string()
-    .matches(emailRegexp, 'Invalid email address')
-    .required('Email is required'),
+    .matches(emailRegexp, 'Введіть коректний email address')
+    .required('Email є обов`язковим'),
   phone: Yup.string()
-    .required('Phone is required')
+    .required('Телефон є обов`язковим')
     .max(20, 'Номер повинен бути не більше 20 символів'),
 });

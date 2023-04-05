@@ -44,7 +44,7 @@ export const DeliveryField = () => {
               className={`${s.departmentSelect} ${s.input}`}
               name="select"
             >
-              <option value="" disabled selected>
+              <option value="" disabled defaultValue>
                 Виберіть відділення
               </option>
               <option value="value1">1</option>
@@ -82,7 +82,7 @@ export const DeliveryField = () => {
               className={`${s.departmentSelect} ${s.input}`}
               name="select"
             >
-              <option value="" disabled selected>
+              <option value="" disabled defaultValue>
                 Виберіть відділення
               </option>
               <option value="value1">1</option>
@@ -120,7 +120,7 @@ export const DeliveryField = () => {
               className={`${s.departmentSelect} ${s.input}`}
               name="select"
             >
-              <option value="" disabled selected>
+              <option value="" disabled defaultValue>
                 Виберіть відділення
               </option>
               <option value="value1">1</option>

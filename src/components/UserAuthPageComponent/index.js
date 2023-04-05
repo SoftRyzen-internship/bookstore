@@ -1,0 +1,1 @@
+export { UserAuthPageComponent } from './UserAuthPageComponent';

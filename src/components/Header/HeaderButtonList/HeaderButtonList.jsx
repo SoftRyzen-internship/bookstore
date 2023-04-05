@@ -1,31 +1,51 @@
+import { useMemo, useRef, useState } from 'react';
 import { ICONS } from 'assets/icons';
 import { HeaderButton } from './HeaderButton';
+import { toggleCart } from 'redux/slice/slice-cart';
+import { useDispatch, useSelector } from 'react-redux';
 import s from './HeaderButtonList.module.scss';
+import { useOutsideClick } from 'hooks/useOutsideClick';
 
 export const HeaderButtonList = () => {
-  const handleClickUser = () => {};
-  const handleClickFavorite = () => {};
-  const handleClickCart = () => {};
+  const ref = useRef();
+  const [popup, setPopup] = useState(false);
+  useOutsideClick(ref, setPopup);
 
-  const buttonList = [
-    {
-      id: 'user',
-      icon: <ICONS.USER />,
-      onClick: handleClickUser,
-    },
-    {
-      id: 'favorite',
-      icon: <ICONS.FAVORITE />,
-      // indicatorNumber: 3,
-      onClick: handleClickFavorite,
-    },
-    {
-      id: 'cart',
-      icon: <ICONS.CART />,
-      // indicatorNumber: 1,
-      onClick: handleClickCart,
-    },
-  ];
+  const dispatch = useDispatch();
+  const orderItems = useSelector(state => state.cart.items);
+
+  const buttonList = useMemo(
+    () => [
+      {
+        id: 'user',
+        icon: <ICONS.USER />,
+        ref: ref,
+        popup: popup,
+        onClick: () => {
+          setPopup(!popup);
+        },
+      },
+      {
+        id: 'favorite',
+        icon: <ICONS.FAVORITE />,
+        // indicatorNumber: 3,
+        onClick: () => {},
+      },
+      {
+        id: 'cart',
+        icon: <ICONS.CART />,
+        indicatorNumber: orderItems.reduce(
+          (acc, item) => acc + item.quality,
+          0
+        ),
+        onClick: () => {
+          dispatch(toggleCart());
+        },
+      },
+    ],
+    [dispatch, orderItems, popup]
+  );
+
   return (
     <ul className={s.container}>
       {buttonList.map(button => {
@@ -33,6 +53,8 @@ export const HeaderButtonList = () => {
           <li key={button.id}>
             <HeaderButton
               icon={button.icon}
+              buttonRef={button.ref}
+              popup={button.popup}
               indicatorNumber={button.indicatorNumber}
               onClick={button.onClick}
             />

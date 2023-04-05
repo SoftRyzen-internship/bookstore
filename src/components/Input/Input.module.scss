@@ -25,4 +25,8 @@
   position: absolute;
   right: 0px;
   background-color: var(--accent-cl);
+  &:hover {
+    background-color: var(--accent-hover-cl);
+    box-shadow: var(--shadow-primary);
+  }
 }

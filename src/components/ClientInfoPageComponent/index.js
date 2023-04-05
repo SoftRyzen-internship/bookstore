@@ -1,0 +1,1 @@
+export { ClientInfoPageComponent } from './ClientInfoPageComponent';

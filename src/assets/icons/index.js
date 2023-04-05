@@ -20,6 +20,10 @@ import { ReactComponent as Arrow } from 'assets/icons/svg/arrow.svg';
 import { ReactComponent as Eye } from 'assets/icons/svg/eye.svg';
 import { ReactComponent as ShowPass } from 'assets/icons/svg/show-password.svg';
 import { ReactComponent as ClosePass } from 'assets/icons/svg/close-password.svg';
+import { ReactComponent as Lock } from 'assets/icons/svg/lock.svg';
+import { ReactComponent as Checked } from 'assets/icons/svg/checked.svg';
+import { ReactComponent as DefaultChecked } from 'assets/icons/svg/default-checked.svg';
+import { ReactComponent as Email } from 'assets/icons/svg/email.svg';
 
 export const ICONS = {
   LOGO: Logo,
@@ -44,4 +48,8 @@ export const ICONS = {
   EYE: Eye,
   SHOWPASS: ShowPass,
   CLOSEPASS: ClosePass,
+  LOCK: Lock,
+  DEFAULT_CHECKED: DefaultChecked,
+  CHECKED: Checked,
+  EMAIL: Email,
 };

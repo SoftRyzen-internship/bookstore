@@ -1,0 +1,130 @@
+.formWrapper {
+  background-color: var(--primary-bg-cl);
+  padding: 16px 24px 24px 24px;
+  min-width: 800px;
+  height: auto;
+  position: relative;
+}
+
+.buttonSubmit {
+  padding: 12px 30px;
+  border-radius: 5px;
+  font-size: var(--text-md);
+  font-weight: var(--semibold);
+  line-height: calc(20 / 16);
+  color: var(--primary-bg-cl);
+  border: 1px solid var(--accent-cl);
+  background-color: var(--accent-cl);
+  opacity: 0.8;
+  transition: all var(--transition);
+  &:hover,
+  &:focus {
+    opacity: 1;
+  }
+}
+.buttonSubmitGap {
+  margin-right: 24px;
+}
+
+.buttonCancel {
+  padding: 12px 30px;
+  border-radius: 5px;
+  font-size: var(--text-md);
+  line-height: calc(20 / 16);
+  color: var(--red);
+  border: 1px solid var(--red);
+  opacity: 0.8;
+  transition: all var(--transition);
+  &:hover,
+  &:focus {
+    opacity: 1;
+  }
+}
+.blockButton {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(1, 1fr);
+  gap: 32px;
+}
+.inputGroup {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+.inputLabel {
+  font-weight: var(--medium);
+  line-height: calc(24 / 16);
+  margin-bottom: 10px;
+}
+.inputLabel::after {
+  content: '*';
+  color: var(--red);
+}
+.input {
+  width: 100%;
+  max-width: 412px;
+  padding: 12px 15px;
+  border: 1px solid var(--gray-secondary);
+  border-radius: 5px;
+}
+
+.inputGroupBlock {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(1, 1fr);
+  gap: 32px;
+  margin-bottom: 16px;
+}
+
+.errorInput {
+  position: absolute;
+  bottom: -20px;
+  left: 15px;
+  color: var(--red);
+}
+
+.showPasswordButton {
+  position: absolute;
+  top: 70%;
+  right: 16px;
+  transform: translateY(-40%);
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  padding: 0;
+  margin: 0;
+}
+.iconShow {
+  fill: var(--primary-txt-cl);
+}
+.wrapperLock {
+  display: inline-flex;
+  justify-content: left;
+  align-items: flex-start;
+  margin-bottom: 16px;
+  position: relative;
+}
+.lockLink {
+  font-size: var(--text-sm);
+  line-height: calc(24 / 14);
+  font-weight: var(--regular);
+  color: var(--accent-cl);
+  margin-left: 12px;
+  &:before {
+    content: '';
+    width: 110px;
+    height: 1px;
+    border-radius: 1px;
+    background-color: var(--accent-cl);
+    position: absolute;
+    left: 30px;
+    bottom: 2px;
+  }
+}
+.spinner {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}

@@ -8,7 +8,7 @@ export const userValidationSchema = Yup.object().shape({
     .required("Новий пароль є обов'язковим")
     .min(6, 'Новий пароль повинен містити щонайменше 6 символів'),
   confirmNewPassword: Yup.string()
-    .required("Підтвердження нового пароля є обов'язковим")
+    .required('Підтвердіть пароль')
     .oneOf([Yup.ref('newPassword'), null], 'Паролі не співпадають'),
   error: Yup.string(),
 });

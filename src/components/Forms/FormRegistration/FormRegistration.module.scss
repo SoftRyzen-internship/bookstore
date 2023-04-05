@@ -1,0 +1,114 @@
+.formWrapper {
+  background-color: var(--primary-bg-cl);
+  padding: 16px 24px 24px 24px;
+  min-width: 800px;
+  height: auto;
+  position: relative;
+}
+.buttonSubmit {
+  width: 100%;
+  padding: 12px 30px;
+  border-radius: 5px;
+  font-size: var(--text-md);
+  font-weight: var(--semibold);
+  line-height: calc(20 / 16);
+  color: var(--primary-bg-cl);
+  border: 1px solid var(--accent-cl);
+  background-color: var(--accent-cl);
+  opacity: 0.8;
+  transition: all var(--transition);
+  &:hover,
+  &:focus {
+    opacity: 1;
+  }
+}
+
+.blockButton {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(1, 1fr);
+  gap: 32px;
+}
+.inputGroup {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+.inputLabel {
+  font-weight: var(--medium);
+  line-height: calc(24 / 16);
+  margin-bottom: 10px;
+}
+.inputLabel::after {
+  content: '*';
+  color: var(--red);
+}
+.input {
+  width: 100%;
+  max-width: 412px;
+  padding: 12px 15px;
+  border: 1px solid var(--gray-secondary);
+  border-radius: 5px;
+}
+
+.inputGroupBlock {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 32px;
+  margin-bottom: 32px;
+}
+
+.errorInput {
+  position: absolute;
+  bottom: -20px;
+  left: 15px;
+  color: var(--red);
+}
+.showPasswordButton {
+  position: absolute;
+  top: 70%;
+  right: 16px;
+  transform: translateY(-40%);
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  padding: 0;
+  margin: 0;
+}
+.iconShow {
+  fill: var(--primary-txt-cl);
+}
+.wrapperCheckbox {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+.inputCheckbox {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  border: 0;
+  clip: rect(0 0 0 0);
+}
+.checkboxLabel {
+  font-size: var(--text-sm);
+  line-height: calc(24 / 14);
+  font-weight: var(--regular);
+  color: var(--secondary-txt-cl);
+  margin-left: 12px;
+  cursor: pointer;
+}
+.iconCheckbox {
+  cursor: pointer;
+}
+.spinner {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
