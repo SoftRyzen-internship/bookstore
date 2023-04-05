@@ -1,0 +1,1 @@
+export { TotalPricePageComponent } from './TotalPricePageComponent';
