@@ -8,6 +8,7 @@ import { App } from 'components/App';
 import './index.css';
 import 'styles/variables.scss';
 import 'styles/global.scss';
+import 'react-phone-number-input/style.css';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
