@@ -7,6 +7,7 @@ import { FormRegistration } from 'components/Forms/FormRegistration';
 import { FormLogin } from 'components/Forms/FormLogin';
 import { NavLink } from 'react-router-dom';
 import { OrderForm } from 'components/Forms';
+import { TotalPricePageComponent } from 'components/TotalPricePageComponent';
 
 export const UserAuthPageComponent = ({ isRegister }) => {
   return (
@@ -49,6 +50,7 @@ export const UserAuthPageComponent = ({ isRegister }) => {
             </div>
             {isRegister ? <FormRegistration /> : <FormLogin />}
             <OrderForm />
+            <TotalPricePageComponent />
           </div>
         </FlexWrapper>
       </Container>
