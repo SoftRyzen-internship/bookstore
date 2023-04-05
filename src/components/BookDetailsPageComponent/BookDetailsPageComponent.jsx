@@ -1,12 +1,14 @@
 import { useParams } from 'react-router-dom';
 import { useFetch } from 'hooks/useFetch';
 import { getBookDetails } from 'services/books-api';
+import { pages } from 'constants/pages';
 import { Breadcrumbs } from 'components/Breadcrumbs';
 import { ImageGallery } from './ImageGallery';
 import { BlockInfo } from './BlockInfo';
 import { Spinner } from 'components/Spinner';
 import { Container } from 'components/Containers/Container';
 import { BlockDescription } from './BlockDescription';
+
 import s from './BookDetailsPageComponent.module.scss';
 
 export const BookDetailsPageComponent = () => {
@@ -27,7 +29,7 @@ export const BookDetailsPageComponent = () => {
     <>
       <div className={s.container}>
         <Container>
-          <Breadcrumbs />
+          <Breadcrumbs breadcrumbs={[pages.HOME, pages.BOOK_DETAIL]} />
           <div className={s.wrapper}>
             {loading && <Spinner />}
             {data && !!images.length && <ImageGallery images={images} />}

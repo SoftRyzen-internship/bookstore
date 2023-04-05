@@ -16,7 +16,8 @@ const cartSlice = createSlice({
       if (book) {
         book.quality += 1;
       } else {
-        const newBook = { ...payload, quality: 1, discount: 16 };
+        const newBook = { ...payload, quality: 1 };
+        newBook.discount = newBook.discount || 16;
         state.items = [...state.items, newBook];
       }
     },
