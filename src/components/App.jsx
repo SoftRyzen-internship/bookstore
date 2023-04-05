@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setUserRole } from 'redux/slice/slice-user';
 import * as selectors from 'redux/selectors';
 import { ProtectedRoute } from './ProtectedRoute';
+import { OrderBasket } from './OrderBasket/OrderBasket';
 
 const HomePage = lazy(() =>
   import('../pages/HomePage' /* webpackChunkName: "home-page" */)
@@ -125,6 +126,7 @@ export const App = () => {
       </MainWrapper>
 
       <Footer />
+      <OrderBasket />
     </PageWrapper>
   );
 };

@@ -11,6 +11,7 @@ import * as selectors from 'redux/selectors';
 import { useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { routesPath } from '../../router/routesPath';
+import { TotalPricePageComponent } from 'components/TotalPricePageComponent';
 
 export const UserAuthPageComponent = ({ isRegister }) => {
   const isAuth = useSelector(selectors.getIsAuth);
@@ -70,6 +71,7 @@ export const UserAuthPageComponent = ({ isRegister }) => {
               <FormLogin />
             )}
             <OrderForm />
+            <TotalPricePageComponent />
           </div>
         </FlexWrapper>
       </Container>
