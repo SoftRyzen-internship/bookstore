@@ -1,0 +1,83 @@
+.orderItem {
+  display: flex;
+  gap: 16px;
+
+  font-weight: var(--medium);
+  color: var(--gray);
+
+  b {
+    color: var(--primary-txt-cl);
+  }
+}
+
+.itemDetails {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.itemSettings {
+  margin-left: auto;
+}
+
+.oldPrice {
+  font-size: var(--text-sm);
+
+  text-decoration: line-through;
+}
+
+.price {
+  margin-right: 4px;
+
+  color: var(--accent-cl);
+}
+
+.itemCount {
+  margin-top: 13px;
+  padding: 6px 4px;
+
+  display: flex;
+  justify-content: space-between;
+
+  color: var(--primary-txt-cl);
+  border: var(--border);
+  border-radius: 5px;
+}
+
+.decrease {
+  width: 12px;
+  height: 24px;
+
+  background-image: url('../../assets/icons/svg/decrease.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.increase {
+  width: 12px;
+  height: 24px;
+
+  background-image: url('../../assets/icons/svg/increase.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.bookPoster {
+  position: relative;
+}
+
+.discount {
+  padding: 3px 12px;
+
+  position: absolute;
+  bottom: -6px;
+  left: 0;
+
+  font-size: var(--text-sm);
+  line-height: 1.57;
+
+  color: var(--white);
+  background-color: var(--blue);
+
+  border-radius: 30px;
+}

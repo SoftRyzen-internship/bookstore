@@ -8,7 +8,7 @@ export const registerUser = createAsyncThunk(
     return data;
   }
 );
-export const changeUser = createAsyncThunk('user/register', async userData => {
+export const changeUser = createAsyncThunk('user/change', async userData => {
   const data = await userApi.changeUserData(userData);
   return data;
 });

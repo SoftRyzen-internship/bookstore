@@ -1,7 +1,7 @@
-import { lazy, Suspense, useEffect } from 'react';
+import { lazy, Suspense } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
-import * as selectors from 'redux/selectors';
 import { useSelector } from 'react-redux';
+import * as selectors from 'redux/selectors';
 import { userRoles } from 'constants/userRoles';
 import { Header } from './Header';
 import { Footer } from './Footer';
@@ -9,8 +9,8 @@ import { PageWrapper } from './Containers/PageWrapper/PageWrapper';
 import { Spinner } from './Spinner';
 import { routesPath } from 'router/routesPath';
 import { MainWrapper } from './Containers/MainWrapper';
-import { useDispatch } from 'react-redux';
-import { setUserRole } from 'redux/slice/slice-user';
+import { ProtectedRoute } from './ProtectedRoute';
+import { OrderBasket } from './OrderBasket/OrderBasket';
 
 const HomePage = lazy(() =>
   import('../pages/HomePage' /* webpackChunkName: "home-page" */)
@@ -36,11 +36,8 @@ const OrderPage = lazy(() =>
 );
 
 export const App = () => {
-  const dispatch = useDispatch();
+  const isAuth = useSelector(selectors.getIsAuth);
   const userRole = useSelector(selectors.getUserRole);
-  useEffect(() => {
-    dispatch(setUserRole(userRoles.BUYER));
-  }, [dispatch]);
 
   return (
     <PageWrapper>
@@ -57,11 +54,22 @@ export const App = () => {
           />
 
           <Route
-            path={routesPath.ORDER}
+            path={'/' + routesPath.ORDER}
             element={
               <Suspense fallback={<Spinner />}>
                 <OrderPage />
               </Suspense>
+            }
+          />
+
+          <Route
+            path={'/' + routesPath.PROFILE}
+            element={
+              <ProtectedRoute isAuth={isAuth}>
+                <Suspense fallback={<Spinner />}>
+                  <UserPage />
+                </Suspense>
+              </ProtectedRoute>
             }
           />
 
@@ -81,11 +89,12 @@ export const App = () => {
               </Suspense>
             }
           />
+
           <Route
-            path={routesPath.PROFILE}
+            path={routesPath.HOME + routesPath.BOOK_DETAIL}
             element={
               <Suspense fallback={<Spinner />}>
-                <UserPage />
+                <BookDetailsPage />
               </Suspense>
             }
           />
@@ -100,15 +109,6 @@ export const App = () => {
               }
             />
           )}
-
-          <Route
-            path={routesPath.HOME + routesPath.BOOK_DETAIL}
-            element={
-              <Suspense fallback={<Spinner />}>
-                <BookDetailsPage />
-              </Suspense>
-            }
-          />
 
           {userRole === userRoles.ADMIN && (
             <Route
@@ -128,6 +128,7 @@ export const App = () => {
       </MainWrapper>
 
       <Footer />
+      <OrderBasket />
     </PageWrapper>
   );
 };

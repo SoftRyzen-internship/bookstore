@@ -1,6 +1,8 @@
 import { useMemo, useRef, useState } from 'react';
 import { ICONS } from 'assets/icons';
 import { HeaderButton } from './HeaderButton';
+import { toggleCart } from 'redux/slice/slice-cart';
+import { useDispatch, useSelector } from 'react-redux';
 import s from './HeaderButtonList.module.scss';
 import { useOutsideClick } from 'hooks/useOutsideClick';
 
@@ -9,8 +11,8 @@ export const HeaderButtonList = () => {
   const [popup, setPopup] = useState(false);
   useOutsideClick(ref, setPopup);
 
-  const handleClickFavorite = () => {};
-  const handleClickCart = () => {};
+  const dispatch = useDispatch();
+  const orderItems = useSelector(state => state.cart.items);
 
   const buttonList = useMemo(
     () => [
@@ -27,16 +29,21 @@ export const HeaderButtonList = () => {
         id: 'favorite',
         icon: <ICONS.FAVORITE />,
         // indicatorNumber: 3,
-        onClick: handleClickFavorite,
+        onClick: () => {},
       },
       {
         id: 'cart',
         icon: <ICONS.CART />,
-        // indicatorNumber: 1,
-        onClick: handleClickCart,
+        indicatorNumber: orderItems.reduce(
+          (acc, item) => acc + item.quality,
+          0
+        ),
+        onClick: () => {
+          dispatch(toggleCart());
+        },
       },
     ],
-    [popup]
+    [dispatch, orderItems, popup]
   );
 
   return (

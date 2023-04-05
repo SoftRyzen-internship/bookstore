@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
+import { useDispatch, useSelector } from 'react-redux';
 import * as selectors from 'redux/selectors';
-import { useSelector } from 'react-redux';
+import { logoutUser } from 'redux/operations/operations-user';
 import { userRoles } from 'constants/userRoles';
 
 import s from './HeaderButton.module.scss';
@@ -15,6 +16,9 @@ export const HeaderButton = ({
   indicatorNumber,
 }) => {
   const userRole = useSelector(selectors.getUserRole);
+  const isAuth = useSelector(selectors.getIsAuth);
+
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   return (
     <div ref={buttonRef} className={s.container}>
@@ -27,16 +31,42 @@ export const HeaderButton = ({
       {popup && (
         <div className={s.popup}>
           <ul className={s.popupList}>
-            <li className={s.userMenuItem}>
-              <button
-                type="button"
-                onClick={() => {
-                  navigate(routesPath.HOME + routesPath.PROFILE);
-                }}
-              >
-                Мої дані
-              </button>
-            </li>
+            {isAuth ? (
+              <li className={s.userMenuItem}>
+                <button
+                  type="button"
+                  onClick={() => {
+                    navigate('/' + routesPath.PROFILE);
+                  }}
+                >
+                  Мої дані
+                </button>
+              </li>
+            ) : (
+              <>
+                <li className={s.userMenuItem}>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      navigate('/' + routesPath.REGISTER);
+                    }}
+                  >
+                    Реєстрація
+                  </button>
+                </li>
+
+                <li className={s.userMenuItem}>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      navigate('/' + routesPath.LOGIN);
+                    }}
+                  >
+                    Логін
+                  </button>
+                </li>
+              </>
+            )}
             {userRole === userRoles.ADMIN && (
               <li className={s.userMenuItem}>
                 <button
@@ -50,7 +80,12 @@ export const HeaderButton = ({
               </li>
             )}
             <li className={s.userMenuItem}>
-              <button type="button" onClick={() => {}}>
+              <button
+                type="button"
+                onClick={() => {
+                  dispatch(logoutUser());
+                }}
+              >
                 Вийти
               </button>
             </li>

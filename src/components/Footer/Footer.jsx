@@ -4,6 +4,7 @@ import { Logo } from 'components/Logo';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Container } from 'components/Containers/Container';
+
 import s from './Footer.module.scss';
 
 export const Footer = () => {

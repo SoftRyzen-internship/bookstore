@@ -21,7 +21,7 @@
 .indicator {
   font-family: var(--font-family);
   font-size: 10px;
-  line-height: 1.2;
+  line-height: 1;
   font-weight: var(--medium);
   position: absolute;
   display: block;
@@ -29,7 +29,7 @@
   right: 0px;
   width: 16px;
   height: 16px;
-  padding: 2px 5px;
+  padding: 2px;
   text-align: center;
   border-radius: 50%;
   background-color: var(--red);
