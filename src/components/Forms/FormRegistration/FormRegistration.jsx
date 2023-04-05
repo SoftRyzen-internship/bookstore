@@ -6,12 +6,20 @@ import { ICONS } from 'assets/icons';
 import s from './FormRegistration.module.scss';
 import 'react-phone-number-input/style.css';
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { registerUser } from 'redux/operations/operations-user';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  loginUser,
+  registerUser,
+  currentUser,
+} from 'redux/operations/operations-user';
+import { Spinner } from 'components/Spinner';
+import * as selectors from 'redux/selectors';
+import { handleError } from 'utils';
 
 export function FormRegistration() {
   const [showPassword, setShowPassword] = useState(false);
   const [isChecked, setIsChecked] = useState(false);
+  const isLoading = useSelector(selectors.isLoading);
   const dispatch = useDispatch();
   const formik = useFormik({
     initialValues: {
@@ -32,7 +40,20 @@ export function FormRegistration() {
           }
           return acc;
         }, {});
-        dispatch(registerUser({ ...formData }));
+        const resp = await dispatch(registerUser({ ...formData }));
+        if (resp.meta.requestStatus === 'fulfilled') {
+          await dispatch(loginUser({ email, password })).then(
+            ({ meta }) => meta.requestStatus === 'fulfilled'
+          );
+          if (resp.meta.requestStatus === 'fulfilled') {
+            await dispatch(currentUser()).then(
+              ({ meta }) => meta.requestStatus === 'fulfilled'
+            );
+          }
+        }
+        if (resp.meta.requestStatus === 'rejected') {
+          setErrors(handleError({ email }));
+        }
       } catch (error) {
         setErrors({ error: error?.response?.data?.message });
       }
@@ -229,6 +250,11 @@ export function FormRegistration() {
             </div>
           </div>
         </form>
+        {isLoading && (
+          <div className={s.spinner}>
+            <Spinner />
+          </div>
+        )}
       </div>
     </>
   );

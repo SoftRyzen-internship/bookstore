@@ -6,11 +6,15 @@ import s from './FormLogin.module.scss';
 import 'react-phone-number-input/style.css';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { loginUser } from 'redux/operations/operations-user';
+import { useDispatch, useSelector } from 'react-redux';
+import { currentUser, loginUser } from 'redux/operations/operations-user';
+import { Spinner } from 'components/Spinner';
+import * as selectors from 'redux/selectors';
+import { handleErrorLogin } from 'utils/handleErrorLogin';
 
 export function FormLogin() {
   const [showPassword, setShowPassword] = useState(false);
+  const isLoading = useSelector(selectors.isLoading);
   const dispatch = useDispatch();
   const formik = useFormik({
     initialValues: {
@@ -27,7 +31,15 @@ export function FormLogin() {
           }
           return acc;
         }, {});
-        dispatch(loginUser({ ...formData }));
+        const resp = await dispatch(loginUser({ ...formData }));
+        if (resp.meta.requestStatus === 'fulfilled') {
+          await dispatch(currentUser()).then(
+            ({ meta }) => meta.requestStatus === 'fulfilled'
+          );
+        }
+        if (resp.meta.requestStatus === 'rejected') {
+          setErrors(handleErrorLogin({ ...formData }));
+        }
       } catch (error) {
         setErrors({ error: error?.response?.data?.message });
       }
@@ -122,6 +134,11 @@ export function FormLogin() {
             </button>
           </div>
         </form>
+        {isLoading && (
+          <div className={s.spinner}>
+            <Spinner />
+          </div>
+        )}
       </div>
     </>
   );

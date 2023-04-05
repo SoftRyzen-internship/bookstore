@@ -3,6 +3,7 @@
   padding: 16px 24px 24px 24px;
   min-width: 800px;
   height: auto;
+  position: relative;
 }
 .buttonSubmit {
   width: 100%;
@@ -104,4 +105,10 @@
 }
 .iconCheckbox {
   cursor: pointer;
+}
+.spinner {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }

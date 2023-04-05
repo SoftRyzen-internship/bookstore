@@ -3,6 +3,7 @@
   padding: 16px 24px 24px 24px;
   min-width: 800px;
   height: auto;
+  position: relative;
 }
 
 .buttonSubmit {
@@ -120,4 +121,10 @@
     left: 30px;
     bottom: 2px;
   }
+}
+.spinner {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }

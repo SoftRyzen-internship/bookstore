@@ -1,3 +1,4 @@
+import { NavLink, useNavigate } from 'react-router-dom';
 import { Breadcrumbs } from 'components/Breadcrumbs';
 import { Container } from 'components/Containers/Container';
 import { FlexWrapper } from 'components/Containers/FlexWrapper';
@@ -5,10 +6,22 @@ import s from './UserAuthPageComponent.module.scss';
 
 import { FormRegistration } from 'components/Forms/FormRegistration';
 import { FormLogin } from 'components/Forms/FormLogin';
-import { NavLink } from 'react-router-dom';
 import { OrderForm } from 'components/Forms';
+import * as selectors from 'redux/selectors';
+import { useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { routesPath } from '../../router/routesPath';
 
 export const UserAuthPageComponent = ({ isRegister }) => {
+  const isAuth = useSelector(selectors.getIsAuth);
+
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (isAuth) {
+      navigate('/' + routesPath.ORDER);
+    }
+  }, [isAuth, navigate]);
+
   return (
     <>
       <Container>
@@ -47,7 +60,15 @@ export const UserAuthPageComponent = ({ isRegister }) => {
                 </div>
               </div>
             </div>
-            {isRegister ? <FormRegistration /> : <FormLogin />}
+            {isRegister ? (
+              !isAuth ? (
+                <FormRegistration />
+              ) : (
+                <p>Я Віталій Валерійович</p>
+              )
+            ) : (
+              <FormLogin />
+            )}
             <OrderForm />
           </div>
         </FlexWrapper>

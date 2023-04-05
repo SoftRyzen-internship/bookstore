@@ -10,7 +10,7 @@ export const HeaderButtonList = () => {
   const buttonList = [
     {
       id: 'user',
-      icon: <ICONS.USER />,
+      icon: <ICONS.USER className={s.userFill} />,
       onClick: handleClickUser,
     },
     {

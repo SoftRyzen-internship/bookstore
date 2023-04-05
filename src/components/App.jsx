@@ -6,8 +6,10 @@ import { PageWrapper } from './Containers/PageWrapper/PageWrapper';
 import { Spinner } from './Spinner';
 import { routesPath } from 'router/routesPath';
 import { MainWrapper } from './Containers/MainWrapper';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { setUserRole } from 'redux/slice/slice-user';
+import * as selectors from 'redux/selectors';
+import { ProtectedRoute } from './ProtectedRoute';
 
 const HomePage = lazy(() =>
   import('../pages/HomePage' /* webpackChunkName: "home-page" */)
@@ -33,6 +35,7 @@ const OrderPage = lazy(() =>
 );
 
 export const App = () => {
+  const isAuth = useSelector(selectors.getIsAuth);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -61,13 +64,14 @@ export const App = () => {
               </Suspense>
             }
           />
-
           <Route
             path={routesPath.PROFILE}
             element={
-              <Suspense fallback={<Spinner />}>
-                <UserPage />
-              </Suspense>
+              <ProtectedRoute isAuth={isAuth}>
+                <Suspense fallback={<Spinner />}>
+                  <UserPage />
+                </Suspense>
+              </ProtectedRoute>
             }
           />
 
