@@ -1,0 +1,28 @@
+.container {
+  display: flex;
+  gap: 28px;
+}
+.item {
+  position: relative;
+  &:not(:first-child)::before {
+    content: '';
+    position: absolute;
+    top: 8px;
+    left: -16px;
+    width: 8px;
+    height: 8px;
+    border-bottom: 2px solid var(--primary-txt-cl);
+    border-left: 2px solid var(--primary-txt-cl);
+    transform: rotate(45deg);
+  }
+  &:last-child {
+    & .link {
+      pointer-events: none;
+    }
+  }
+}
+.link {
+  font-weight: var(--medium);
+  font-size: var(--text-sm);
+  line-height: calc(17 / 14);
+}

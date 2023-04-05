@@ -1,17 +1,18 @@
+import { useEffect } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import * as selectors from 'redux/selectors';
+import { routesPath } from 'router/routesPath';
+import { pages } from 'constants/pages';
 import { Breadcrumbs } from 'components/Breadcrumbs';
 import { Container } from 'components/Containers/Container';
 import { FlexWrapper } from 'components/Containers/FlexWrapper';
-import s from './UserAuthPageComponent.module.scss';
-
 import { FormRegistration } from 'components/Forms/FormRegistration';
 import { FormLogin } from 'components/Forms/FormLogin';
 import { OrderForm } from 'components/Forms';
-import * as selectors from 'redux/selectors';
-import { useSelector } from 'react-redux';
-import { useEffect } from 'react';
-import { routesPath } from '../../router/routesPath';
 import { TotalPricePageComponent } from 'components/TotalPricePageComponent';
+
+import s from './UserAuthPageComponent.module.scss';
 
 export const UserAuthPageComponent = ({ isRegister }) => {
   const isAuth = useSelector(selectors.getIsAuth);
@@ -28,7 +29,13 @@ export const UserAuthPageComponent = ({ isRegister }) => {
       <Container>
         <FlexWrapper>
           <div className={s.wrapperPageForm}>
-            <Breadcrumbs />
+            <Breadcrumbs
+              breadcrumbs={
+                isRegister
+                  ? [pages.HOME, pages.REGISTER]
+                  : [pages.HOME, pages.LOGIN]
+              }
+            />
             <h2 className={s.title}>Оформлення замовлення</h2>
             <div className={s.blockWrapper}>
               <div className={s.titleWrapper}>
