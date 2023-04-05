@@ -1,5 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit';
-// import * as extraReducersBooks from 'redux/reducers/reducers-books';
 import * as operations from 'redux/operations/operations-books';
 
 const initialState = {
@@ -22,15 +21,6 @@ const booksSlice = createSlice({
         state.count = payload.count;
         state.total = payload.total;
       })
-      // .addCase(operations.addBook.fulfilled, (state, { payload }) => {
-      //   state.isLoading = false;
-      // })
-      // .addCase(operations.updateBook.fulfilled, (state, { payload }) => {
-      //   state.isLoading = false;
-      // })
-      // .addCase(operations.deleteBook.fulfilled, (state, { payload }) => {
-      //   state.isLoading = false;
-      // })
       .addMatcher(
         action =>
           !action.type.startsWith('books/getBooks') &&
@@ -57,13 +47,6 @@ const booksSlice = createSlice({
         }
       );
   },
-
-  // {
-  //   ...extraReducersBooks.getBooks,
-  //   ...extraReducersBooks.addBook,
-  //   ...extraReducersBooks.updateBook,
-  //   ...extraReducersBooks.deleteBook,
-  // },
 });
 
 export default booksSlice.reducer;

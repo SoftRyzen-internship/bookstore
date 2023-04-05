@@ -42,14 +42,17 @@ export const BookAddForm = () => {
           big_image: values.big_image,
           media_gallery_image: values.media_gallery_image,
           price: Number(values.price - values.discount),
+          discount: values.discount,
         };
         setIsLoading(true);
-        await addBook(book);
+        const response = await addBook(book);
         setIsLoading(false);
-        actions.setSubmitting(false);
-        actions.resetForm({
-          values: initialValues,
-        });
+        if (response.status === 201) {
+          actions.setSubmitting(false);
+          actions.resetForm({
+            values: initialValues,
+          });
+        }
       } catch (error) {
         setIsLoading(false);
         setError(error.message);
@@ -103,6 +106,16 @@ export const BookAddForm = () => {
 
     setFieldValue('media_gallery_image', updatedGallery);
     setFieldValue('gallery_image', '');
+  };
+
+  const getTotalPrice = (priceValue, discountValue) => {
+    const price = Number(priceValue);
+    const discount = Number(discountValue);
+    if (!price || discount > 100 || discount < 0) {
+      return null;
+    }
+    const totalPrice = (price - (discount * price) / 100).toFixed(2);
+    return totalPrice + ' грн';
   };
 
   return isLoading ? (
@@ -168,7 +181,10 @@ export const BookAddForm = () => {
                       value: 'paper',
                     },
                   ]}
-                  placeHolder=""
+                  initialValue={{
+                    label: 'Паперова',
+                    value: 'paper',
+                  }}
                   onClick={() => setFieldTouched('type', true)}
                   onChange={({ value }) => {
                     setFieldValue('type', value);
@@ -192,6 +208,10 @@ export const BookAddForm = () => {
                     (errors.book_year ? s.inputError : s.inputValid)
                   }
                   options={yearList}
+                  initialValue={{
+                    label: values.book_year.toString(),
+                    value: values.book_year.toString(),
+                  }}
                   isSearchable
                   onClick={() => setFieldTouched('book_year', true)}
                   onChange={({ value }) => {
@@ -407,9 +427,7 @@ export const BookAddForm = () => {
                 <label className={s.smallInputLabel}>
                   Кінцева ціна
                   <p className={s.price}>
-                    {Number(values.price) -
-                      (Number(values.discount) ? Number(values.discount) : 0) +
-                      ' грн'}
+                    {getTotalPrice(values.price, values.discount)}
                   </p>
                 </label>
               ) : (

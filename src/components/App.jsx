@@ -1,14 +1,16 @@
-import { lazy, Suspense } from 'react';
+import { lazy, Suspense, useEffect } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import * as selectors from 'redux/selectors';
-import { userRoles } from 'constants/userRoles';
 import { Header } from './Header';
 import { Footer } from './Footer';
 import { PageWrapper } from './Containers/PageWrapper/PageWrapper';
 import { Spinner } from './Spinner';
 import { routesPath } from 'router/routesPath';
 import { MainWrapper } from './Containers/MainWrapper';
+import { useDispatch } from 'react-redux';
+import { setUserRole } from 'redux/slice/slice-user';
+import { userRoles } from 'constants/userRoles';
 import { ProtectedRoute } from './ProtectedRoute';
 import { OrderBasket } from './OrderBasket/OrderBasket';
 
@@ -36,8 +38,13 @@ const OrderPage = lazy(() =>
 );
 
 export const App = () => {
+  const dispatch = useDispatch();
   const isAuth = useSelector(selectors.getIsAuth);
   const userRole = useSelector(selectors.getUserRole);
+
+  useEffect(() => {
+    if (!isAuth) dispatch(setUserRole(userRoles.BUYER));
+  }, [dispatch, isAuth]);
 
   return (
     <PageWrapper>

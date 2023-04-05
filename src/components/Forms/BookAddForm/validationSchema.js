@@ -68,8 +68,8 @@ export const validationSchema = Yup.object({
     ),
   discount: Yup.string().test(
     'discount',
-    'Число від 0 до 5000',
-    val => !isNaN(Number(val)) && Number(val) >= 0 && Number(val) <= 5000
+    'Число від 0 до 100',
+    val => !isNaN(Number(val)) && Number(val) >= 0 && Number(val) <= 100
   ),
   gallery_image: Yup.string()
     .matches(

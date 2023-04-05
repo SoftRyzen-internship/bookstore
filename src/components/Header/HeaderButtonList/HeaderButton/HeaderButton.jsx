@@ -48,21 +48,20 @@ export const HeaderButton = ({
                   <button
                     type="button"
                     onClick={() => {
-                      navigate('/' + routesPath.REGISTER);
-                    }}
-                  >
-                    Реєстрація
-                  </button>
-                </li>
-
-                <li className={s.userMenuItem}>
-                  <button
-                    type="button"
-                    onClick={() => {
                       navigate('/' + routesPath.LOGIN);
                     }}
                   >
                     Логін
+                  </button>
+                </li>
+                <li className={s.userMenuItem}>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      navigate('/' + routesPath.REGISTER);
+                    }}
+                  >
+                    Реєстрація
                   </button>
                 </li>
               </>
@@ -79,16 +78,18 @@ export const HeaderButton = ({
                 </button>
               </li>
             )}
-            <li className={s.userMenuItem}>
-              <button
-                type="button"
-                onClick={() => {
-                  dispatch(logoutUser());
-                }}
-              >
-                Вийти
-              </button>
-            </li>
+            {isAuth && (
+              <li className={s.userMenuItem}>
+                <button
+                  type="button"
+                  onClick={() => {
+                    dispatch(logoutUser());
+                  }}
+                >
+                  Вийти
+                </button>
+              </li>
+            )}
           </ul>
         </div>
       )}
