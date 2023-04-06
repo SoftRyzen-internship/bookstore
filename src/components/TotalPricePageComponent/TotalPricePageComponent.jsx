@@ -1,4 +1,8 @@
+import { useSelector } from 'react-redux';
 import s from './TotalPricePageComponent.module.scss';
+import * as selectors from 'redux/selectors';
+import { handleErrorGoogle } from 'utils/handleError';
+import { Spinner } from 'components/Spinner';
 
 export const TotalPricePageComponent = ({
   handleSubmit,
@@ -6,8 +10,14 @@ export const TotalPricePageComponent = ({
   orderTotal,
   totalDiscount,
   shippingCost,
-  successMessage,
 }) => {
+  const isAuth = useSelector(selectors.getIsAuth);
+  const cartError = useSelector(selectors.getCartError);
+  const cartSend = useSelector(selectors.getCartSend);
+  const isError = useSelector(selectors.cartIsError);
+  const isLoading = useSelector(selectors.cartIsLoading);
+  const msgError = handleErrorGoogle(cartError);
+
   return (
     <>
       <div className={s.wrapperPrice}>
@@ -38,17 +48,37 @@ export const TotalPricePageComponent = ({
             </div>
           </li>
         </ul>
-        {successMessage && (
-          <p className={s.success}>Замовлення відправлено дякуємо</p>
-        )}
-        {!successMessage && (
-          <button
-            className={s.buttonPrice}
-            type="button"
-            onClick={handleSubmit}
-          >
-            Підтверджую замовлення
-          </button>
+        <button
+          className={`${
+            isError || (!isAuth && !cartSend)
+              ? s.buttonPriceError
+              : s.buttonPrice
+          }`}
+          type="button"
+          onClick={handleSubmit}
+          disabled={isError || (!isAuth && !cartSend)}
+        >
+          Підтверджую замовлення
+        </button>
+
+        <div>
+          <small className={s.error}>{msgError}</small>
+        </div>
+
+        {cartSend ? (
+          <small className={s.success}>
+            Ваше замовлення успішно відправлено
+          </small>
+        ) : null}
+        {!isAuth && !cartSend ? (
+          <small className={s.success}>
+            Для відправки замовлення потрібно увійти або зареєструватися
+          </small>
+        ) : null}
+        {isLoading && (
+          <div className={s.spinner}>
+            <Spinner />
+          </div>
         )}
       </div>
     </>
