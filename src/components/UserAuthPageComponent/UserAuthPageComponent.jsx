@@ -76,8 +76,8 @@ export const UserAuthPageComponent = ({ isRegister }) => {
               <Breadcrumbs
                 breadcrumbs={
                   isRegister
-                    ? [pages.HOME, pages.REGISTER]
-                    : [pages.HOME, pages.LOGIN]
+                    ? [pages.HOME, pages.LOGIN]
+                    : [pages.HOME, pages.REGISTER]
                 }
               />
               <h2 className={s.title}>Оформлення замовлення</h2>
