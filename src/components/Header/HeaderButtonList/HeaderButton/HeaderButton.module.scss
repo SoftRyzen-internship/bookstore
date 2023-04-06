@@ -24,7 +24,9 @@
   line-height: 1;
   font-weight: var(--medium);
   position: absolute;
-  display: block;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   top: 0px;
   right: 0px;
   width: 16px;

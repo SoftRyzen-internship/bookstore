@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { ClientInfoPageComponent } from 'components/ClientInfoPageComponent';
 import { useEffect } from 'react';
 import { currentUser } from 'redux/operations/operations-user';
+import { pages } from 'constants/pages';
 
 export const OrderPageComponent = () => {
   const isAuth = useSelector(selectors.getIsAuth);
@@ -28,7 +29,7 @@ export const OrderPageComponent = () => {
       <Container>
         <FlexWrapper>
           <div className={s.wrapperPageForm}>
-            <Breadcrumbs />
+            <Breadcrumbs breadcrumbs={[pages.HOME, pages.ORDER]} />
             <h2 className={s.title}>Оформлення замовлення</h2>
             <div className={s.blockWrapper}>
               <div className={s.titleWrapper}>

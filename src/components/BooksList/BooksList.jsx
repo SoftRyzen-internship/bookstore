@@ -1,59 +1,67 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import ReactPaginate from 'react-paginate';
-import { useFetch } from 'hooks/useFetch';
-import { getBooks } from 'services/books-api';
+
+import { useDispatch, useSelector } from 'react-redux';
+import * as operations from 'redux/operations/operations-books';
+import * as selectors from 'redux/selectors';
+
 import { Spinner } from 'components/Spinner';
 import { BookCard } from './BookCard';
 
 import s from './BooksList.module.scss';
 
 export const BooksList = () => {
-  const [count, setCount] = useState(null);
+  const books = useSelector(selectors.getBooks);
+  const isLoading = useSelector(selectors.getBooksIsLoading);
+  const countOnPage = useSelector(selectors.getCountBooksOnPage);
+  const totalBooks = useSelector(selectors.getTotalCountBooks);
+
+  const dispatch = useDispatch();
+
+  const [count, setCount] = useState(countOnPage);
   let [searchParams, setSearchParams] = useSearchParams();
-  let page = searchParams.get('page') || 1;
+  let page = searchParams.get('page') || '1';
   const booksPerPage = 6;
+  const changed = useRef(false);
+
+  useEffect(() => {
+    if (!changed.current && count === 0 && page > 1) {
+      setSearchParams({ page: page - 1 });
+      changed.current = true;
+    } else {
+      dispatch(operations.getBooks(page));
+      setCount(countOnPage);
+      changed.current = false;
+    }
+  }, [dispatch, count, page, setSearchParams, totalBooks, countOnPage]);
 
   const handlePageChange = ({ selected }) => {
     setSearchParams({ page: selected + 1 });
   };
 
-  const handleDelete = () => {
-    setCount(prev => {
-      if (prev === 1) {
-        setSearchParams({ page: page - 1 });
-        setCount(null);
-      } else {
-        setCount(prev - 1);
-      }
-    });
-  };
-
-  const { data, loading } = useFetch(() => getBooks(page), [page, count]);
-
-  useEffect(() => {
-    if (data) {
-      setCount(data.count);
-    }
-  }, [data]);
   return (
     <div className={s.container}>
-      {loading && <Spinner />}
-      {!loading && data && (
+      {isLoading && <Spinner />}
+      {!isLoading && books && (
         <ul className={s.list}>
-          {data.books.map(book => {
+          {books.map(book => {
             return (
               <li key={book._id}>
-                <BookCard count={count} book={book} onDelete={handleDelete} />
+                <BookCard
+                  count={countOnPage}
+                  book={book}
+                  onDelete={() => setCount(prev => prev - 1)}
+                />
               </li>
             );
           })}
         </ul>
       )}
-      {!loading && data && (
+      {!isLoading && totalBooks && (
         <ReactPaginate
           initialPage={page - 1}
-          pageCount={Math.ceil(data.total / booksPerPage)}
+          pageCount={Math.ceil(totalBooks / booksPerPage)}
           nextLabel=">"
           previousLabel="<"
           marginPagesDisplayed={1}

@@ -28,11 +28,13 @@ export const OrderBasket = () => {
   };
 
   const orderPriceAmount = () =>
-    orderItems?.reduce(
-      (acc, { quality, price, discount }) =>
-        acc + quality * (price - (price * discount) / 100),
-      0
-    ) + ' грн.';
+    orderItems
+      ?.reduce(
+        (acc, { quality, price, discount }) =>
+          acc + quality * (price - (price * discount) / 100),
+        0
+      )
+      .toFixed(2) + ' грн.';
 
   const orderItemsAmount = () =>
     orderItems?.reduce((acc, { quality }) => acc + quality, 0) + ' шт.';

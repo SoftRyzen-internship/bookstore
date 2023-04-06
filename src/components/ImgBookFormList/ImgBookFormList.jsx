@@ -42,7 +42,7 @@ export const ImgBookFormList = memo(({ list, onDelete }) => {
       </ul>
       {modalImg && (
         <Modal
-          isOpen={modalImg}
+          isOpen={!!modalImg}
           onClose={() => {
             setModalImg(null);
           }}

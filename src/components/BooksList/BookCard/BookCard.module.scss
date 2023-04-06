@@ -6,21 +6,8 @@
   background-color: var(--components-cl);
   transition: var(--transition);
   &:hover {
-    border-bottom-left-radius: 0;
-    border-bottom-right-radius: 0;
-    box-shadow: var(--shadow-primary);
-    & .addButtonContainer {
+    .hoverContainer {
       display: block;
-      box-shadow: var(--shadow-primary);
-    }
-    & .editButtonContainer {
-      display: flex;
-      box-shadow: var(--shadow-primary);
-    }
-    & .title {
-      white-space: normal;
-      text-overflow: clip;
-      overflow: visible;
     }
   }
 }
@@ -60,6 +47,16 @@
   margin-bottom: 4px;
   color: var(--primary-txt-cl);
 }
+
+.hoverTitle {
+  font-size: var(--text-xl);
+  font-weight: var(--semibold);
+  line-height: 1.3;
+  width: 248px;
+  margin-bottom: 4px;
+  color: var(--primary-txt-cl);
+}
+
 .author {
   font-size: var(--text-lg);
   font-weight: var(--medium);
@@ -89,21 +86,22 @@
   color: var(--gray);
 }
 
-.addButtonContainer {
+.hoverContainer {
   display: none;
   position: absolute;
-  left: 0;
-  bottom: -64px;
-  width: 100%;
-  height: 64px;
-  padding-left: 16px;
-  padding-right: 16px;
-  padding-bottom: 16px;
   z-index: 1;
+  top: 0;
+  left: 0;
+  width: 280px;
+  padding: 16px 20px 20px 16px;
   border-radius: 5px;
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
   background-color: var(--components-cl);
+  transition: var(--transition);
+  box-shadow: var(--shadow-primary);
+}
+
+.addButtonContainer {
+  margin-top: 20px;
 }
 .addButton {
   font-weight: var(--semibold);
@@ -130,21 +128,9 @@
 }
 
 .editButtonContainer {
-  display: none;
-  position: absolute;
-  left: 0;
-  bottom: -64px;
+  display: flex;
   justify-content: space-between;
-  width: 100%;
-  height: 64px;
-  padding-left: 16px;
-  padding-right: 16px;
-  padding-bottom: 16px;
-  z-index: 1;
-  border-radius: 5px;
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
-  background-color: var(--components-cl);
+  margin-top: 20px;
 }
 
 .editButton {

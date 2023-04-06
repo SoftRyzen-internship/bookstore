@@ -51,9 +51,12 @@ export const BookEditForm = () => {
           big_image: values.big_image,
           media_gallery_image: values.media_gallery_image,
           price: Number(values.price - values.discount),
+          discount: values.discount,
         };
-        await updateBook(id, book);
-        backPage ? navigate(backPage) : navigate(routesPath.HOME);
+        const response = await updateBook(id, book);
+        if (response.status === 200) {
+          backPage ? navigate(backPage) : navigate(routesPath.HOME);
+        }
       } catch (error) {
         setError(error.message);
       }
@@ -129,6 +132,16 @@ export const BookEditForm = () => {
 
     setFieldValue('media_gallery_image', updatedGallery);
     setFieldValue('gallery_image', '');
+  };
+
+  const getTotalPrice = (priceValue, discountValue) => {
+    const price = Number(priceValue);
+    const discount = Number(discountValue);
+    if (!price || discount > 100 || discount < 0) {
+      return null;
+    }
+    const totalPrice = (price - (discount * price) / 100).toFixed(2);
+    return totalPrice + ' грн';
   };
 
   return loading ? (
@@ -410,7 +423,7 @@ export const BookEditForm = () => {
             <li>
               <label className={s.smallInputLabel}>
                 <p>
-                  Вкажіть знижку, в грн
+                  Вкажіть знижку, %
                   <span style={{ color: 'var(--red)' }}>*</span>
                 </p>
                 <input
@@ -435,9 +448,7 @@ export const BookEditForm = () => {
                 <label className={s.smallInputLabel}>
                   Кінцева ціна
                   <p className={s.price}>
-                    {Number(values.price) -
-                      (Number(values.discount) ? Number(values.discount) : 0) +
-                      ' грн'}
+                    {getTotalPrice(values.price, values.discount)}
                   </p>
                 </label>
               ) : (
