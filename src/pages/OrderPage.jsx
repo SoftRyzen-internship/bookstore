@@ -1,4 +1,4 @@
-import { OrderPageComponent } from 'components/OrderPageComponent';
+import { OrderPageComponent } from 'components/OrderPageComponent/OrderPageComponent';
 
 const OrderPage = () => {
   return <OrderPageComponent />;
