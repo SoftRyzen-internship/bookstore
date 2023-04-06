@@ -1,7 +1,7 @@
 import { CommentsField } from './CommentsField/CommentsField';
 import { DeliveryField } from './DeliveryField/DeliveryField';
 import { OrderField } from './OrderField/OrderField';
-import { PaymentField } from './PaymentField';
+import { PaymentField } from './PaymentField/PaymentField';
 
 import s from './OrderForm.module.scss';
 
