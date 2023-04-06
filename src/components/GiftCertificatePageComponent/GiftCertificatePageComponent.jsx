@@ -1,13 +1,6 @@
-import s from './TotalPricePageComponent.module.scss';
+import s from './GiftCertificatePageComponent.module.scss';
 
-export const TotalPricePageComponent = ({
-  handleSubmit,
-  total,
-  orderTotal,
-  totalDiscount,
-  shippingCost,
-  successMessage,
-}) => {
+export const GiftCertificatePageComponent = ({ isCompleteDelivery }) => {
   return (
     <>
       <div className={s.wrapperPrice}>
@@ -16,40 +9,29 @@ export const TotalPricePageComponent = ({
           <li className={s.itemPrice}>
             <div className={s.textItemGroup}>
               <span className={s.textItem}>Сума замовлення</span>
-              <span className={s.textItem}>{total} грн</span>
+              <span className={s.textItem}>390,00 грн</span>
             </div>
           </li>
           <li className={s.itemPrice}>
             <div className={s.textItemGroup}>
               <span className={s.textItem}>Знижка</span>
-              <span className={s.textItem}>{totalDiscount} %</span>
+              <span className={s.textItem}>58,50 грн</span>
             </div>
           </li>
           <li className={s.itemPrice}>
             <div className={s.textItemGroup}>
               <span className={s.textItem}>Вартість доставки</span>
-              <span className={s.textItem}>{shippingCost} грн</span>
+              <span className={s.textItem}>65,00 грн</span>
             </div>
           </li>
           <li className={s.itemPrice}>
             <div className={s.textItemGroup}>
               <span className={s.textItem}>Сума разом</span>
-              <span className={s.textItem}>{orderTotal} грн</span>
+              <span className={s.textItem}>396,50 грн</span>
             </div>
           </li>
         </ul>
-        {successMessage && (
-          <p className={s.success}>Замовлення відправлено дякуємо</p>
-        )}
-        {!successMessage && (
-          <button
-            className={s.buttonPrice}
-            type="button"
-            onClick={handleSubmit}
-          >
-            Підтверджую замовлення
-          </button>
-        )}
+        <button className={s.buttonPrice}>Підтверджую замовлення</button>
       </div>
     </>
   );

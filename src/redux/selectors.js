@@ -4,8 +4,8 @@ export const getTotalCountBooks = state => state.books.total;
 export const getBooksIsLoading = state => state.books.isLoading;
 
 export const getUserRole = state => state.auth.user.role;
-
-export const getCartItems = state => state.cart.items;
+// CART
+export const getCartItems = state => state?.cart?.items;
 // AUTH
 export const getIsAuth = state => state.auth.isAuth;
 export const isLoading = state => state.auth.isLoading;
