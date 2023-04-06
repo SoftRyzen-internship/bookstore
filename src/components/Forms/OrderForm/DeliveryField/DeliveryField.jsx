@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { DeliveryOptions } from '../DeliveryOptions/DeliveryOptions';
 
 import s from './DeliveryField.module.scss';
 
@@ -35,60 +36,30 @@ export const DeliveryField = () => {
             <span className={s.price}>65,00 грн</span>
           </div>
           <div className={s.deliveryOptions}>
-            <input
-              className={s.input}
-              type="text"
-              placeholder="Введіть пошту"
-            />
-            <select
-              className={`${s.departmentSelect} ${s.input}`}
-              name="select"
-            >
-              <option value="" disabled defaultValue>
-                Виберіть відділення
-              </option>
-              <option value="value1">1</option>
-              <option value="value2">2</option>
-              <option value="value3">3</option>
-            </select>
+            <DeliveryOptions deliveryType={selectedDeliveryType} />
           </div>
         </li>
         <li
           className={`${s.deliveryItem} ${
-            selectedDeliveryType === 'novaPoshta' && s.active
+            selectedDeliveryType === 'novaPoshtaMailBox' && s.active
           }`}
         >
           <div className={s.radioItem}>
             <label className={s.label}>
               <input
                 type="radio"
-                id="novaPoshta"
+                id="novaPoshtaMailBox"
                 name="delivery"
-                value="novaPoshta"
+                value="novaPoshtaMailBox"
                 onChange={handleChangeDeliveryType}
-                checked={selectedDeliveryType === 'novaPoshta'}
+                checked={selectedDeliveryType === 'novaPoshtaMailBox'}
               />
               До поштомату нової почти
             </label>
             <span className={s.price}>65,00 грн</span>
           </div>
           <div className={s.deliveryOptions}>
-            <input
-              className={s.input}
-              type="text"
-              placeholder="Введіть пошту"
-            />
-            <select
-              className={`${s.departmentSelect} ${s.input}`}
-              name="select"
-            >
-              <option value="" disabled defaultValue>
-                Виберіть відділення
-              </option>
-              <option value="value1">1</option>
-              <option value="value2">2</option>
-              <option value="value3">3</option>
-            </select>
+            <DeliveryOptions deliveryType={selectedDeliveryType} />
           </div>
         </li>
         <li
@@ -111,22 +82,7 @@ export const DeliveryField = () => {
             <span className={s.price}>35,00 грн</span>
           </div>
           <div className={s.deliveryOptions}>
-            <input
-              className={s.input}
-              type="text"
-              placeholder="Введіть пошту"
-            />
-            <select
-              className={`${s.departmentSelect} ${s.input}`}
-              name="select"
-            >
-              <option value="" disabled defaultValue>
-                Виберіть відділення
-              </option>
-              <option value="value1">1</option>
-              <option value="value2">2</option>
-              <option value="value3">3</option>
-            </select>
+            <DeliveryOptions deliveryType={selectedDeliveryType} />
           </div>
         </li>
       </ul>

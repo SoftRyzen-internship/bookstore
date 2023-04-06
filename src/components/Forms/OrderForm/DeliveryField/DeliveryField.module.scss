@@ -46,31 +46,14 @@
 }
 
 .deliveryOptions {
+  position: relative;
+
   display: none;
   margin-top: 16px;
 
   justify-content: space-between;
+  flex-wrap: wrap;
   gap: 32px;
-}
-
-.input {
-  padding: 12px 16px;
-
-  width: 100%;
-
-  font-size: var(--text-md);
-
-  background-color: var(--primary-bg-cl);
-  border: 1px solid var(--gray-secondary);
-  border-radius: 5px;
-
-  &:focus {
-    outline: 1px solid var(--accent-cl);
-  }
-
-  &::placeholder {
-    color: var(--gray-secondary);
-  }
 }
 
 .active {
