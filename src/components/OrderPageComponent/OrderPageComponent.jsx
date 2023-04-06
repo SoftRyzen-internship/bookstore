@@ -8,15 +8,14 @@ import { OrderForm } from 'components/Forms';
 import * as selectors from 'redux/selectors';
 import { useDispatch, useSelector } from 'react-redux';
 import { ClientInfoPageComponent } from 'components/ClientInfoPageComponent';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import { currentUser } from 'redux/operations/operations-user';
 import { pages } from 'constants/pages';
 import { TotalPricePageComponent } from 'components/TotalPricePageComponent';
 import { calculateTotal, shippingCost, totalDiscount } from 'utils';
-import { submitOrder } from 'services/submitOrder';
+import { orderUser } from 'redux/operations/operations-cart';
 
 export const OrderPageComponent = () => {
-  const [successMessage, setSuccessMessage] = useState(false);
   const isAuth = useSelector(selectors.getIsAuth);
   const getOrderItems = useSelector(selectors.getCartItems);
   const name = useSelector(selectors.getUserFirstName);
@@ -24,6 +23,7 @@ export const OrderPageComponent = () => {
   const fathersName = useSelector(selectors.getUserFathersName);
   const phone = useSelector(selectors.getUserPhone);
   const email = useSelector(selectors.getUserEmail);
+
   const total = calculateTotal(getOrderItems);
   const orderTotal = (
     (total * (100 - totalDiscount)) / 100 +
@@ -64,12 +64,9 @@ export const OrderPageComponent = () => {
 
     try {
       if (isAuth) {
-        await submitOrder(formData);
-        setSuccessMessage(true);
+        dispatch(orderUser(formData)).unwrap();
       }
-    } catch (error) {
-      console.error(error);
-    }
+    } catch (error) {}
   };
 
   return (
@@ -135,7 +132,6 @@ export const OrderPageComponent = () => {
                 orderTotal={orderTotal}
                 totalDiscount={totalDiscount}
                 shippingCost={shippingCost}
-                successMessage={successMessage}
               />
             </div>
           </div>

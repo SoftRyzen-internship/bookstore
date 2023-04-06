@@ -1,10 +1,11 @@
 .wrapperPrice {
   width: 384px;
-  height: 293px;
+  height: 350px;
   padding: 18px 24px 16px 24px;
 
   background-color: var(--primary-bg-cl);
   border-radius: 8px;
+  position: relative;
 }
 
 .title {
@@ -51,8 +52,28 @@
     background-color: var(--accent-cl);
   }
 }
-.success {
+.buttonPriceError {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  border-radius: 5px;
+  width: 100%;
+  border: 1px solid var(--accent-cl);
   font-size: var(--text-md);
   font-weight: var(--medium);
   color: var(--accent-cl);
+}
+.success {
+  font-size: var(--text-md);
+  font-weight: var(--medium);
+  color: var(--secondary-txt-cl);
+}
+.error {
+  font-weight: var(--medium);
+  color: var(--red);
+}
+.spinner {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }

@@ -6,6 +6,10 @@ export const getBooksIsLoading = state => state.books.isLoading;
 export const getUserRole = state => state.auth.user.role;
 // CART
 export const getCartItems = state => state?.cart?.items;
+export const getCartError = state => state?.cart?.error?.code;
+export const getCartSend = state => state?.cart?.send;
+export const cartIsLoading = state => state?.cart?.isLoading;
+export const cartIsError = state => state?.cart?.isError;
 // AUTH
 export const getIsAuth = state => state.auth.isAuth;
 export const isLoading = state => state.auth.isLoading;

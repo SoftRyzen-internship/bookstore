@@ -27,3 +27,22 @@ export const handleErrorPass = error => {
 
   return { error };
 };
+
+export const handleErrorGoogle = error => {
+  const message = error;
+
+  let msg = '';
+  switch (message) {
+    case 'ERR_NETWORK':
+      msg = `Помилка сети ERR_NETWORK`;
+      break;
+    case undefined:
+      msg = ``;
+      break;
+
+    default:
+      msg = 'Невідома помилка';
+  }
+
+  return msg;
+};

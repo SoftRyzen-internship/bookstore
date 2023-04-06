@@ -8,6 +8,6 @@ export const submitOrder = async data => {
     );
     return response;
   } catch (error) {
-    console.error(error);
+    throw error;
   }
 };
