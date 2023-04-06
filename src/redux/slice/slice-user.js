@@ -53,6 +53,10 @@ const userSlice = createSlice({
         state.isError = false;
         state.isAuth = true;
       })
+      .addCase(operations.changePassword.fulfilled, state => {
+        state.isLoading = false;
+        state.isError = false;
+      })
       .addCase(operations.registerUser.fulfilled, (state, { payload }) => {
         state.user.email = payload.email;
         state.user.role = payload.role;
@@ -85,6 +89,11 @@ const userSlice = createSlice({
         state.isAuth = false;
         state.isError = false;
       })
+      .addCase(operations.changePassword.pending, state => {
+        state.isLoading = true;
+
+        state.isError = false;
+      })
       .addCase(operations.registerUser.pending, state => {
         state.isLoading = true;
         state.isError = false;
@@ -94,12 +103,17 @@ const userSlice = createSlice({
         state.error = action.error;
         state.isError = true;
       })
+      .addCase(operations.changePassword.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.error;
+        state.isError = true;
+      })
       .addCase(operations.registerUser.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.error;
         state.isError = true;
       })
-      .addCase(operations.changeUser.pending, (state, { ...action }) => {
+      .addCase(operations.changeUser.pending, (state, _) => {
         state.isLoading = true;
         state.isError = false;
       })

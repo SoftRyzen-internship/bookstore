@@ -12,6 +12,13 @@ export const changeUser = createAsyncThunk('user/change', async userData => {
   const data = await userApi.changeUserData(userData);
   return data;
 });
+export const changePassword = createAsyncThunk(
+  'user/changepassword',
+  async userDataPassword => {
+    const data = await userApi.updatePassword(userDataPassword);
+    return data;
+  }
+);
 
 export const loginUser = createAsyncThunk('user/login', async userData => {
   const data = await userApi.loginUser(userData);

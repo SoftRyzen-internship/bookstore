@@ -5,6 +5,12 @@
   padding-right: 32px;
   padding-bottom: 52px;
   margin-left: -32px;
+  margin-right: -32px;
+  display: flex;
+}
+.groupTotalPrice {
+  margin-left: 32px;
+  margin-top: 114px;
 }
 .blockWrapper {
   background-color: var(--primary-bg-cl);

@@ -4,10 +4,14 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { ICONS } from 'assets/icons';
 import s from './FormPassword.module.scss';
-import { updatePassword } from 'services/sendFormData';
+// import { updatePassword } from 'services/sendFormData';
+import { useDispatch } from 'react-redux';
+import { changePassword } from 'redux/operations/operations-user';
+import { handleErrorPass } from 'utils/handleError';
 
 export function FormPassword() {
   const [showPassword, setShowPassword] = useState(false);
+  const dispatch = useDispatch();
   const formik = useFormik({
     initialValues: {
       oldPassword: '',
@@ -21,9 +25,11 @@ export function FormPassword() {
           oldPassword: values.oldPassword,
           newPassword: values.newPassword,
         };
-        await updatePassword(formData);
+
+        await dispatch(changePassword(formData)).unwrap();
       } catch (error) {
-        setErrors({ error: error?.response?.data?.message });
+        const msg = error?.code;
+        setErrors(handleErrorPass(msg));
       }
     },
   });

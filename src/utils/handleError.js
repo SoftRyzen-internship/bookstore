@@ -15,3 +15,15 @@ export const handleError = ({ email }) => {
 
   return { email };
 };
+export const handleErrorPass = error => {
+  switch (error) {
+    case 'ERR_BAD_REQUEST':
+      error = `Старий пароль невірний`;
+      break;
+
+    default:
+      error = 'Невідома помилка';
+  }
+
+  return { error };
+};
