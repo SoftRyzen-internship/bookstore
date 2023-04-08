@@ -19,7 +19,7 @@ export const HeaderButtonList = () => {
   const userRole = useSelector(selectors.getUserRole);
 
   const buttonList = useMemo(() => {
-    if (userRole === userRoles.BUYER) {
+    if (userRole === userRoles.BUYER || userRole === null) {
       return [
         {
           id: 'user',

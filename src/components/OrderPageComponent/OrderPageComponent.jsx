@@ -64,7 +64,8 @@ export const OrderPageComponent = () => {
 
     try {
       if (isAuth) {
-        dispatch(orderUser(formData)).unwrap();
+        await dispatch(currentUser()).unwrap();
+        await dispatch(orderUser(formData)).unwrap();
       }
     } catch (error) {}
   };

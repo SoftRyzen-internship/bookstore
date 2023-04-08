@@ -3,8 +3,8 @@ export const routesPath = {
   BOOK_DETAIL: ':id/',
   BOOK_EDIT: 'edit/',
   BOOK_ADD: 'add/',
-  PROFILE: 'profile/',
-  ORDER: 'order/',
-  LOGIN: 'login/',
-  REGISTER: 'register/',
+  PROFILE: '/profile',
+  ORDER: '/order',
+  LOGIN: '/login',
+  REGISTER: '/register',
 };

@@ -53,6 +53,7 @@ const userSlice = createSlice({
         state.isError = false;
         state.isAuth = true;
       })
+
       .addCase(operations.changePassword.fulfilled, state => {
         state.isLoading = false;
         state.isError = false;
@@ -63,15 +64,9 @@ const userSlice = createSlice({
         state.isAuth = true;
       })
       .addCase(operations.currentUser.fulfilled, (state, { payload }) => {
-        const { email, firstName, lastName, fathersName, phone, role } =
-          payload.data.user;
-        state.user.email = email;
-        state.user.firstName = firstName;
-        state.user.lastName = lastName;
-        state.user.fathersName = fathersName;
-        state.user.phone = phone;
-        state.user.role = role;
+        state.user = { ...payload.data.user };
         state.isAuth = true;
+        state.isLoading = false;
       })
       .addCase(operations.logoutUser.fulfilled, state => {
         state.user = initialState.user;
@@ -89,6 +84,11 @@ const userSlice = createSlice({
         state.isAuth = false;
         state.isError = false;
       })
+      .addCase(operations.currentUser.pending, state => {
+        state.isLoading = true;
+        state.isError = false;
+      })
+
       .addCase(operations.changePassword.pending, state => {
         state.isLoading = true;
 
@@ -103,6 +103,13 @@ const userSlice = createSlice({
         state.error = action.error;
         state.isError = true;
       })
+      .addCase(operations.currentUser.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.error;
+        state.isError = true;
+        state.isAuth = false;
+      })
+
       .addCase(operations.changePassword.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.error;

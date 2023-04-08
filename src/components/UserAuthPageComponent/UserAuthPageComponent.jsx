@@ -33,7 +33,7 @@ export const UserAuthPageComponent = ({ isRegister }) => {
   const navigate = useNavigate();
   useEffect(() => {
     if (isAuth) {
-      navigate('/' + routesPath.ORDER);
+      navigate(routesPath.ORDER);
     }
   }, [isAuth, navigate]);
   const formRef = useRef(null);

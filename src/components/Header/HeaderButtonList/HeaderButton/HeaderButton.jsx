@@ -36,7 +36,7 @@ export const HeaderButton = ({
                 <button
                   type="button"
                   onClick={() => {
-                    navigate('/' + routesPath.PROFILE);
+                    navigate(routesPath.PROFILE);
                   }}
                 >
                   Мої дані
@@ -48,7 +48,7 @@ export const HeaderButton = ({
                   <button
                     type="button"
                     onClick={() => {
-                      navigate('/' + routesPath.LOGIN);
+                      navigate(routesPath.LOGIN);
                     }}
                   >
                     Логін
@@ -58,7 +58,7 @@ export const HeaderButton = ({
                   <button
                     type="button"
                     onClick={() => {
-                      navigate('/' + routesPath.REGISTER);
+                      navigate(routesPath.REGISTER);
                     }}
                   >
                     Реєстрація

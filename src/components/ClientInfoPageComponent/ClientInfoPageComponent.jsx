@@ -15,7 +15,7 @@ export function ClientInfoPageComponent() {
   const getUserPhone = useSelector(selectors.getUserPhone);
   const handleButton = e => {
     e.preventDefault();
-    navigate('/' + routesPath.PROFILE, {
+    navigate(routesPath.PROFILE, {
       state: {
         from: location,
       },
