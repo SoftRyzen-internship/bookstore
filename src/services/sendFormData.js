@@ -1,13 +1,14 @@
-import axios from 'axios';
-
-const api = axios.create({
-  baseURL: 'https://book-beck-user.onrender.com/api',
-  withCredentials: true,
-});
+// import axios from 'axios';
+import axiosInstance from './axiosInstance';
+//
+// const api = axios.create({
+//   baseURL: 'http://localhost:5000/api',
+//   withCredentials: true,
+// });
 
 export async function changeUserData(body) {
   try {
-    const response = await api.patch('/users', body);
+    const response = await axiosInstance.patch('/users', body);
     return response.data;
   } catch (error) {
     throw error;
@@ -16,7 +17,7 @@ export async function changeUserData(body) {
 
 export async function currentUser() {
   try {
-    const response = await api.get('/users/current');
+    const response = await axiosInstance.get('/users/current');
     return response.data;
   } catch (error) {
     throw error;
@@ -25,7 +26,7 @@ export async function currentUser() {
 
 export async function loginUser(body) {
   try {
-    const response = await api.post('/users/login', body);
+    const response = await axiosInstance.post('/users/login', body);
     return response.data;
   } catch (error) {
     throw error;
@@ -33,7 +34,7 @@ export async function loginUser(body) {
 }
 export async function logOut() {
   try {
-    const response = await api.post('/users/logout', {});
+    const response = await axiosInstance.post('/users/logout', {});
     return response;
   } catch (error) {
     throw error;
@@ -41,7 +42,7 @@ export async function logOut() {
 }
 export async function registerUser(body) {
   try {
-    const response = await api.post('/users/register', body);
+    const response = await axiosInstance.post('/users/register', body);
     return response.data;
   } catch (error) {
     throw error;
@@ -50,7 +51,16 @@ export async function registerUser(body) {
 
 export async function updatePassword(body) {
   try {
-    const response = await api.patch('/users/update-password', body);
+    const response = await axiosInstance.patch('/users/update-password', body);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+}
+
+export async function refresh() {
+  try {
+    const response = await axiosInstance.post('/users/refresh', {});
     return response.data;
   } catch (error) {
     throw error;

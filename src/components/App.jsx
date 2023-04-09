@@ -61,7 +61,7 @@ export const App = () => {
           />
 
           <Route
-            path={'/' + routesPath.ORDER}
+            path={routesPath.ORDER}
             element={
               <Suspense fallback={<Spinner />}>
                 <OrderPage />
@@ -70,7 +70,7 @@ export const App = () => {
           />
 
           <Route
-            path={'/' + routesPath.PROFILE}
+            path={routesPath.PROFILE}
             element={
               <ProtectedRoute isAuth={isAuth}>
                 <Suspense fallback={<Spinner />}>
